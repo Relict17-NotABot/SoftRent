@@ -38,6 +38,15 @@ html {
 
 /************************************************/
 
+/*Paleta de Colores*/
+:root {
+  --color-primary: #350305;
+  --color-secondary: #7d2150;
+  --color-accent: #161616;
+  --color-background: #faf1f2;
+  --color-text: #A30A0E;
+}
+
 
 /*body*/
 

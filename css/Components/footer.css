@@ -1,0 +1,26 @@
+@import url('css/Base.css');
+
+footer{
+    width: 100%;
+    height: auto;
+    padding: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #3f0423;
+}
+footer p, a{
+    font-family: 'Nunito', sans-serif;
+    color: var(--color-background);
+    font-weight: 200;
+    
+}
+
+.icon{
+    color: var(--color-background);
+    font-size: 2rem;
+}
+
+.footer-brand img{
+    width: 200px;
+    height: auto;
+}
