@@ -25,3 +25,25 @@
     margin-bottom: 0;
     white-space: nowrap;
 }
+
+header nav{
+  width: 70%;
+}
+
+.navegacion {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.navegacion li{
+  list-style: none;
+}
+
+.navegacion li a{
+  color: black;
+  text-decoration: none;
+}
