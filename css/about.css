@@ -1,0 +1,7 @@
+.divprueba{
+    background-color: white;
+    width: 100%;
+    height: 900px;
+     display: grid;
+  place-items: center;
+}
