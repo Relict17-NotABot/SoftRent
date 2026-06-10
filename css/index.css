@@ -1,9 +1,16 @@
 .seccion-hero {
     overflow: visible;
-    padding-right: 50%;
-    display: grid;
+    padding-right: 0 5%;
+    display: flex ;
     gap: 10px;
     height: 800px;
+}
+
+.seccion-hero > div {
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
 }
 
 h1 {
@@ -11,6 +18,13 @@ h1 {
     font-weight: 700;
     font-style: normal;
     color: var(--color-text);
+}
+
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 button {
