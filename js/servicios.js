@@ -43,6 +43,8 @@ async function cargarServicios() {
         servicio.ventas >= 50000;
     });
 
+    console.log(servicios);
+
     // Recién aquí es seguro llamar a filtrarServicios(), porque servicios ya está lleno.
     filtrarServicios()
 }
