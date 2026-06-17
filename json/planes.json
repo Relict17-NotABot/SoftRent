@@ -23,7 +23,7 @@
         "id": "PLAN-PROFESIONAL",
         "nombre": "Plan Profesional",
         "desc": "Para empresas comprometidas con la eficiencia operativa",
-        "precio_mensual": 119.080,
+        "precio_mensual": 119080,
         "precio_anual": 1285000,
         "porc_desc_anual": 10,
         "servicios_incluidos": ["srv-028", "srv-011", "srv-013"],
