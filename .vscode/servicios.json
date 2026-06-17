@@ -155,10 +155,10 @@
 
     {
         "id": "srv-012",
-        "nombre": "Mantenimiento 24/7",
+        "nombre": "Mantenimiento Prioritario",
         "categoria": "core",
         "desc_corta": "Tu negocio no para. Tu infraestructura tampoco debería hacerlo.",
-        "desc_ext": "Monitoreo continuo y resolución de incidencias en cualquier momento del día, incluyendo fines de semana y festivos.",
+        "desc_ext": "Monitoreo continuo y resolución de incidencias en cualquier momento del día, incluyendo fines de semana y festivos. Tienes prioridad VIP",
         "precio": 25000,
         "ventas": 3211,
         "tags": ["operaciones"],
@@ -358,6 +358,19 @@
         "precio": 25000,
         "ventas": 1759,
         "tags": [ "inventario", "comunicacion"],
+        "icono": "",
+        "destacado": true,
+        "disponible": true
+    },
+    {
+        "id": "srv-028",
+        "nombre": "Mantenimiento 24/7",
+        "categoria": "core",
+        "desc_corta": "Tu negocio no para. Tu infraestructura tampoco debería hacerlo.",
+        "desc_ext": "Monitoreo continuo y resolución de incidencias en cualquier momento del día, incluyendo fines de semana y festivos.",
+        "precio": 25000,
+        "ventas": 3211,
+        "tags": ["operaciones"],
         "icono": "",
         "destacado": true,
         "disponible": true
