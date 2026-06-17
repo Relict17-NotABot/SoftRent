@@ -38,6 +38,11 @@ async function cargarServicios() {
     // Solo después de esto `servicios` tiene los datos reales.
     servicios = await respuesta.json()
 
+    servicios.forEach(function(servicio){
+    servicio.destacado =
+        servicio.ventas >= 50000;
+    });
+
     // Recién aquí es seguro llamar a filtrarServicios(), porque servicios ya está lleno.
     filtrarServicios()
 }
@@ -76,7 +81,7 @@ function formatearPrecio(numero) {
  */
 function crearTarjetaServicio(servicio) {
     const tarjeta = document.createElement("article")
-    tarjeta.classList.add("tarjeta-servicio")
+    tarjeta.classList.add("contenedor-servicios")
 
     // Si el servicio tiene destacado: true, se le agrega una clase extra para estilizarlo diferente.
     if (servicio.destacado) tarjeta.classList.add("destacado")
@@ -129,9 +134,9 @@ function renderizarServicios(listaServicios) {
 
     mensajeServicios.textContent = `Mostrando ${listaServicios.length} servicio(s).`
 
-    for (const srv of listaServicios) {
+    for (const servicio of listaServicios) {
         // crearTarjetaServicio construye el elemento en memoria.
-        const tarjeta = crearTarjetaServicio(srv)
+        const tarjeta = crearTarjetaServicio(servicio)
         // appendChild lo inserta en el DOM, haciéndolo visible en la página.
         contenedorServicios.appendChild(tarjeta)
     }
