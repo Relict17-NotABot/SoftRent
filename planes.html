@@ -142,6 +142,51 @@
 
         </section>
 
+        <!-- Seccion: Plan V.I.P-->
+        <section class="seccion-planVIP">
+            <h2>Plan V.I.P</h2>
+            <img src="assets/img/robotVIP.png" alt="">
+            <div>
+                <div>
+                    <ul>
+                        <li>
+                            <p>Todo el catálogo a disposición</p>
+                        </li>
+                        <li>
+                            <p>Mantemiento Prioritario</p>
+                        </li>
+                        <li>
+                            <p>Asesoramiento Profesional</p>
+                        </li>
+                        <li>
+                            <p>Brief Mensual de Estadísticas</p>
+                        </li>
+                        <li>
+                            <p>Análisis Profundo de Datos</p>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li>
+                            <p>Reuniones</p>
+                        </li>
+                        <li>
+                            <p>Invitaciones Exclusivas</p>
+                        </li>
+                        <li>
+                            <p>Servicio Exclusivo</p>
+                        </li>
+                        <li>
+                            <p>Y mucho más</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button>CONSEGUIR</button>
+        </section>
+
         <!-- Seccion: Servicios -->
         <section class="seccion-servicios">
             <div class="servicios-titulo">
@@ -149,14 +194,41 @@
                 <p>Explorá todo lo que SoftRent puede hacer por vos</p>
             </div>
 
-            <!-- Filtros -->
-            <div class="servicios-filtros">
-                <button class="filtro-btn activo" data-filtro="todos">Todos</button>
-                <button class="filtro-btn" data-filtro="automatizacion">Automatización</button>
-                <button class="filtro-btn" data-filtro="soporte">Soporte</button>
-                <button class="filtro-btn" data-filtro="analisis">Análisis</button>
-                <button class="filtro-btn" data-filtro="integraciones">Integraciones</button>
+            <div>
+                <button id="btnCore">
+                    AUMATIZACIONES CENTRALES
+                </button>
+                <button id="btnEcommerce">
+                    SOLUCIONES E-COMMERCE
+                </button>
             </div>
+
+            <div class="servicios-filtros-select">
+
+                <select id="filtroTag">
+                    <option value="">Todos los tags</option>
+                    <option value="ventas">Ventas</option>
+                    <option value="soporte">Soporte</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="ia">IA</option>
+                    <option value="operaciones">Operaciones</option>
+                    <option value="reportes">Reportes</option>
+                    <option value="finanzas">Finanzas</option>
+                    <option value="comunicacion">Comunicación</option>
+                    <option value="inventario">Inventario</option>
+                </select>
+
+                <button id="btnLimpiarFiltros">
+                    Limpiar filtros
+                </button>
+
+            </div>
+
+            <section>
+                <p id="mensajeServicios"></p>
+
+                <div id="contenedorServicios"></div>
+            </section>
 
             <!-- Grid de Servicios -->
             <div class="servicios-grid" id="servicios-grid">
@@ -220,50 +292,7 @@
         </section>
         <!-- Fin Seccion: Servicios -->
 
-        <!-- Seccion: Plan V.I.P-->
-        <section class="seccion-planVIP">
-            <h2>Plan V.I.P</h2>
-            <img src="assets/img/robotVIP.png" alt="">
-            <div>
-                <div>
-                    <ul>
-                        <li>
-                            <p>Todo el catálogo a disposición</p>
-                        </li>
-                        <li>
-                            <p>Mantemiento Prioritario</p>
-                        </li>
-                        <li>
-                            <p>Asesoramiento Profesional</p>
-                        </li>
-                        <li>
-                            <p>Brief Mensual de Estadísticas</p>
-                        </li>
-                        <li>
-                            <p>Análisis Profundo de Datos</p>
-                        </li>
-                    </ul>
-                </div>
-                <hr>
-                <div>
-                    <ul>
-                        <li>
-                            <p>Reuniones</p>
-                        </li>
-                        <li>
-                            <p>Invitaciones Exclusivas</p>
-                        </li>
-                        <li>
-                            <p>Servicio Exclusivo</p>
-                        </li>
-                        <li>
-                            <p>Y mucho más</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <button>CONSEGUIR</button>
-        </section>
+
 
 
         <!--inicio Footer-->
@@ -319,47 +348,48 @@
         </footer>
         <!--Fin Seccion: Footer-->
     </main>
+    <script type="text/javascript">
+        new FinisherHeader({
+            "count": 7,
+            "size": {
+                "min": 886,
+                "max": 1148,
+                "pulse": 1.8
+            },
+            "speed": {
+                "x": {
+                    "min": 1.2,
+                    "max": 2
+                },
+                "y": {
+                    "min": 1.2,
+                    "max": 2.2
+                }
+            },
+            "colors": {
+                "background": "#400517",
+                "particles": [
+                    "#770707",
+                    "#810303",
+                    "#690631",
+                    "#59031d"
+                ]
+            },
+            "blending": "lighten",
+            "opacity": {
+                "center": 0.65,
+                "edge": 0
+            },
+            "skew": 0,
+            "shapes": [
+                "c"
+            ]
+        });
+    </script>
+
+    <script src="js/servicios.js"></script>
+
 </body>
 
-<script type="text/javascript">
-    new FinisherHeader({
-        "count": 7,
-        "size": {
-            "min": 886,
-            "max": 1148,
-            "pulse": 1.8
-        },
-        "speed": {
-            "x": {
-                "min": 1.2,
-                "max": 2
-            },
-            "y": {
-                "min": 1.2,
-                "max": 2.2
-            }
-        },
-        "colors": {
-            "background": "#400517",
-            "particles": [
-                "#770707",
-                "#810303",
-                "#690631",
-                "#59031d"
-            ]
-        },
-        "blending": "lighten",
-        "opacity": {
-            "center": 0.65,
-            "edge": 0
-        },
-        "skew": 0,
-        "shapes": [
-            "c"
-        ]
-    });
-</script>
-
-<script src="js/servicios.js"></script>
 
 </html>
