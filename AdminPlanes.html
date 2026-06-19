@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos base del sitio -->
+    <link rel="stylesheet" href="css/Base.css">
+    <link rel="stylesheet" href="css/Components/header.css">
+    <link rel="stylesheet" href="css/Components/footer.css">
+
+    <!-- Estilos propios de esta página -->
+    <link rel="stylesheet" href="css/gestion.css">
+
+    <!-- Iconos -->
+    <script src="https://kit.fontawesome.com/9b11b68b76.js" crossorigin="anonymous"></script>
+
+    <!-- Animación de fondo (igual que el resto del sitio) -->
+    <script src="js/finisher-header.es5.min.js" type="text/javascript"></script>
+
+    <title>SoftRent — Gestión</title>
+</head>
+
+<body class="finisher-header">
+    <main class="container">
+
+        <!-- ============================
+             HEADER (igual al resto del sitio)
+             ============================ -->
+        <header class="side-header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo-softrent.png" alt="logo-softrent">
+                    </a>
+                </div>
+
+                <input type="checkbox" id="check-menu" class="menu-oculto">
+
+                <label for="check-menu" class="boton-hamburguesa">
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                </label>
+
+                <nav class="nav-menu">
+                    <ul class="navegacion">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <!-- Link activo resaltado con clase nav-activo -->
+                        <li><a href="AdminPlanes.html" class="nav-activo">Gestión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+
+        <!-- ============================
+             SECCIÓN 1: HERO
+             Bienvenida al panel de gestión
+             ============================ -->
+        <section class="gestion-hero">
+            <h1>Panel de Gestión</h1>
+            <p>Aquí administrás el plan y los servicios que contrataste para tu negocio.</p>
+        </section>
+
+
+        <!-- ============================
+             SECCIÓN 2: ESTADO DE LA SUBSCRIPCIÓN
+             Muestra un resumen del plan activo.
+             Si no hay plan: mostrar .sin-plan y ocultar .sub-tarjeta
+             ============================ -->
+        <section class="gestion-subscripcion">
+            <h2>Tu Subscripción</h2>
+
+            <!-- Tarjeta del plan activo -->
+            <div class="sub-tarjeta">
+                <div class="sub-info">
+                    <span class="sub-nombre">Plan Intermedio</span>
+                    <span class="sub-modalidad">Mensual</span>
+                </div>
+                <div class="sub-datos">
+                    <div class="sub-dato">
+                        <span class="dato-numero">$99</span>
+                        <span class="dato-label">Precio / mes</span>
+                    </div>
+                    <div class="sub-dato">
+                        <span class="dato-numero">3</span>
+                        <span class="dato-label">Servicios activos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje vacío: cuando el usuario no tiene plan contratado -->
+            <!-- Para activarlo: agregar clase "oculto" a .sub-tarjeta y quitar "oculto" de aquí -->
+            <div class="sin-plan oculto">
+                <p>Todavía no tenés ningún plan contratado.</p>
+                <a href="planes.html" class="btn-ir-planes">Ver planes disponibles</a>
+            </div>
+        </section>
+
+
+        <!-- ============================
+             SECCIÓN 3: DATOS DEL NEGOCIO
+             Formulario con información del negocio.
+             La validación corre desde gestion.js al hacer submit.
+             ============================ -->
+        <section class="gestion-datos">
+            <h2>Datos del Negocio</h2>
+
+            <!-- novalidate: desactiva la validación nativa del browser, la hacemos nosotros -->
+            <form id="form-negocio" class="datos-form" novalidate>
+
+                <!-- Campo: nombre del negocio -->
+                <div class="campo">
+                    <label for="negocio-nombre">Nombre del negocio</label>
+                    <input type="text" id="negocio-nombre" placeholder="Ej: Mi Empresa S.A.">
+                    <!-- Aquí gestion.js escribe el mensaje de error si el campo está vacío -->
+                    <span class="campo-error" id="error-nombre"></span>
+                </div>
+
+                <!-- Campo: correo de contacto -->
+                <div class="campo">
+                    <label for="negocio-correo">Correo de contacto</label>
+                    <input type="email" id="negocio-correo" placeholder="Ej: contacto@miempresa.com">
+                    <span class="campo-error" id="error-correo"></span>
+                </div>
+
+                <!-- Campo: modalidad de pago -->
+                <div class="campo">
+                    <label for="negocio-modalidad">Modalidad de pago</label>
+                    <select id="negocio-modalidad">
+                        <option value="">Seleccioná una opción</option>
+                        <option value="mensual">Mensual</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                    <span class="campo-error" id="error-modalidad"></span>
+                </div>
+
+                <button type="submit" class="btn-guardar">Guardar cambios</button>
+            </form>
+        </section>
+
+
+        <!-- ============================
+             SECCIÓN 4: SERVICIOS CONTRATADOS
+             Una tarjeta por cada servicio del plan.
+             Cada toggle cambia el estado activo / pausado.
+             ============================ -->
+        <section class="gestion-servicios">
+            <h2>Servicios Contratados</h2>
+
+            <div class="servicios-grid">
+
+                <!-- Tarjeta de servicio — repetir por cada servicio -->
+                <div class="servicio-tarjeta">
+                    <div class="servicio-icono">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="servicio-info">
+                        <h3>Automatización CRM</h3>
+                        <span class="servicio-categoria">Automatización</span>
+                    </div>
+                    <!-- Toggle: checked = activo, sin checked = pausado -->
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="servicio-tarjeta">
+                    <div class="servicio-icono">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="servicio-info">
+                        <h3>Soporte Chat</h3>
+                        <span class="servicio-categoria">Soporte</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="servicio-tarjeta">
+                    <div class="servicio-icono">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="servicio-info">
+                        <h3>Análisis de Datos</h3>
+                        <span class="servicio-categoria">Análisis</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ============================
+             SECCIÓN 5: ACCIONES
+             Botones que abren los modales
+             ============================ -->
+        <section class="gestion-acciones">
+            <!-- Abre el modal de editar plan (id conectado en gestion.js) -->
+            <button class="btn-editar" id="btn-abrir-editar">
+                <i class="fa-solid fa-pen"></i>
+                Editar Plan
+            </button>
+
+            <!-- Abre el mini modal de confirmación (id conectado en gestion.js) -->
+            <button class="btn-eliminar" id="btn-abrir-eliminar">
+                <i class="fa-solid fa-trash"></i>
+                Eliminar Subscripción
+            </button>
+        </section>
+
+
+        <!-- ============================
+             FOOTER (igual al resto del sitio)
+             ============================ -->
+        <footer>
+            <div class="footer-cont1">
+                <div class="footer-edu">
+                    <div class="edu-contenedor1">
+                        <img src="assets/img/logo-utn.png" class="logo-utn" alt="">
+                        <div>
+                            <p>Universidad Técnica Nacional</p>
+                            <p>Mini-Proyecto Programación en Ambiente Web I, II-26, C-02</p>
+                            <p>Profesora: Nathalie Paniagua López</p>
+                        </div>
+                    </div>
+                    <div class="edu-contenedor2">
+                        <div>
+                            <i class="fa-brands fa-square-linkedin icon"></i>
+                            <a href="https://www.linkedin.com/in/el%C3%ADaseltro/">Elías Castro Soto</a>
+                        </div>
+                        <div>
+                            <i class="fa-brands fa-square-linkedin icon"></i>
+                            <a href="#">ReLichtyy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/img/logo-softrent.png" alt="logo-softrent">
+                </div>
+                <div class="footer-acceso">
+                    <h3>Acceso Rápido</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-patrocinadores">
+                    <h3>Patrocinadores</h3>
+                    <div class="patrocinadores-cont">
+                        <img src="assets/img/logo-utn.png" class="logo-utn" alt="">
+                        <img src="assets/img/KFC-Logo-PNG-Clipart.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="linea-horizontal">
+            <div class="footer-cont2">
+                <a href=""><i class="fa-brands fa-square-instagram icon"></i></a>
+                <a href=""><i class="fa-brands fa-square-youtube icon"></i></a>
+                <a href=""><i class="fa-brands fa-square-x-twitter icon"></i></a>
+                <a href=""><i class="fa-brands fa-square-facebook icon"></i></a>
+            </div>
+        </footer>
+
+    </main>
+
+
+    <!-- ============================
+         MODAL: EDITAR PLAN
+         Se abre con btn-abrir-editar.
+         Dos columnas: configuración | resumen de precio.
+         ============================ -->
+    <div class="modal-overlay oculto" id="modal-editar">
+        <div class="modal">
+            <div class="modal-cabecera">
+                <h3>Editar Plan</h3>
+                <button class="btn-cerrar" id="btn-cerrar-editar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-cuerpo">
+                <!-- Izquierda: aquí irá el selector de plan y servicios -->
+                <div class="modal-config">
+                    <p>Seleccioná tu plan y servicios.</p>
+                    <!-- TODO: conectar con el flujo de planes.html -->
+                </div>
+
+                <!-- Derecha: resumen y precio en tiempo real -->
+                <div class="modal-resumen">
+                    <p>Resumen del plan</p>
+                    <span class="resumen-precio">$99 / mes</span>
+                    <!-- TODO: actualizar precio según selección -->
+                </div>
+            </div>
+
+            <button class="btn-confirmar">Confirmar cambios</button>
+        </div>
+    </div>
+
+
+    <!-- ============================
+         MINI MODAL: CONFIRMAR ELIMINACIÓN
+         Se abre con btn-abrir-eliminar.
+         Pide confirmación antes de borrar.
+         ============================ -->
+    <div class="modal-overlay oculto" id="modal-eliminar">
+        <div class="modal modal-chico">
+            <div class="modal-cabecera">
+                <h3>¿Eliminar subscripción?</h3>
+                <button class="btn-cerrar" id="btn-cerrar-eliminar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="modal-aviso">Esta acción no se puede deshacer. Se eliminarán todos los datos de tu subscripción.</p>
+            <div class="modal-acciones">
+                <button class="btn-cancelar" id="btn-cancelar-eliminar">Cancelar</button>
+                <!-- TODO: al confirmar, limpiar datos y mostrar estado vacío -->
+                <button class="btn-confirmar-eliminar">Sí, eliminar</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<!-- Animación de fondo (misma configuración que planes.html) -->
+<script type="text/javascript">
+    new FinisherHeader({
+        "count": 7,
+        "size": { "min": 886, "max": 1148, "pulse": 1.8 },
+        "speed": { "x": { "min": 1.2, "max": 2 }, "y": { "min": 1.2, "max": 2.2 } },
+        "colors": {
+            "background": "#400517",
+            "particles": ["#770707", "#810303", "#690631", "#59031d"]
+        },
+        "blending": "lighten",
+        "opacity": { "center": 0.65, "edge": 0 },
+        "skew": 0,
+        "shapes": ["c"]
+    });
+</script>
+
+<!-- Lógica de modales y validación del formulario -->
+<script src="js/gestion.js"></script>
+
+</html>

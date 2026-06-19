@@ -1,0 +1,430 @@
+/* ============================================================
+   GESTION.CSS — Estilos de la página de gestión del usuario
+   ============================================================ */
+
+
+/* ---- HERO ---- */
+
+.gestion-hero {
+    text-align: center;
+    padding: 4rem 1rem 2rem;
+    color: #fff;
+}
+
+.gestion-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.gestion-hero p {
+    color: #c48a9a;
+    font-size: 1rem;
+}
+
+
+/* ---- SECCIONES GENERALES ---- */
+
+/* Cada sección tiene el mismo espaciado base */
+.gestion-subscripcion,
+.gestion-datos,
+.gestion-servicios,
+.gestion-acciones {
+    max-width: 860px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+/* Títulos de sección */
+.gestion-subscripcion h2,
+.gestion-datos h2,
+.gestion-servicios h2 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #5a1a2a;
+    padding-bottom: 0.5rem;
+}
+
+
+/* ---- ESTADO DE LA SUBSCRIPCIÓN ---- */
+
+.sub-tarjeta {
+    background-color: rgba(43, 12, 22, 0.8);
+    border: 1px solid #5a1a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sub-nombre {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.sub-modalidad {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    background-color: #5a1a2a;
+    color: #f0c0cc;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+}
+
+.sub-datos {
+    display: flex;
+    gap: 2rem;
+}
+
+.sub-dato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dato-numero {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #c0395a;
+}
+
+.dato-label {
+    font-size: 0.75rem;
+    color: #c48a9a;
+}
+
+/* Mensaje cuando no hay plan contratado */
+.sin-plan {
+    text-align: center;
+    padding: 2rem;
+    color: #c48a9a;
+}
+
+.btn-ir-planes {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #c0395a;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+}
+
+
+/* ---- FORMULARIO DE DATOS ---- */
+
+.datos-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* Cada campo: label + input + mensaje de error */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.campo label {
+    font-size: 0.85rem;
+    color: #c48a9a;
+}
+
+.campo input,
+.campo select {
+    background-color: rgba(26, 10, 15, 0.9);
+    border: 1px solid #5a1a2a;
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    color: #f0e6ea;
+    font-size: 0.9rem;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #c0395a;
+}
+
+/* Mensaje de error debajo del campo (se rellena desde JS) */
+.campo-error {
+    font-size: 0.78rem;
+    color: #e05070;
+    min-height: 1rem; /* reserva espacio para que no salte el layout */
+}
+
+.btn-guardar {
+    align-self: flex-start;
+    background-color: #c0395a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-guardar:hover {
+    background-color: #a02e4a;
+}
+
+
+/* ---- SERVICIOS CONTRATADOS ---- */
+
+.servicios-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Fila de cada servicio */
+.servicio-tarjeta {
+    background-color: rgba(43, 12, 22, 0.8);
+    border: 1px solid #5a1a2a;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.servicio-icono {
+    font-size: 1.4rem;
+    color: #c0395a;
+    width: 36px;
+    text-align: center;
+}
+
+.servicio-info {
+    flex: 1;
+}
+
+.servicio-info h3 {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+}
+
+.servicio-categoria {
+    font-size: 0.75rem;
+    color: #c48a9a;
+}
+
+/* Toggle switch activo / pausado */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background-color: #5a1a2a;
+    border-radius: 24px;
+    transition: background 0.2s;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+/* Cuando el checkbox está marcado → activo */
+.toggle input:checked + .toggle-slider {
+    background-color: #c0395a;
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(18px);
+}
+
+
+/* ---- BOTONES DE ACCIÓN ---- */
+
+.gestion-acciones {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-editar,
+.btn-eliminar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-editar {
+    background-color: #c0395a;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color: #a02e4a;
+}
+
+.btn-eliminar {
+    background-color: transparent;
+    color: #e05070;
+    border: 1px solid #e05070;
+}
+
+.btn-eliminar:hover {
+    background-color: rgba(224, 80, 112, 0.1);
+}
+
+
+/* ---- MODALES ---- */
+
+/* Fondo oscuro detrás del modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* Clase utilitaria para ocultar elementos */
+.oculto {
+    display: none;
+}
+
+.modal {
+    background-color: #2b0c16;
+    border: 1px solid #5a1a2a;
+    border-radius: 14px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 640px;
+}
+
+/* Mini modal de confirmación: más angosto */
+.modal-chico {
+    max-width: 400px;
+}
+
+.modal-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.modal-cabecera h3 {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    color: #c48a9a;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn-cerrar:hover {
+    color: #fff;
+}
+
+/* Cuerpo del modal grande: dos columnas */
+.modal-cuerpo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #c48a9a;
+}
+
+.resumen-precio {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #c0395a;
+    margin-top: 0.5rem;
+}
+
+/* Texto de aviso en el mini modal */
+.modal-aviso {
+    color: #c48a9a;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Fila de botones del mini modal */
+.modal-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.btn-cancelar {
+    background: none;
+    border: 1px solid #5a1a2a;
+    border-radius: 8px;
+    padding: 0.55rem 1.1rem;
+    color: #c48a9a;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-cancelar:hover {
+    border-color: #c0395a;
+    color: #fff;
+}
+
+.btn-confirmar,
+.btn-confirmar-eliminar {
+    background-color: #c0395a;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1.1rem;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-confirmar:hover,
+.btn-confirmar-eliminar:hover {
+    background-color: #a02e4a;
+}
+
+
+/* ---- NAV ACTIVO ---- */
+
+/* Resalta el link de Gestión en el nav cuando estás en esta página */
+.nav-activo {
+    color: #c0395a !important;
+    font-weight: 600;
+}
