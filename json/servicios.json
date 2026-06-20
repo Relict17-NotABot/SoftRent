@@ -280,7 +280,7 @@
         "precio": 15000,
         "ventas": 532020,
         "tags": ["soporte", "operaciones", "ia"],
-        "icono": "",
+        "icono": "fa-solid fa-envelope-open-text",
         "destacado": true, 
         "disponible": true
     },
@@ -293,7 +293,7 @@
         "precio": 15000,
         "ventas": 35699,
         "tags": [ "marketing", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-share-from-square",
         "destacado": true,
         "disponible": true
     },
@@ -306,7 +306,7 @@
         "precio": 15000,
         "ventas": 212,
         "tags": [ "reportes", "ventas"],
-        "icono": "",
+        "icono": "fa-solid fa-cart-plus",
         "destacado": true,
         "disponible": true
     },
@@ -319,7 +319,7 @@
         "precio": 20000,
         "ventas": 3235,
         "tags": [ "soporte", "operaciones", "finanzas"],
-        "icono": "",
+        "icono": "fa-solid fa-bag-shopping",
         "destacado": true,
         "disponible": true
     },
@@ -332,7 +332,7 @@
         "precio": 20000,
         "ventas": 5434,
         "tags": [ "marketing", "ventas", "ia"],
-        "icono": "",
+        "icono": "fa-solid fa-user-tag",
         "destacado": true,
         "disponible": true
     },
@@ -345,7 +345,7 @@
         "precio": 15700,
         "ventas": 34,
         "tags": [ "marketing", "ventas", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-comments-dollar",
         "destacado": true,
         "disponible": true
     },
@@ -358,7 +358,7 @@
         "precio": 25000,
         "ventas": 1759,
         "tags": [ "inventario", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-bullhorn",
         "destacado": true,
         "disponible": true
     },
@@ -371,7 +371,7 @@
         "precio": 25000,
         "ventas": 3211,
         "tags": ["operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-star-and-crescent",
         "destacado": true,
         "disponible": true
     }
