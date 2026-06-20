@@ -8,7 +8,7 @@
         "precio": 15000,
         "ventas": 25,
         "tags": ["ventas", "comunicacion"],
-        "icono": "",
+        "icono": "fa-brands fa-fly",
         "destacado": false,
         "disponible": false
     },
@@ -22,7 +22,7 @@
         "precio": 20000,
         "ventas": 100,
         "tags": ["ventas", "operaciones"],
-        "icono": "",
+        "icono": "fa-brands fa-fly",
         "destacado": true,
         "disponible": true
     },
@@ -36,7 +36,7 @@
         "precio": 35000,
         "ventas": 75,
         "tags": ["finanzas", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-money-bill-transfer",
         "destacado": false,
         "disponible": true
     },
@@ -50,7 +50,7 @@
         "precio": 20000,
         "ventas": 250,
         "tags": ["soporte", "ia", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-comments",
         "destacado": true,
         "disponible": true
     },
@@ -64,7 +64,7 @@
         "precio": 23000,
         "ventas": 67,
         "tags": ["operaciones", "ventas"],
-        "icono": "",
+        "icono": "fa-solid fa-cash-register",
         "destacado": false,
         "disponible": true
     },
@@ -78,7 +78,7 @@
         "precio": 35000,
         "ventas": 777,
         "tags": ["marketing", "ventas"],
-        "icono": "",
+        "icono": "fa-solid fa-user-shield",
         "destacado": false,
         "disponible": true
     },
@@ -92,7 +92,7 @@
         "precio": 15000,
         "ventas": 25,
         "tags": ["inventario", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-boxes-stacked",
         "destacado": false,
         "disponible": true
     },
@@ -106,7 +106,7 @@
         "precio": 15000,
         "ventas": 555,
         "tags": ["soporte"],
-        "icono": "",
+        "icono": "fa-solid fa-headset",
         "destacado": true,
         "disponible": true
     },
@@ -120,7 +120,7 @@
         "precio": 15000,
         "ventas": 379,
         "tags": ["operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-code",
         "destacado": false,
         "disponible": true
     },
@@ -134,7 +134,7 @@
         "precio": 20000,
         "ventas": 13340,
         "tags": ["soporte", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-handshake-angle",
         "destacado": true,
         "disponible": true
     },
@@ -148,7 +148,7 @@
         "precio": 20000,
         "ventas": 13340,
         "tags": ["reportes", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-hands-holding-child",
         "destacado": true,
         "disponible": true
     },
@@ -162,7 +162,7 @@
         "precio": 25000,
         "ventas": 3211,
         "tags": ["operaciones"],
-        "icono": "",
+        "icono": "fa-brands fa-supportnow",
         "destacado": true,
         "disponible": true
     },
@@ -176,7 +176,7 @@
         "precio": 10000,
         "ventas": 43,
         "tags": ["reportes"],
-        "icono": "",
+        "icono": "fa-solid fa-chart-line",
         "destacado": true,
         "disponible": true
     },
@@ -189,7 +189,7 @@
         "precio": 35000,
         "ventas": 2451,
         "tags": ["reportes", "ia"],
-        "icono": "",
+        "icono": "fa-solid fa-hexagon-nodes",
         "destacado": true,
         "disponible": true
     },
@@ -202,7 +202,7 @@
         "precio": 5000,
         "ventas": 3211,
         "tags": ["ventas", "comunicacion", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-users-line",
         "destacado": true,
         "disponible": true
     },
@@ -215,7 +215,7 @@
         "precio": 25000,
         "ventas": 34,
         "tags": ["ventas", "marketing", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-person-running",
         "destacado": true,
         "disponible": true
     },
@@ -228,7 +228,7 @@
         "precio": 27000,
         "ventas": 5628,
         "tags": ["operaciones", "finanzas"],
-        "icono": "",
+        "icono": "fa-solid fa-file-signature",
         "destacado": true,
         "disponible": true
     },
@@ -241,7 +241,7 @@
         "precio": 15000,
         "ventas": 526,
         "tags": ["reportes", "operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-file-half-dashed",
         "destacado": true,
         "disponible": true
     },
@@ -254,7 +254,7 @@
         "precio": 35000,
         "ventas": 550,
         "tags": ["operaciones"],
-        "icono": "",
+        "icono": "fa-solid fa-gear",
         "destacado": true,
         "disponible": true
     },
@@ -267,7 +267,7 @@
         "precio": 5000,
         "ventas": 27192,
         "tags": ["soporte", "ia", "comunicacion"],
-        "icono": "",
+        "icono": "fa-solid fa-robot",
         "destacado": true,
         "disponible": true
     },

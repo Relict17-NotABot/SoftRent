@@ -69,16 +69,12 @@ function formatearPrecio(numero) {
 // CREACIÓN DE TARJETAS
 // ============================================================
 
-function crearTarjetaServicio(servicio) {
+function crearTarjetaServicio(servicio){
 
     const tarjeta =
         document.createElement("article");
 
-    tarjeta.classList.add("contenedor-servicios");
-
-    if (servicio.destacado) {
-        tarjeta.classList.add("destacado");
-    }
+    tarjeta.classList.add("tarjeta-servicio");
 
     tarjeta.innerHTML = `
         <div class="servicio-icono">
@@ -91,9 +87,9 @@ function crearTarjetaServicio(servicio) {
                 ${servicio.categoria}
             </span>
 
-            <h4>
+            <h3>
                 ${servicio.nombre}
-            </h4>
+            </h3>
 
             <p class="servicio-precio">
                 ${formatearPrecio(servicio.precio)}
@@ -104,9 +100,15 @@ function crearTarjetaServicio(servicio) {
                 ${servicio.desc_corta}
             </p>
 
-            <p class="desc-ext">
-                ${servicio.desc_ext}
-            </p>
+            <button class="btn-expandir">
+                <i class="fa-solid fa-angle-down"></i>
+            </button>
+
+            <div class="descripcion-expandida hidden">
+                <p>
+                    ${servicio.desc_ext}
+                </p>
+            </div>
 
             <div class="servicio-tags">
                 ${servicio.tags.map(function(tag){
@@ -114,12 +116,38 @@ function crearTarjetaServicio(servicio) {
                         <span class="tag">
                             ${tag}
                         </span>
-                    `;
+                    `
                 }).join("")}
             </div>
 
         </div>
     `;
+
+    const boton =
+        tarjeta.querySelector(".btn-expandir");
+
+    const icono =
+        boton.querySelector("i");
+
+    const descripcion =
+        tarjeta.querySelector(".descripcion-expandida");
+
+    boton.addEventListener("click", function(){
+
+        descripcion.classList.toggle("hidden");
+
+        if(
+            descripcion.classList.contains("hidden")
+        ){
+            icono.classList.remove("fa-angle-up");
+            icono.classList.add("fa-angle-down");
+        }
+        else{
+            icono.classList.remove("fa-angle-down");
+            icono.classList.add("fa-angle-up");
+        }
+
+    });
 
     return tarjeta;
 }
