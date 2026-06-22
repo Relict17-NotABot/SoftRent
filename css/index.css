@@ -334,7 +334,7 @@ button:hover{
 }
 
 /* ==========================================
-   RESPONSIVO (único breakpoint: móvil Samsung S9 ~360px)
+   RESPONSIVO 
    ========================================== */
 @media (max-width: 700px) {
     /* Hero en columna */
