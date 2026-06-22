@@ -46,7 +46,7 @@ html {
 /*Paleta de Colores*/
 :root {
   --color-primary: #350305;
-  --color-secondary: #7d2150;
+  --color-secondary: rgba(142, 71, 129);
   --color-accent: #161616;
   --color-text: #faf1f2;
   --color-bg: rgba(163, 10, 14, 0.8);

@@ -14,7 +14,7 @@
 }
 
 /* ==========================================
-   TARJETAS DE PRECIOS (LAYOUT)
+   ----------- SECCION PLANES ---------------
    ========================================== */
 .seccion-planes{
     width: 100%;
@@ -347,9 +347,24 @@
     }
 }
 
+
+/*=====================================================
+=================SECCION SERVICIOS=====================
+======================================================*/
+
+span {
+    font-family: var(--play-bold);
+    color: rgba(142, 71, 129, 1);
+}
+
+.icons{
+    font-size: 6rem;
+    padding: 15px 0;
+    color: rgba(142, 71, 129, 1)
+}
+
 .seccion-servicios{
     width: 100%;
-    
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -369,7 +384,15 @@
 }
 
 .tarjeta-servicio{
-    background: rgba(0,0,0,.15);
+   background:
+        linear-gradient(
+            rgba(85, 85, 85, 0.041),
+            rgba(37, 0, 0, 0.75)
+        ),
+        url("../assets/img/disenios-03.png");
+
+    background-size: cover;
+    background-position: center;
     border: 1px solid rgba(255,0,0,.4);
     border-radius: 25px;
     padding: 30px;
@@ -436,7 +459,7 @@
 }
 
 .desc-corta{
-    opacity: .85;
+    opacity: 0.85;
     line-height: 1.6;
 }
 
