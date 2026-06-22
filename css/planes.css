@@ -231,6 +231,209 @@ height: auto;
 }
 
 
+
+.seccion-planVIP{
+    width: 100%;
+    min-height: 1000px;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 120px 100px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(142,71,129,.15),
+            transparent 50%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(53,3,5,.2),
+            rgba(90,0,20,.25)
+        );
+}
+
+/* ==========================================
+   BRAZO ROBÓTICO
+   ========================================== */
+
+.vip-brazo{
+    position: absolute;
+
+    left: -250px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 1400px;
+
+    opacity: .95;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 0 30px rgba(255,40,90,.3))
+        drop-shadow(0 0 80px rgba(142,71,129,.2));
+}
+
+/* ==========================================
+   CONTENIDO
+   ========================================== */
+
+.vip-contenido{
+    width: 100%;
+    max-width: 1400px;
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+}
+
+.vip-contenido h2{
+    font-family: var(--play-bold);
+
+    font-size: 5rem;
+
+    margin-bottom: 70px;
+
+    color: #f7d77b;
+
+    text-shadow:
+        0 0 10px rgba(247,215,123,.5),
+        0 0 25px rgba(247,215,123,.25);
+}
+
+/* ==========================================
+   PANEL DE BENEFICIOS
+   ========================================== */
+
+.vip-beneficios{
+    width: 58%;
+
+    display: flex;
+
+    gap: 50px;
+
+    padding: 50px;
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(10px);
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.20),
+            rgba(20,0,0,.25)
+        );
+
+    border: 1px solid rgba(247,215,123,.15);
+
+    box-shadow:
+        0 0 40px rgba(247,215,123,.05),
+        inset 0 0 40px rgba(255,255,255,.02);
+}
+
+.vip-columna{
+    flex: 1;
+}
+
+.vip-columna ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vip-columna li{
+    position: relative;
+
+    padding-left: 35px;
+
+    margin-bottom: 25px;
+
+    color: var(--color-text);
+
+    font-family: var(--nunito);
+
+    font-size: 1.1rem;
+}
+
+/* DIAMANTES DORADOS */
+
+.vip-columna li::before{
+    content: "◆";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    color: #f7d77b;
+
+    text-shadow:
+        0 0 10px rgba(247,215,123,.5);
+}
+
+.vip-linea{
+    width: 1px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(247,215,123,.4),
+            transparent
+        );
+}
+
+/* ==========================================
+   BOTÓN VIP
+   ========================================== */
+
+.vip-contenido .btn-plan{
+    margin-top: 50px;
+
+    width: 280px;
+    height: 60px;
+
+    font-family: var(--play-bold);
+
+    letter-spacing: 2px;
+
+    border-radius: 15px;
+
+    border: 2px solid #f7d77b;
+
+    background: transparent;
+
+    color: #f7d77b;
+
+    transition: .3s;
+}
+
+.vip-contenido .btn-plan:hover{
+    transform: translateY(-5px);
+
+    background: #f7d77b;
+
+    color: #350305;
+
+    box-shadow:
+        0 0 20px rgba(247,215,123,.5),
+        0 0 50px rgba(247,215,123,.2);
+}
+
+
+
 /*=====================================================
 =================SECCION SERVICIOS=====================
 ======================================================*/
