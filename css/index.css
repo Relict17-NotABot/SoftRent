@@ -91,14 +91,10 @@ button:hover{
 
 /* ESTILOS PARA LA IMAGEN DEL HERO */
 .hero-frame {
-    width: 100%;             
-    height: auto;          
-    aspect-ratio: 690 / 430;
-    border: none;           
-    border-radius: 12px;    
-    background: transparent;
-    overflow: hidden;        
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    height: 400px;
+    border: none;
+    overflow: hidden;
 }
 
 /*Seccion 2: Introduccion*/
@@ -107,7 +103,7 @@ button:hover{
     width: 100%;
     height: auto;
     margin-top: 50px;
-    padding: 200px 9%;
+    padding: 80px 9%;
     display: flex;
     justify-content: center;
     justify-content: center;
@@ -134,21 +130,44 @@ button:hover{
 .seccion-introduccion div{
     width: 30%;
     flex-direction: column;
+    justify-content: center;
+    justify-content: center;
 }
+
+    .header-serviciosbtn {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+    justify-content: center;
+
+}
+
+.servicios-botones {
+    width: 100%;
+    padding: 17px;
+    gap : 50px;
+    display: flex;
+    justify-content: center;
+}
+
 
 .seccion-introduccion h2 {
     padding-bottom: 30px;
     font-size: 30px;
+    justify-content: center;
+    justify-content: center;
 }
 
 /*Seccion 3: Servicios*/
 
 .seccion-servicios{
     width: 100%;
-    padding: 100px 9%;
+    padding: 200px 9%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 30px;
 }
 
