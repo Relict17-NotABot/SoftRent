@@ -46,6 +46,13 @@
     gap: 10px;
   }
 
+  /* En pantallas angostas (Samsung S9 ~360px) las 5 columnas no se leen:
+     se reacomodan a 2 para que las tarjetas queden legibles. */
+  @media (max-width: 700px) {
+    body { padding: 20px 16px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   .card {
     background: #110707;
     border: 1px solid #3a1515;

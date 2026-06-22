@@ -122,3 +122,37 @@ footer h3{
     gap: 20px;
 }
 
+/* Responsivo footer: único breakpoint móvil (Samsung S9 ~360px) */
+@media (max-width: 700px) {
+    footer {
+        padding: 40px 24px;
+    }
+    .footer-cont1 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+    .footer-logo {
+        padding-top: 0;
+    }
+    .footer-logo img {
+        width: 240px;
+    }
+    .footer-acceso,
+    .footer-patrocinadores {
+        width: auto;
+    }
+    .edu-contenedor1 {
+        flex-direction: column;
+    }
+    .edu-contenedor2 {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .patrocinadores-cont {
+        justify-content: center;
+    }
+}
+
