@@ -92,7 +92,7 @@ button:hover{
 /* ESTILOS PARA LA IMAGEN DEL HERO */
 .hero-frame {
     width: 100%;
-    height: 400px;
+    height: 500px;
     border: none;
     overflow: hidden;
 }
@@ -324,7 +324,77 @@ button:hover{
     transition: all 0.3s ease;
 }
 
+.quick-contenedor a {
+    width: 100%;
+    text-decoration: none;
+}
+
 .quick-contenedor button {
     width: 100%;
+}
+
+/* ==========================================
+   RESPONSIVO 
+   ========================================== */
+@media (max-width: 700px) {
+    /* Hero en columna */
+    .seccion-hero {
+        padding: 110px 6% 50px;
+    }
+    .seccion-hero > div {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .hero-text {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    .hero-botones {
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+    .hero-botones :nth-child(1),
+    .hero-botones :nth-child(2) {
+        width: 100%;
+    }
+    .hero-frame {
+        height: 820px;   /* el grid interno pasa a 2 columnas y crece a lo alto */
+    }
+
+    /* Introducción en columna */
+    .seccion-introduccion {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 50px 8%;
+    }
+    .seccion-introduccion div {
+        width: 100%;
+    }
+
+    /* Servicios */
+    .seccion-servicios {
+        padding: 70px 6%;
+    }
+    .contenedor-solucion {
+        width: 100%;
+        padding: 20px 24px;
+    }
+
+    /* Quick access en columna */
+    .seccion-quickaccess {
+        padding: 60px 6%;
+    }
+    .seccion-quickaccess > div {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .quick-contenedor {
+        width: 100%;
+        max-width: 360px;
+    }
 }
 

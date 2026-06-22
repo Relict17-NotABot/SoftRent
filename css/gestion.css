@@ -7,7 +7,7 @@
 
 .gestion-hero {
     text-align: center;
-    padding: 4rem 1rem 2rem;
+    padding: 8rem 1rem 2rem;   /* deja espacio bajo el header fijo */
     color: #fff;
 }
 
@@ -427,4 +427,31 @@
 .nav-activo {
     color: #c0395a !important;
     font-weight: 600;
+}
+
+
+/* ---- RESPONSIVO: único breakpoint móvil (Samsung S9 ~360px) ---- */
+@media (max-width: 700px) {
+    .gestion-hero {
+        padding: 6rem 1rem 1.5rem;   /* deja espacio bajo el header fijo */
+    }
+    .gestion-hero h1 {
+        font-size: 2rem;
+    }
+    .sub-tarjeta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sub-datos {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    /* El modal grande pasa de 2 columnas a 1 */
+    .modal-cuerpo {
+        grid-template-columns: 1fr;
+    }
+    .modal {
+        padding: 1.5rem;
+    }
 }
