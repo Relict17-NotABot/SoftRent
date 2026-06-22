@@ -78,7 +78,7 @@ function crearTarjetaServicio(servicio){
 
     tarjeta.innerHTML = `
         <div class="servicio-icono">
-            <i class="${servicio.icono}"></i>
+            <i class="${servicio.icono} icons"></i>
         </div>
 
         <div class="servicio-contenido">

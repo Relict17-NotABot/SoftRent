@@ -30,9 +30,9 @@ button {
 }
 
 button:hover{
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     border-color: transparent;
-    color: var(--color-bg);
+    color: var(--color-primary);
     cursor: pointer;
 }
 
