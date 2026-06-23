@@ -237,6 +237,21 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
+.tarjeta-plan ul li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.tarjeta-plan ul li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #DC143C;
+    font-size: 0.8rem;
+    text-shadow: 0 0 10px rgba(220, 20, 60, 0.7);
+}
+
 .tarjeta-plan button {
     margin-top: auto;   /* empuja el botón al fondo, alinea las 3 tarjetas */
     width: 100%;
@@ -456,12 +471,14 @@ height: auto;
     left:0;
     top:0;
 
-    color:#f6d36c;
+    /* color:#DC143C; */
+     color:#f6d36c;
 
     font-size:.9rem;
 
     text-shadow:
-        0 0 10px rgba(212,175,55,.7);
+        /* 0 0 10px rgba(220,20,60,.7); */ 
+         0 0 10px rgba(212,175,55,.7);
 }
 
 .vip-beneficios hr{
