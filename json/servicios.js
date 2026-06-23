@@ -1,4 +1,4 @@
-[
+const SERVICIOS =[
     {
         "id": "srv-001",
         "nombre": "Automatización del Flujo de Clientes Potenciales",
@@ -375,4 +375,4 @@
         "destacado": true,
         "disponible": true
     }
-]
+];
