@@ -31,13 +31,9 @@ let categoriaSeleccionada = "";
 // CARGA DEL JSON
 // ============================================================
 
-async function cargarServicios() {
+function cargarServicios() {
 
-    const respuesta =
-        await fetch("../json/servicios.json");
-
-    servicios =
-        await respuesta.json();
+    servicios = SERVICIOS;
 
     servicios.forEach(function (servicio) {
         servicio.destacado =
