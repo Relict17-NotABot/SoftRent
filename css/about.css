@@ -1,7 +1,33 @@
-.divprueba{
-    background-color: white;
-    width: 100%;
-    height: 900px;
-     display: grid;
-  place-items: center;
+.seccion-about{
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin-top: 110px;
+  margin-bottom: 50px;
+  padding: 0 100px;
+  gap: 200px;
+  justify-content: center;
+}
+
+.seccion-about h2{
+  font-size: 3rem;
+  font-family: var(--play-bold);
+  color: var(--color-text);
+  text-shadow:
+        0 0 15px rgba(204, 47, 175, 0.5);
+}
+
+.seccion-about p{
+  font-size: 1.75rem;
+}
+
+.seccion-about img{
+  width: 750px;
+  height: auto;
+  border-radius: 25px;
+}
+
+.about-text{
+  width: 30%;
+  align-items: center;
 }
