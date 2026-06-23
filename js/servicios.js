@@ -31,16 +31,13 @@ let categoriaSeleccionada = "";
 // CARGA DEL JSON
 // ============================================================
 
-function cargarServicios() {
-
-    servicios = SERVICIOS;
-
-    servicios.forEach(function (servicio) {
-        servicio.destacado =
-            servicio.ventas >= 50000;
-    });
-
-    filtrarServicios();
+async function cargarServicios() {
+    try {
+        const respuesta = await fetch("json/servicios.json");
+        servicios = await respuesta.json();
+    } catch(error) {
+        console.error("Error al cargar servicios");
+    }
 }
 
 // ============================================================
@@ -240,36 +237,27 @@ function limpiarFiltros() {
 // INICIALIZACIÓN
 // ============================================================
 
-function iniciarServicios() {
+async function iniciarServicios() {
 
     btnCore.addEventListener("click", function(){
-
         categoriaSeleccionada = "core";
-
         filtrarServicios();
-
     });
 
     btnEcommerce.addEventListener("click", function(){
-
         categoriaSeleccionada = "ecommerce";
-
         filtrarServicios();
-
     });
 
-    filtroTag.addEventListener(
-        "change",
-        filtrarServicios
+    filtroTag.addEventListener("change", filtrarServicios);
+
+    btnLimpiarFiltros.addEventListener("click", limpiarFiltros);
+
+    await cargarServicios();
+
+    renderizarServicios(
+    obtenerServiciosDisponibles()
     );
-
-    btnLimpiarFiltros.addEventListener(
-        "click",
-        limpiarFiltros
-    );
-
-    cargarServicios();
-
 }
 
 // ============================================================

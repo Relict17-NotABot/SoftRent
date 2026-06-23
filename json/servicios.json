@@ -1,4 +1,4 @@
-const SERVICIOS =[
+[
     {
         "id": "srv-001",
         "nombre": "Automatización del Flujo de Clientes Potenciales",
@@ -7,12 +7,14 @@ const SERVICIOS =[
         "desc_ext": "Captura automática de leads desde formularios, redes sociales o correo. Los asigna a tu CRM, notifica al equipo y activa un seguimiento sin intervención manual.",
         "precio": 15000,
         "ventas": 25,
-        "tags": ["ventas", "comunicacion"],
+        "tags": [
+            "ventas",
+            "comunicacion"
+        ],
         "icono": "fa-brands fa-fly",
         "destacado": false,
         "disponible": false
     },
-
     {
         "id": "srv-002",
         "nombre": "Automatización de Tareas y Operaciones",
@@ -21,12 +23,14 @@ const SERVICIOS =[
         "desc_ext": "Automatiza flujos repetitivos internos: asignación de tareas, recordatorios, actualizaciones de estado y coordinación entre equipos o herramientas.",
         "precio": 20000,
         "ventas": 100,
-        "tags": ["ventas", "operaciones"],
+        "tags": [
+            "ventas",
+            "operaciones"
+        ],
         "icono": "fa-brands fa-fly",
         "destacado": true,
         "disponible": true
     },
-
     {
         "id": "srv-003",
         "nombre": "Automatización de Facturación y Pagos",
@@ -35,12 +39,14 @@ const SERVICIOS =[
         "desc_ext": "Generación y envío automático de facturas al completar un servicio o al vencer un plazo. Incluye recordatorios de pago y registro en sistemas contables.",
         "precio": 35000,
         "ventas": 75,
-        "tags": ["finanzas", "operaciones"],
+        "tags": [
+            "finanzas",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-money-bill-transfer",
         "destacado": false,
         "disponible": true
     },
-
     {
         "id": "srv-004",
         "nombre": "Automatización en Soporte al Cliente",
@@ -49,12 +55,15 @@ const SERVICIOS =[
         "desc_ext": "Respuestas automáticas a consultas frecuentes, clasificación de tickets por prioridad y derivación al agente correcto. Reduce tiempos de respuesta sin ampliar el equipo.",
         "precio": 20000,
         "ventas": 250,
-        "tags": ["soporte", "ia", "comunicacion"],
+        "tags": [
+            "soporte",
+            "ia",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-comments",
         "destacado": true,
         "disponible": true
     },
-
     {
         "id": "srv-005",
         "nombre": "Flujo de Pedidos de E-Commerce",
@@ -63,12 +72,14 @@ const SERVICIOS =[
         "desc_ext": "Automatiza la confirmación, preparación y notificación de pedidos desde tu tienda online. Conecta tu plataforma de venta con tu logística y tu equipo sin pasos manuales.",
         "precio": 23000,
         "ventas": 67,
-        "tags": ["operaciones", "ventas"],
+        "tags": [
+            "operaciones",
+            "ventas"
+        ],
         "icono": "fa-solid fa-cash-register",
         "destacado": false,
         "disponible": true
     },
-
     {
         "id": "srv-006",
         "nombre": "Recuperación de Clientes de E-Commerce",
@@ -77,12 +88,14 @@ const SERVICIOS =[
         "desc_ext": "Secuencias automáticas de recuperación de carritos abandonados, reactivación de clientes inactivos y campañas de recompra personalizadas según historial.",
         "precio": 35000,
         "ventas": 777,
-        "tags": ["marketing", "ventas"],
+        "tags": [
+            "marketing",
+            "ventas"
+        ],
         "icono": "fa-solid fa-user-shield",
         "destacado": false,
         "disponible": true
     },
-
     {
         "id": "srv-007",
         "nombre": "Sincronización de Inventario de E-Commerce",
@@ -91,12 +104,14 @@ const SERVICIOS =[
         "desc_ext": "Sincronización en tiempo real del stock entre tu tienda, almacén y canales de venta. Evita sobreventas, pedidos imposibles y correcciones manuales.",
         "precio": 15000,
         "ventas": 25,
-        "tags": ["inventario", "operaciones"],
+        "tags": [
+            "inventario",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-boxes-stacked",
         "destacado": false,
         "disponible": true
     },
-
     {
         "id": "srv-008",
         "nombre": "Soporte Básico",
@@ -105,12 +120,13 @@ const SERVICIOS =[
         "desc_ext": "Canal de soporte por chat para resolución de dudas, errores menores y ajustes en las automatizaciones activas.",
         "precio": 15000,
         "ventas": 555,
-        "tags": ["soporte"],
+        "tags": [
+            "soporte"
+        ],
         "icono": "fa-solid fa-headset",
         "destacado": true,
         "disponible": true
     },
-
     {
         "id": "srv-009",
         "nombre": "Mantenimiento Básico",
@@ -119,12 +135,13 @@ const SERVICIOS =[
         "desc_ext": "Monitoreo y mantenimiento periódico de los flujos activos para garantizar que sigan funcionando aunque cambien las herramientas conectadas.",
         "precio": 15000,
         "ventas": 379,
-        "tags": ["operaciones"],
+        "tags": [
+            "operaciones"
+        ],
         "icono": "fa-solid fa-code",
         "destacado": false,
         "disponible": true
     },
-
     {
         "id": "srv-010",
         "nombre": "Asesoramiento Básico",
@@ -133,12 +150,14 @@ const SERVICIOS =[
         "desc_ext": "Asesoramiento estratégico para identificar fricciones en tus procesos y proponer mejoras concretas.",
         "precio": 20000,
         "ventas": 13340,
-        "tags": ["soporte", "operaciones"],
+        "tags": [
+            "soporte",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-handshake-angle",
         "destacado": true,
         "disponible": true
     },
-
     {
         "id": "srv-011",
         "nombre": "Asesoramiento Profesional",
@@ -147,12 +166,14 @@ const SERVICIOS =[
         "desc_ext": "Sesiones de revisión con un consultor especializado para evaluar el estado de tus automatizaciones y recomendar ajustes estratégicos según tu crecimiento.",
         "precio": 20000,
         "ventas": 13340,
-        "tags": ["reportes", "operaciones"],
+        "tags": [
+            "reportes",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-hands-holding-child",
         "destacado": true,
         "disponible": true
     },
-
     {
         "id": "srv-012",
         "nombre": "Mantenimiento Prioritario",
@@ -161,12 +182,13 @@ const SERVICIOS =[
         "desc_ext": "Monitoreo continuo y resolución de incidencias en cualquier momento del día, incluyendo fines de semana y festivos. Tienes prioridad VIP",
         "precio": 25000,
         "ventas": 3211,
-        "tags": ["operaciones"],
+        "tags": [
+            "operaciones"
+        ],
         "icono": "fa-brands fa-supportnow",
         "destacado": true,
         "disponible": true
     },
-    
     {
         "id": "srv-013",
         "nombre": "Brief Mensual de Estadísticas",
@@ -175,7 +197,9 @@ const SERVICIOS =[
         "desc_ext": "Reporte mensual con métricas clave de rendimiento de tus automatizaciones: tiempo ahorrado, errores evitados, volumen procesado y comparativa mensual.",
         "precio": 10000,
         "ventas": 43,
-        "tags": ["reportes"],
+        "tags": [
+            "reportes"
+        ],
         "icono": "fa-solid fa-chart-line",
         "destacado": true,
         "disponible": true
@@ -188,7 +212,10 @@ const SERVICIOS =[
         "desc_ext": "Análisis detallado de los datos generados por tus flujos automatizados, con interpretación, visualizaciones y recomendaciones de acción.",
         "precio": 35000,
         "ventas": 2451,
-        "tags": ["reportes", "ia"],
+        "tags": [
+            "reportes",
+            "ia"
+        ],
         "icono": "fa-solid fa-hexagon-nodes",
         "destacado": true,
         "disponible": true
@@ -201,7 +228,11 @@ const SERVICIOS =[
         "desc_ext": "Flujo automatizado que da la bienvenida al nuevo cliente, solicita la información necesaria, crea los accesos requeridos y coordina internamente los primeros pasos del proyecto.",
         "precio": 5000,
         "ventas": 3211,
-        "tags": ["ventas", "comunicacion", "operaciones"],
+        "tags": [
+            "ventas",
+            "comunicacion",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-users-line",
         "destacado": true,
         "disponible": true
@@ -214,7 +245,11 @@ const SERVICIOS =[
         "desc_ext": "Secuencia automática de mensajes post-venta para verificar satisfacción, solicitar reseñas y detectar oportunidades de venta adicional (upsell/cross-sell).",
         "precio": 25000,
         "ventas": 34,
-        "tags": ["ventas", "marketing", "comunicacion"],
+        "tags": [
+            "ventas",
+            "marketing",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-person-running",
         "destacado": true,
         "disponible": true
@@ -227,7 +262,10 @@ const SERVICIOS =[
         "desc_ext": "Generación automática de contratos desde plantillas y envío para firma digital. Notifica a ambas partes y archiva el documento firmado en el sistema correspondiente.",
         "precio": 27000,
         "ventas": 5628,
-        "tags": ["operaciones", "finanzas"],
+        "tags": [
+            "operaciones",
+            "finanzas"
+        ],
         "icono": "fa-solid fa-file-signature",
         "destacado": true,
         "disponible": true
@@ -240,7 +278,10 @@ const SERVICIOS =[
         "desc_ext": "Generación y distribución automática de reportes internos con datos actualizados de ventas, operaciones o soporte. Sin intervención manual, con periodicidad configurable.",
         "precio": 15000,
         "ventas": 526,
-        "tags": ["reportes", "operaciones"],
+        "tags": [
+            "reportes",
+            "operaciones"
+        ],
         "icono": "fa-solid fa-file-half-dashed",
         "destacado": true,
         "disponible": true
@@ -253,7 +294,9 @@ const SERVICIOS =[
         "desc_ext": "Conexión y sincronización entre las plataformas que ya usas: CRM, email, contabilidad, gestión de proyectos, WhatsApp, y más. Sin exportar archivos ni copiar datos a mano.",
         "precio": 35000,
         "ventas": 550,
-        "tags": ["operaciones"],
+        "tags": [
+            "operaciones"
+        ],
         "icono": "fa-solid fa-gear",
         "destacado": true,
         "disponible": true
@@ -266,7 +309,11 @@ const SERVICIOS =[
         "desc_ext": "Agente conversacional con IA entrenado con información de tu negocio para responder preguntas frecuentes, calificar leads y derivar consultas complejas al equipo humano.",
         "precio": 5000,
         "ventas": 27192,
-        "tags": ["soporte", "ia", "comunicacion"],
+        "tags": [
+            "soporte",
+            "ia",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-robot",
         "destacado": true,
         "disponible": true
@@ -279,9 +326,13 @@ const SERVICIOS =[
         "desc_ext": "Sistema que clasifica automáticamente los correos entrantes por tipo, prioridad y área responsable. Etiqueta, archiva y reenvía sin que tengas que tocar nada.",
         "precio": 15000,
         "ventas": 532020,
-        "tags": ["soporte", "operaciones", "ia"],
+        "tags": [
+            "soporte",
+            "operaciones",
+            "ia"
+        ],
         "icono": "fa-solid fa-envelope-open-text",
-        "destacado": true, 
+        "destacado": true,
         "disponible": true
     },
     {
@@ -292,7 +343,10 @@ const SERVICIOS =[
         "desc_ext": "Programación y publicación automática de contenido en múltiples redes sociales desde un único flujo. Se conecta con tu calendario editorial y publica en el horario de mayor impacto.",
         "precio": 15000,
         "ventas": 35699,
-        "tags": [ "marketing", "comunicacion"],
+        "tags": [
+            "marketing",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-share-from-square",
         "destacado": true,
         "disponible": true
@@ -305,7 +359,10 @@ const SERVICIOS =[
         "desc_ext": "Dashboard automatizado con métricas clave de tu tienda: ventas por producto, ticket promedio, tasa de conversión, devoluciones y evolución mensual. Se actualiza solo.",
         "precio": 15000,
         "ventas": 212,
-        "tags": [ "reportes", "ventas"],
+        "tags": [
+            "reportes",
+            "ventas"
+        ],
         "icono": "fa-solid fa-cart-plus",
         "destacado": true,
         "disponible": true
@@ -318,7 +375,11 @@ const SERVICIOS =[
         "desc_ext": "Flujo automatizado que gestiona solicitudes de devolución, verifica condiciones, activa el reembolso o el reenvío y notifica al cliente en cada etapa sin intervención del equipo.",
         "precio": 20000,
         "ventas": 3235,
-        "tags": [ "soporte", "operaciones", "finanzas"],
+        "tags": [
+            "soporte",
+            "operaciones",
+            "finanzas"
+        ],
         "icono": "fa-solid fa-bag-shopping",
         "destacado": true,
         "disponible": true
@@ -331,7 +392,11 @@ const SERVICIOS =[
         "desc_ext": "Clasificación automática de tu base de clientes en segmentos según comportamiento de compra, frecuencia, valor y etapa en el ciclo de vida. Permite campañas más precisas con menos esfuerzo.",
         "precio": 20000,
         "ventas": 5434,
-        "tags": [ "marketing", "ventas", "ia"],
+        "tags": [
+            "marketing",
+            "ventas",
+            "ia"
+        ],
         "icono": "fa-solid fa-user-tag",
         "destacado": true,
         "disponible": true
@@ -344,7 +409,11 @@ const SERVICIOS =[
         "desc_ext": "Solicitud automática de reseñas tras la entrega del pedido en el canal adecuado (Google, Trustpilot, tu plataforma). Detecta respuestas negativas para escalar antes de que se publiquen.",
         "precio": 15700,
         "ventas": 34,
-        "tags": [ "marketing", "ventas", "comunicacion"],
+        "tags": [
+            "marketing",
+            "ventas",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-comments-dollar",
         "destacado": true,
         "disponible": true
@@ -357,7 +426,10 @@ const SERVICIOS =[
         "desc_ext": "Monitoreo automático del nivel de inventario con alertas configurables antes de llegar a cero. Puede disparar órdenes de reposición o pausar el producto en la tienda temporalmente.",
         "precio": 25000,
         "ventas": 1759,
-        "tags": [ "inventario", "comunicacion"],
+        "tags": [
+            "inventario",
+            "comunicacion"
+        ],
         "icono": "fa-solid fa-bullhorn",
         "destacado": true,
         "disponible": true
@@ -370,9 +442,11 @@ const SERVICIOS =[
         "desc_ext": "Monitoreo continuo y resolución de incidencias en cualquier momento del día, incluyendo fines de semana y festivos.",
         "precio": 25000,
         "ventas": 3211,
-        "tags": ["operaciones"],
+        "tags": [
+            "operaciones"
+        ],
         "icono": "fa-solid fa-star-and-crescent",
         "destacado": true,
         "disponible": true
     }
-];
+]

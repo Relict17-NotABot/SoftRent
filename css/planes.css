@@ -213,9 +213,12 @@
 }
 
 /* Layout interno de cada tarjeta de plan */
-.tarjeta-plan > div {
+.tarjeta-plan:first-child() {
     width: 100%;
-    text-align: center;
+}
+
+.list-ventajas{
+    text-align: left;
 }
 
 .tarjeta-plan h2 {
@@ -561,16 +564,17 @@ span {
 }
 
 #contenedorServicios{
-     width: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     align-items: start;
+    padding: 0 100px;
     
 }
 
 .tarjeta-servicio{
-   background:
+    background:
         linear-gradient(
             rgba(85, 85, 85, 0.041),
             rgba(37, 0, 0, 0.75)
@@ -601,11 +605,11 @@ span {
 
 .servicio-icono{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .servicio-icono i{
-    font-size: 5rem;
+    font-size: 2rem;
     color: #ff1c47;
 }
 
