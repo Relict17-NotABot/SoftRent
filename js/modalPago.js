@@ -67,21 +67,6 @@ function calcularTotal() {
     return Math.round(total);
 }
 
-
-
-// ============================================================
-// OBTENER LÍMITE DE SISTEMAS DEL PLAN
-// ============================================================
-
-function obtenerLimiteSistemas() {
-    const plan = estadoModal.planElegido;
-    if (!plan) {
-        return 0;
-    }
-    
-    return plan.sistemas_elegibles;
-}
-
 // ============================================================
 // RENDERIZAR DETALLE DE FACTURA (ACTUALIZADO)
 // ============================================================
@@ -562,3 +547,272 @@ function guardarCompraEnLocalStorage() {
 
     return compra;
 }
+
+// ============================================================
+// VALIDACIÓN DE CÓDIGO DE DESCUENTO
+// ============================================================
+
+const CODIGOS_DESCUENTO = {
+    "SOFTRENT10": 10,
+    "SOFTRENT20": 20,
+    "UTN2026": 15,
+    "PROMO50": 50
+};
+
+function validarCodigoDescuento() {
+    const inputCodigo = document.getElementById("mp-codigo-descuento");
+    const msgEl = document.getElementById("mp-mensaje-codigo");
+    const codigo = inputCodigo.value.trim().toUpperCase();
+
+    if (!codigo) {
+        msgEl.textContent = "Ingresá un código.";
+        msgEl.className = "mp-msg-codigo mp-msg-codigo--error";
+        return;
+    }
+
+    if (CODIGOS_DESCUENTO[codigo] !== undefined) {
+        estadoModal.codigoDescuento = codigo;
+        estadoModal.descuentoAplicado = CODIGOS_DESCUENTO[codigo];
+        msgEl.textContent = `¡Código válido! ${CODIGOS_DESCUENTO[codigo]}% de descuento aplicado.`;
+        msgEl.className = "mp-msg-codigo mp-msg-codigo--exito";
+    } else {
+        estadoModal.codigoDescuento = "";
+        estadoModal.descuentoAplicado = 0;
+        msgEl.textContent = "Código inválido. Intentá con otro.";
+        msgEl.className = "mp-msg-codigo mp-msg-codigo--error";
+    }
+
+    renderizarDetalle();
+}
+
+// ============================================================
+// BADGE DE AHORRO EN PLAN ANUAL
+// ============================================================
+
+function actualizarBadgeAhorro() {
+    const plan = estadoModal.planElegido;
+    const badge = document.getElementById("mp-badge-ahorro");
+    if (!badge || !plan) {
+        return;
+    }
+
+    if (estadoModal.periodicidad === "anual" && plan.porc_desc_anual) {
+        badge.textContent = `Ahorrás ${plan.porc_desc_anual}%`;
+        badge.style.display = "inline-block";
+    } else {
+        badge.style.display = "none";
+    }
+}
+
+// ============================================================
+// MOSTRAR PANTALLA DE ÉXITO
+// ============================================================
+
+function mostrarExito(compra) {
+    const resumen = document.getElementById("mp-exito-resumen");
+    resumen.textContent = `${compra.plan.nombre} (${compra.plan.periodicidad}) — Total: ${formatearPrecio(compra.total)}`;
+    document.getElementById("mp-exito-overlay").classList.add("mp-overlay--visible");
+}
+
+// ============================================================
+// ABRIR / CERRAR MODAL
+// ============================================================
+
+function abrirModalPago(planId) {
+    const plan = buscarPlan(planId);
+    if (!plan) {
+        return;
+    }
+
+    // Resetear estado
+    estadoModal = {
+        planElegido: plan,
+        periodicidad: "mensual",
+        serviciosElegidos: [],
+        serviciosAdicionales: [],
+        codigoDescuento: "",
+        descuentoAplicado: 0
+    };
+
+    // Resetear UI del radio
+    const radioMensual = document.getElementById("mp-radio-mensual");
+    const radioAnual = document.getElementById("mp-radio-anual");
+    if (radioMensual) {
+        radioMensual.checked = true;
+    }
+    if (radioAnual) {
+        radioAnual.checked = false;
+    }
+
+    // Resetear código de descuento
+    const inputCodigo = document.getElementById("mp-codigo-descuento");
+    if (inputCodigo) {
+        inputCodigo.value = "";
+    }
+    const msgCodigo = document.getElementById("mp-mensaje-codigo");
+    if (msgCodigo) { 
+        msgCodigo.textContent = ""; 
+        msgCodigo.className = "mp-msg-codigo"; 
+    }
+
+    // Renderizar
+    renderizarDetalle();
+    renderizarCatalogoElegibles();
+    actualizarBadgeAhorro();
+
+    // Mostrar modal
+    const overlay = document.getElementById("mp-overlay");
+    overlay.classList.add("mp-overlay--visible");
+    document.body.style.overflow = "hidden";
+}
+
+function cerrarModalPago() {
+    const overlay = document.getElementById("mp-overlay");
+    overlay.classList.remove("mp-overlay--visible");
+    document.body.style.overflow = "";
+}
+
+// ============================================================
+// VINCULAR EVENTOS DEL MODAL
+// ============================================================
+
+function vincularEventosModal() {
+    // Cerrar modal principal
+    const btnCerrar = document.getElementById("mp-btn-cerrar");
+    if (btnCerrar) {
+        btnCerrar.addEventListener("click", cerrarModalPago);
+    }
+
+    const overlay = document.getElementById("mp-overlay");
+    if (overlay) {
+        overlay.addEventListener("click", function (e) {
+            if (e.target === this) {
+                cerrarModalPago();
+            }
+        });
+    }
+
+    // Periodicidad
+    document.querySelectorAll("input[name='mp-periodicidad']").forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            estadoModal.periodicidad = this.value;
+            actualizarBadgeAhorro();
+            renderizarDetalle();
+        });
+    });
+
+    // Código de descuento
+    const btnAplicar = document.getElementById("mp-btn-aplicar-codigo");
+    if (btnAplicar) {
+        btnAplicar.addEventListener("click", validarCodigoDescuento);
+    }
+
+    const inputCodigo = document.getElementById("mp-codigo-descuento");
+    if (inputCodigo) {
+        inputCodigo.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                validarCodigoDescuento();
+            }
+        });
+    }
+
+    // Botón siguiente
+    const btnSiguiente = document.getElementById("mp-btn-siguiente");
+    if (btnSiguiente) {
+        btnSiguiente.addEventListener("click", abrirModalConfirmacion);
+    }
+
+    // Modal confirmación
+    const btnCerrarConfirm = document.getElementById("mpc-btn-cerrar");
+    if (btnCerrarConfirm) {
+        btnCerrarConfirm.addEventListener("click", cerrarModalConfirmacion);
+    }
+
+    const btnVolver = document.getElementById("mpc-btn-volver");
+    if (btnVolver) {
+        btnVolver.addEventListener("click", cerrarModalConfirmacion);
+    }
+
+    const overlayConfirm = document.getElementById("mp-confirmacion-overlay");
+    if (overlayConfirm) {
+        overlayConfirm.addEventListener("click", function (e) {
+            if (e.target === this) {
+                cerrarModalConfirmacion();
+            }
+        });
+    }
+
+    // Botón comprar
+    const btnComprar = document.getElementById("mpc-btn-comprar");
+    if (btnComprar) {
+        btnComprar.addEventListener("click", function () {
+            const compra = guardarCompraEnLocalStorage();
+            cerrarModalConfirmacion();
+            cerrarModalPago();
+            mostrarExito(compra);
+        });
+    }
+
+    // Cerrar éxito
+    const btnCerrarExito = document.getElementById("mp-exito-cerrar");
+    if (btnCerrarExito) {
+        btnCerrarExito.addEventListener("click", function () {
+            document.getElementById("mp-exito-overlay").classList.remove("mp-overlay--visible");
+        });
+    }
+
+    const overlayExito = document.getElementById("mp-exito-overlay");
+    if (overlayExito) {
+        overlayExito.addEventListener("click", function (e) {
+            if (e.target === this) {
+                this.classList.remove("mp-overlay--visible");
+            }
+        });
+    }
+}
+
+// ============================================================
+// VINCULAR BOTONES DE PLANES
+// ============================================================
+
+function vincularBotonesPlan() {
+    // Tarjetas existentes
+    const mapaBotones = {
+        ".tarjeta-plan.basic": "PLAN-BASICO",
+        ".tarjeta-plan.inter": "PLAN-INTERMEDIO",
+        ".tarjeta-plan.pro": "PLAN-PROFESIONAL"
+    };
+
+    Object.entries(mapaBotones).forEach(function (entrada) {
+        const selector = entrada[0];
+        const planId = entrada[1];
+        const tarjeta = document.querySelector(selector);
+        if (!tarjeta) {
+            return;
+        }
+
+        const boton = tarjeta.querySelector("button");
+        if (boton) {
+            boton.addEventListener("click", function () {
+                abrirModalPago(planId);
+            });
+        }
+    });
+
+    // Plan VIP
+    const btnVIP = document.querySelector(".btn-vip");
+    if (btnVIP) {
+        btnVIP.addEventListener("click", function () {
+            abrirModalPago("PLAN-VIP");
+        });
+    }
+}
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+    vincularEventosModal();
+    vincularBotonesPlan();
+});

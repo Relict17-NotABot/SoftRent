@@ -268,3 +268,34 @@
     margin: 0;
     padding: 0.5rem;
 }
+
+/* ============================================================
+   MODAL DE CONFIRMACIÓN - Estilos para resumen
+   ============================================================ */
+
+.mpc-subtitulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.75rem 0 0.35rem 0;
+    letter-spacing: 0.05em;
+}
+
+.mpc-item--incluido {
+    background: rgba(119, 7, 7, 0.05);
+    border-left: 3px solid rgba(119, 7, 7, 0.5);
+}
+
+.mpc-item--elegido {
+    background: rgba(93, 136, 136, 0.05);
+    border-left: 3px solid rgba(93, 136, 136, 0.5);
+}
+
+.mpc-item--descuento {
+    color: #5d8;
+}
+
+/* ============================================================
+   Resto del CSS ya existe, así que con esto es suficiente
+   ============================================================ */
