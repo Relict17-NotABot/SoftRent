@@ -665,6 +665,7 @@ span {
 }
 
 .btn-expandir i{
+    cursor: pointer;
     font-size: 1.5rem;
     color: white;
 }
@@ -799,6 +800,8 @@ span {
     gap: 10px;
 }
 
+/*Tarjeta intermedia del form*/
+
 .tarjeta-planForm{
     width: 80%;
     margin-left: 40px;
@@ -833,8 +836,9 @@ span {
 }
 
 .tarjeta-planForm:hover {
+    cursor: pointer;
     transform: translateY(-10px); /* Efecto de flotar al pasar el mouse */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 15px 35px rgba(110, 3, 3, 0.8);
     border-color: rgba(199, 86, 86, 0.4);
 }
 
@@ -843,4 +847,32 @@ span {
     display: flex;
     padding-bottom: 10px;
     gap: 10px;
+}
+
+/*servicios recomendados del form*/
+
+.tarjeta-recomendacion{
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.41),
+            rgba(83, 1, 1, 0.41)
+        );
+    width: 90%;
+    margin-bottom: 50px;
+    border: 1px solid rgba(255,0,0,.4);
+    border-radius: 25px;
+    padding: 30px;
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    align-items: center;
+    color: var(--color-text);
+    transition: ease-in-out 0.2s;
+}
+
+.tarjeta-recomendacion:hover {
+    cursor: pointer;
+    transform: translateY(-10px); /* Efecto de flotar al pasar el mouse */
+    box-shadow: 0 15px 35px rgba(110, 3, 3, 0.8);
+    border-color: rgba(199, 86, 86, 0.4);
 }
