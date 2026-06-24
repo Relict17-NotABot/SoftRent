@@ -460,7 +460,7 @@ function mostrarInformacion(){
          InfoPorTipoNegocio.innerHTML = `
          <h3>Conoce más sobre nuestros servicios en el siguiente link:</h3>
 
-         <a href = "https://youtu.be/dQw4w9WgXcQ">Video Informativo</a>
+         <a target="_blank" href = "https://youtu.be/dQw4w9WgXcQ">Video Informativo</a>
          `
          return;
     }
