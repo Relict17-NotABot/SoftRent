@@ -1,53 +1,7 @@
 // ============================================================
-// MODAL DE PAGO - SoftRent
+// ===================== MODAL DE PAGO ========================
 // ============================================================
 
-// ============================================================
-// DATOS DE PLANES
-// ============================================================
-
-const PLANES = [
-    {
-        id: "PLAN-BASICO",
-        nombre: "Plan Básico",
-        desc: "Para empresas que quieren dar el primer paso sin riesgos",
-        precio_mensual: 25480,
-        precio_anual: 244400,
-        porc_desc_anual: 20,
-        servicios_incluidos: ["srv-008", "srv-009", "srv-010"],
-        icono: "robot1.png"
-    },
-    {
-        id: "PLAN-INTERMEDIO",
-        nombre: "Plan Intermedio",
-        desc: "Para emprendimientos en crecimiento que necesitan más capacidad",
-        precio_mensual: 61880,
-        precio_anual: 557000,
-        porc_desc_anual: 25,
-        servicios_incluidos: ["srv-008", "srv-011"],
-        icono: "robot2.png"
-    },
-    {
-        id: "PLAN-PROFESIONAL",
-        nombre: "Plan Profesional",
-        desc: "Para empresas comprometidas con la eficiencia operativa",
-        precio_mensual: 119080,
-        precio_anual: 1285000,
-        porc_desc_anual: 10,
-        servicios_incluidos: ["srv-028", "srv-011", "srv-013"],
-        icono: "robot3.png"
-    },
-    {
-        id: "PLAN-VIP",
-        nombre: "Plan VIP",
-        desc: "Acceso total al catálogo con atención prioritaria y seguimiento personalizado",
-        precio_mensual: 233480,
-        precio_anual: 2522000,
-        porc_desc_anual: 10,
-        servicios_incluidos: ["srv-012", "srv-013", "srv-014"],
-        icono: "robotVIP.png"
-    }
-];
 
 // ============================================================
 // ESTADO GLOBAL DEL MODAL
@@ -62,39 +16,40 @@ let estadoModal = {
 };
 
 // ============================================================
-// HELPERS DE FORMATO
-// ============================================================
-
-function formatearPrecio(numero) {
-    return "₡" + numero.toLocaleString("es-CR");
-}
-
-function obtenerServicioPorId(id) {
-    if (typeof SERVICIOS !== "undefined") {
-        return SERVICIOS.find(function (s) { return s.id === id; }) || null;
-    }
-    return null;
-}
-
-// ============================================================
 // CÁLCULO DEL TOTAL
 // ============================================================
 
 function calcularTotal() {
-    if (!estadoModal.planElegido) return 0;
+    if (!estadoModal.planElegido) {
+        return 0;
+    }
 
     const plan = estadoModal.planElegido;
-    let total = estadoModal.periodicidad === "mensual"
-        ? plan.precio_mensual
-        : plan.precio_anual;
 
-    // Sumar servicios extra (siempre en precio mensual por unidad)
+    //Elegir periodicidad -- mensual o anual modifica el precio
+    let total = 0;
+
+    if (estadoModal.periodicidad === "mensual") {
+        total = plan.precio_mensual;
+    }
+    else {
+        total = plan.precio_anual;
+    }
+
+    //sumar servicios extra, precio fijo
     estadoModal.serviciosExtra.forEach(function (id) {
-        const srv = obtenerServicioPorId(id);
-        if (srv) {
-            total += estadoModal.periodicidad === "mensual"
-                ? srv.precio
-                : srv.precio * 10; // precio anual ≈ 10 meses
+        const servicio = buscarServicio(id);
+
+        if(servicio) {
+            let precioServicio
+
+            if(estadoModal.periodicidad === "mensual"){
+                precioServicio = servicio.precio;
+            } else {
+                precioServicio = servicio.precio * 10;
+            }
+
+            total += precioServicio;
         }
     });
 
@@ -104,6 +59,7 @@ function calcularTotal() {
     }
 
     return Math.round(total);
+
 }
 
 // ============================================================
@@ -237,8 +193,8 @@ function renderizarCatalogoExtras() {
             </div>
             <button class="mp-btn-agregar ${yaAgregado ? "mp-btn-agregado" : ""}" data-id="${srv.id}">
                 ${yaAgregado
-                    ? '<i class="fa-solid fa-check"></i> Agregado'
-                    : '<i class="fa-solid fa-plus"></i> Agregar'}
+                ? '<i class="fa-solid fa-check"></i> Agregado'
+                : '<i class="fa-solid fa-plus"></i> Agregar'}
             </button>
         `;
 
@@ -394,7 +350,7 @@ function guardarCompraEnLocalStorage() {
                     id: srv.id,
                     nombre: srv.nombre,
                     precio: estadoModal.periodicidad === "mensual" ? srv.precio : srv.precio * 10
-                  }
+                }
                 : { id: id, nombre: id, precio: 0 };
         }),
         descuentoAplicado: estadoModal.descuentoAplicado,

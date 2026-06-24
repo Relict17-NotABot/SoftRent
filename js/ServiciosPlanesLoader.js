@@ -1,3 +1,6 @@
+let servicios = [];
+let planes = [];
+
 async function cargarServicios() {
     try {
         const respuesta = await fetch("json/servicios.json");

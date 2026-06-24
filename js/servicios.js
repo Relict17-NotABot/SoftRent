@@ -24,8 +24,6 @@ const btnLimpiarFiltros =
 // VARIABLES GLOBALES
 // ============================================================
 
-let servicios = [];
-let planes = [];
 let categoriaSeleccionada = "";
 
 // ============================================================
@@ -251,6 +249,27 @@ async function iniciarServicios() {
 async function iniciarPlanes(){
     await cargarPlanes();
 }
+
+// ============================================================
+// BUSQUEDA
+// ============================================================
+
+function buscarPlan(idPlan){
+
+    return planes.find(function(plan){
+        return plan.id === idPlan;
+    });
+
+}
+
+function buscarServicio(idServicio){
+
+    return servicios.find(function(servicio){
+        return servicio.id === idServicio;
+    });
+
+}
+
 
 // ============================================================
 // PUNTO DE ENTRADA
