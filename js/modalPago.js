@@ -1,19 +1,27 @@
 // ============================================================
-// ===================== MODAL DE PAGO ========================
-// ============================================================
-
-
-// ============================================================
 // ESTADO GLOBAL DEL MODAL
 // ============================================================
 
 let estadoModal = {
     planElegido: null,
-    periodicidad: "mensual",       // "mensual" | "anual"
-    serviciosExtra: [],            // IDs de servicios adicionales agregados
+    periodicidad: "mensual",
+    serviciosElegidos: [], 
+    serviciosAdicionales: [],
     codigoDescuento: "",
-    descuentoAplicado: 0           // porcentaje 0-100
+    descuentoAplicado: 0
 };
+
+// ============================================================
+// Obtener el limite de servicios por plan
+// ============================================================
+
+
+function obtenerLimiteSistemas() {
+    const plan = estadoModal.planElegido;
+    if (!plan) return 0;
+    
+    return plan.sistemas_elegibles;
+}
 
 // ============================================================
 // CÁLCULO DEL TOTAL
@@ -25,25 +33,23 @@ function calcularTotal() {
     }
 
     const plan = estadoModal.planElegido;
-
-    //Elegir periodicidad -- mensual o anual modifica el precio
     let total = 0;
 
+    // Precio base del plan
     if (estadoModal.periodicidad === "mensual") {
         total = plan.precio_mensual;
-    }
-    else {
+    } else {
         total = plan.precio_anual;
     }
 
-    //sumar servicios extra, precio fijo
-    estadoModal.serviciosExtra.forEach(function (id) {
+    // Agregar servicios adicionales (los que superan el límite)
+    estadoModal.serviciosAdicionales.forEach(function (id) {
         const servicio = buscarServicio(id);
 
-        if(servicio) {
-            let precioServicio
+        if (servicio) {
+            let precioServicio;
 
-            if(estadoModal.periodicidad === "mensual"){
+            if (estadoModal.periodicidad === "mensual") {
                 precioServicio = servicio.precio;
             } else {
                 precioServicio = servicio.precio * 10;
@@ -53,71 +59,149 @@ function calcularTotal() {
         }
     });
 
-    // Aplicar código de descuento al total
+    // Aplicar descuento
     if (estadoModal.descuentoAplicado > 0) {
         total = total * (1 - estadoModal.descuentoAplicado / 100);
     }
 
     return Math.round(total);
+}
 
+
+
+// ============================================================
+// OBTENER LÍMITE DE SISTEMAS DEL PLAN
+// ============================================================
+
+function obtenerLimiteSistemas() {
+    const plan = estadoModal.planElegido;
+    if (!plan) {
+        return 0;
+    }
+    
+    return plan.sistemas_elegibles;
 }
 
 // ============================================================
-// RENDERIZADO DEL DETALLE DE FACTURA (panel derecho)
+// RENDERIZAR DETALLE DE FACTURA (ACTUALIZADO)
 // ============================================================
 
 function renderizarDetalle() {
     const plan = estadoModal.planElegido;
-    if (!plan) return;
+    if (!plan) {
+        return;
+    }
 
-    // --- Encabezado del plan elegido ---
+    // Encabezado del plan
     const encabezadoEl = document.getElementById("mp-plan-encabezado");
-    const precioPlanBase = estadoModal.periodicidad === "mensual"
-        ? plan.precio_mensual
-        : plan.precio_anual;
+    let precioPlanBase;
+
+    if (estadoModal.periodicidad === "mensual") {
+        precioPlanBase = plan.precio_mensual;
+    } else {
+        precioPlanBase = plan.precio_anual;
+    }
+
+    const periodo = estadoModal.periodicidad === "mensual" ? "/ mes" : "/ año";
 
     encabezadoEl.innerHTML = `
         <img src="assets/img/${plan.icono}" alt="${plan.nombre}" class="mp-plan-icon">
         <div>
             <span class="mp-plan-nombre">${plan.nombre}</span>
-            <span class="mp-plan-periodo">${estadoModal.periodicidad === "mensual" ? "/ mes" : "/ año"}</span>
+            <span class="mp-plan-periodo">${periodo}</span>
         </div>
         <span class="mp-plan-precio-base">${formatearPrecio(precioPlanBase)}</span>
     `;
 
-    // --- Servicios incluidos (no removibles) ---
-    const incluidosEl = document.getElementById("mp-servicios-incluidos");
-    incluidosEl.innerHTML = "";
+    // ============================================================
+    // SERVICIOS FIJOS (NO removibles)
+    // ============================================================
 
-    plan.servicios_incluidos.forEach(function (id) {
-        const srv = obtenerServicioPorId(id);
-        const nombre = srv ? srv.nombre : id;
-        const icono = srv ? srv.icono : "fa-solid fa-circle-check";
+    const fijosEl = document.getElementById("mp-servicios-fijos");
+    fijosEl.innerHTML = "";
 
-        const item = document.createElement("div");
-        item.classList.add("mp-item-incluido");
-        item.innerHTML = `
-            <i class="${icono} mp-srv-icon"></i>
-            <span>${nombre}</span>
-            <span class="mp-incluido-badge">Incluido</span>
+    if (plan.servicios_fijos && plan.servicios_fijos.length > 0) {
+        plan.servicios_fijos.forEach(function (id) {
+            const srv = buscarServicio(id);
+            const nombre = srv ? srv.nombre : id;
+            const icono = srv ? srv.icono : "fa-solid fa-circle-check";
+
+            const item = document.createElement("div");
+            item.classList.add("mp-item-fijo");
+            item.innerHTML = `
+                <i class="${icono} mp-srv-icon"></i>
+                <span>${nombre}</span>
+                <span class="mp-fijo-badge">Incluido</span>
+            `;
+            fijosEl.appendChild(item);
+        });
+    } else {
+        fijosEl.innerHTML = `<p class="mp-sin-extras">Sin servicios fijos en este plan.</p>`;
+    }
+
+    // ============================================================
+    // SERVICIOS ELEGIDOS (removibles, dentro del límite)
+    // ============================================================
+
+    const elegidosEl = document.getElementById("mp-servicios-elegidos");
+    elegidosEl.innerHTML = "";
+
+    if (estadoModal.serviciosElegidos.length === 0) {
+        elegidosEl.innerHTML = `
+            <p class="mp-sin-extras">
+                Aún no has seleccionado sistemas. 
+                Tienes ${obtenerLimiteSistemas()} disponibles.
+            </p>
         `;
-        incluidosEl.appendChild(item);
-    });
+    } else {
+        estadoModal.serviciosElegidos.forEach(function (id) {
+            const srv = buscarServicio(id);
+            if (!srv) {
+                return;
+            }
 
-    // --- Servicios extra agregados (removibles) ---
+            const item = document.createElement("div");
+            item.classList.add("mp-item-elegido");
+            item.innerHTML = `
+                <button class="mp-btn-quitar" data-id="${id}" title="Quitar sistema">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <i class="${srv.icono} mp-srv-icon"></i>
+                <span>${srv.nombre}</span>
+                <span class="mp-elegido-estado">Incluido (sin costo)</span>
+            `;
+
+            item.querySelector(".mp-btn-quitar").addEventListener("click", function () {
+                quitarServicioElegido(id);
+            });
+
+            elegidosEl.appendChild(item);
+        });
+    }
+
+    // ============================================================
+    // SERVICIOS ADICIONALES (fuera del límite - CON COSTO)
+    // ============================================================
+
     const extrasEl = document.getElementById("mp-servicios-extra-factura");
     extrasEl.innerHTML = "";
 
-    if (estadoModal.serviciosExtra.length === 0) {
-        extrasEl.innerHTML = `<p class="mp-sin-extras">Sin servicios adicionales agregados.</p>`;
+    if (estadoModal.serviciosAdicionales.length === 0) {
+        extrasEl.innerHTML = `<p class="mp-sin-extras">Sin servicios adicionales.</p>`;
     } else {
-        estadoModal.serviciosExtra.forEach(function (id) {
-            const srv = obtenerServicioPorId(id);
-            if (!srv) return;
+        estadoModal.serviciosAdicionales.forEach(function (id) {
+            const srv = buscarServicio(id);
+            if (!srv) {
+                return;
+            }
 
-            const precioSrv = estadoModal.periodicidad === "mensual"
-                ? srv.precio
-                : srv.precio * 10;
+            let precioSrv;
+
+            if (estadoModal.periodicidad === "mensual") {
+                precioSrv = srv.precio;
+            } else {
+                precioSrv = srv.precio * 10;
+            }
 
             const item = document.createElement("div");
             item.classList.add("mp-item-extra");
@@ -131,14 +215,14 @@ function renderizarDetalle() {
             `;
 
             item.querySelector(".mp-btn-quitar").addEventListener("click", function () {
-                quitarServicioExtra(id);
+                quitarServicioAdicional(id);
             });
 
             extrasEl.appendChild(item);
         });
     }
 
-    // --- Descuento aplicado ---
+    // Descuento
     const descEl = document.getElementById("mp-linea-descuento");
     if (estadoModal.descuentoAplicado > 0) {
         descEl.style.display = "flex";
@@ -148,42 +232,73 @@ function renderizarDetalle() {
         descEl.style.display = "none";
     }
 
-    // --- Total ---
+    // Total
     const total = calcularTotal();
     document.getElementById("mp-total-numero").textContent = formatearPrecio(total);
 }
 
 // ============================================================
-// RENDERIZADO DE SERVICIOS ADICIONALES DISPONIBLES (paso 2)
+// RENDERIZAR CATÁLOGO DE SISTEMAS ELEGIBLES
 // ============================================================
 
-function renderizarCatalogoExtras() {
-    const contenedor = document.getElementById("mp-catalogo-extras");
-    contenedor.innerHTML = "";
-
-    if (typeof SERVICIOS === "undefined" || SERVICIOS.length === 0) {
-        contenedor.innerHTML = `<p class="mp-sin-extras">No hay servicios adicionales disponibles.</p>`;
+function renderizarCatalogoElegibles() {
+    const contenedor = document.getElementById("mp-catalogo-elegibles");
+    if (!contenedor) {
         return;
     }
 
     const plan = estadoModal.planElegido;
-    const excluidos = new Set(plan.servicios_incluidos);
+    const limite = obtenerLimiteSistemas();
 
-    // Mostrar solo disponibles y que no estén en el plan
-    const disponibles = SERVICIOS.filter(function (s) {
+    // Servicios que ya no se pueden elegir
+    const excluidos = new Set([]);
+    
+    if (plan.servicios_fijos) {
+        plan.servicios_fijos.forEach(function (id) {
+            excluidos.add(id);
+        });
+    }
+
+    estadoModal.serviciosElegidos.forEach(function (id) {
+        excluidos.add(id);
+    });
+
+    estadoModal.serviciosAdicionales.forEach(function (id) {
+        excluidos.add(id);
+    });
+
+    // Filtrar servicios disponibles
+    const disponibles = servicios.filter(function (s) {
         return s.disponible && !excluidos.has(s.id);
     });
 
+    contenedor.innerHTML = "";
+
+    // Mostrar mensaje del límite
+    const usados = estadoModal.serviciosElegidos.length;
+    const restantes = limite - usados;
+
+    const msgLimite = document.getElementById("mp-limite-mensaje");
+    
+    if (restantes > 0) {
+        msgLimite.className = "mp-limite-mensaje";
+        msgLimite.textContent = `Has seleccionado ${usados}/${limite} sistemas. Te quedan ${restantes} disponibles.`;
+    } else {
+        msgLimite.className = "mp-limite-mensaje mp-limite-alcanzado";
+        msgLimite.textContent = `Límite alcanzado: ${limite}/${limite}. Los adicionales tendrán costo extra.`;
+    }
+
     if (disponibles.length === 0) {
-        contenedor.innerHTML = `<p class="mp-sin-extras">Todos los servicios ya están incluidos en tu plan.</p>`;
+        contenedor.innerHTML = `<p class="mp-sin-extras">No hay más sistemas disponibles.</p>`;
         return;
     }
 
+    // Renderizar tarjetas
     disponibles.forEach(function (srv) {
-        const yaAgregado = estadoModal.serviciosExtra.includes(srv.id);
         const card = document.createElement("div");
         card.classList.add("mp-extra-card");
-        if (yaAgregado) card.classList.add("mp-extra-card--agregado");
+
+        const btnTexto = '<i class="fa-solid fa-plus"></i> Agregar';
 
         card.innerHTML = `
             <i class="${srv.icono} mp-srv-icon-lg"></i>
@@ -191,17 +306,13 @@ function renderizarCatalogoExtras() {
                 <span class="mp-extra-nombre">${srv.nombre}</span>
                 <span class="mp-extra-precio-cat">${formatearPrecio(srv.precio)}/mes</span>
             </div>
-            <button class="mp-btn-agregar ${yaAgregado ? "mp-btn-agregado" : ""}" data-id="${srv.id}">
-                ${yaAgregado
-                ? '<i class="fa-solid fa-check"></i> Agregado'
-                : '<i class="fa-solid fa-plus"></i> Agregar'}
+            <button class="mp-btn-agregar" data-id="${srv.id}">
+                ${btnTexto}
             </button>
         `;
 
         card.querySelector(".mp-btn-agregar").addEventListener("click", function () {
-            if (!yaAgregado) {
-                agregarServicioExtra(srv.id);
-            }
+            agregarServicio(srv.id);
         });
 
         contenedor.appendChild(card);
@@ -209,117 +320,171 @@ function renderizarCatalogoExtras() {
 }
 
 // ============================================================
-// ACCIONES SOBRE SERVICIOS EXTRA
+// AGREGAR SERVICIO (sistema decide si va elegido o adicional)
 // ============================================================
 
-function agregarServicioExtra(id) {
-    if (!estadoModal.serviciosExtra.includes(id)) {
-        estadoModal.serviciosExtra.push(id);
-        renderizarDetalle();
-        renderizarCatalogoExtras();
+function agregarServicio(id) {
+    const plan = estadoModal.planElegido;
+    const limite = obtenerLimiteSistemas();
+    const usados = estadoModal.serviciosElegidos.length;
+
+    if (usados < limite) {
+        // Hay espacio → va como elegido (sin costo)
+        if (!estadoModal.serviciosElegidos.includes(id)) {
+            estadoModal.serviciosElegidos.push(id);
+        }
+    } else {
+        // Límite alcanzado → va como adicional (con costo)
+        if (!estadoModal.serviciosAdicionales.includes(id)) {
+            estadoModal.serviciosAdicionales.push(id);
+        }
     }
+
+    renderizarDetalle();
+    renderizarCatalogoElegibles();
 }
 
-function quitarServicioExtra(id) {
-    estadoModal.serviciosExtra = estadoModal.serviciosExtra.filter(function (s) {
+// ============================================================
+// QUITAR SERVICIO ELEGIDO (dentro del límite)
+// ============================================================
+
+function quitarServicioElegido(id) {
+    estadoModal.serviciosElegidos = estadoModal.serviciosElegidos.filter(function (s) {
         return s !== id;
     });
     renderizarDetalle();
-    renderizarCatalogoExtras();
+    renderizarCatalogoElegibles();
 }
 
 // ============================================================
-// MODAL PRINCIPAL - ABRIR / CERRAR
+// QUITAR SERVICIO ADICIONAL (fuera del límite)
 // ============================================================
 
-function abrirModalPago(planId) {
-    const plan = PLANES.find(function (p) { return p.id === planId; });
-    if (!plan) return;
-
-    // Resetear estado
-    estadoModal = {
-        planElegido: plan,
-        periodicidad: "mensual",
-        serviciosExtra: [],
-        codigoDescuento: "",
-        descuentoAplicado: 0
-    };
-
-    // Resetear UI del radio
-    const radioMensual = document.getElementById("mp-radio-mensual");
-    const radioAnual = document.getElementById("mp-radio-anual");
-    if (radioMensual) radioMensual.checked = true;
-    if (radioAnual) radioAnual.checked = false;
-
-    // Resetear código de descuento
-    const inputCodigo = document.getElementById("mp-codigo-descuento");
-    if (inputCodigo) inputCodigo.value = "";
-    const msgCodigo = document.getElementById("mp-mensaje-codigo");
-    if (msgCodigo) { msgCodigo.textContent = ""; msgCodigo.className = "mp-msg-codigo"; }
-
-    // Renderizar
+function quitarServicioAdicional(id) {
+    estadoModal.serviciosAdicionales = estadoModal.serviciosAdicionales.filter(function (s) {
+        return s !== id;
+    });
     renderizarDetalle();
-    renderizarCatalogoExtras();
-
-    // Mostrar modal
-    const overlay = document.getElementById("mp-overlay");
-    overlay.classList.add("mp-overlay--visible");
-    document.body.style.overflow = "hidden";
-}
-
-function cerrarModalPago() {
-    const overlay = document.getElementById("mp-overlay");
-    overlay.classList.remove("mp-overlay--visible");
-    document.body.style.overflow = "";
+    renderizarCatalogoElegibles();
 }
 
 // ============================================================
-// MODAL DE CONFIRMACIÓN (paso final)
+// RENDERIZAR MODAL DE CONFIRMACIÓN (ACTUALIZADO)
 // ============================================================
 
 function abrirModalConfirmacion() {
     const plan = estadoModal.planElegido;
-    if (!plan) return;
-
-    const total = calcularTotal();
-    const precioPlan = estadoModal.periodicidad === "mensual"
-        ? plan.precio_mensual
-        : plan.precio_anual;
-
-    // --- Construir lista de ítems ---
-    let itemsHTML = `
-        <div class="mpc-item">
-            <span>${plan.nombre} (${estadoModal.periodicidad === "mensual" ? "Mensual" : "Anual"})</span>
-            <span>${formatearPrecio(precioPlan)}</span>
-        </div>
-    `;
-
-    estadoModal.serviciosExtra.forEach(function (id) {
-        const srv = obtenerServicioPorId(id);
-        if (!srv) return;
-        const precio = estadoModal.periodicidad === "mensual" ? srv.precio : srv.precio * 10;
-        itemsHTML += `
-            <div class="mpc-item">
-                <span>${srv.nombre}</span>
-                <span>${formatearPrecio(precio)}</span>
-            </div>
-        `;
-    });
-
-    if (estadoModal.descuentoAplicado > 0) {
-        itemsHTML += `
-            <div class="mpc-item mpc-item--descuento">
-                <span>Descuento (${estadoModal.descuentoAplicado}%)</span>
-                <span>-${estadoModal.descuentoAplicado}%</span>
-            </div>
-        `;
+    if (!plan) {
+        return;
     }
 
-    // Inyectar en modal de confirmación
-    document.getElementById("mpc-items").innerHTML = itemsHTML;
-    document.getElementById("mpc-total").textContent = formatearPrecio(total);
+    const total = calcularTotal();
+    let precioPlan;
 
-    // Mostrar
+    if (estadoModal.periodicidad === "mensual") {
+        precioPlan = plan.precio_mensual;
+    } else {
+        precioPlan = plan.precio_anual;
+    }
+
+    const periodoTexto = estadoModal.periodicidad === "mensual" ? "Mensual" : "Anual";
+
+    const mpcItems = document.getElementById("mpc-items");
+    mpcItems.innerHTML = "";
+
+    // Plan base
+    const itemPlan = document.createElement("div");
+    itemPlan.className = "mpc-item";
+    itemPlan.innerHTML = `
+        <span>${plan.nombre} (${periodoTexto})</span>
+        <span>${formatearPrecio(precioPlan)}</span>
+    `;
+    mpcItems.appendChild(itemPlan);
+
+    // Servicios fijos
+    if (plan.servicios_fijos && plan.servicios_fijos.length > 0) {
+        const subtituloFijo = document.createElement("div");
+        subtituloFijo.className = "mpc-subtitulo";
+        subtituloFijo.textContent = "✓ Servicios incluidos:";
+        mpcItems.appendChild(subtituloFijo);
+
+        plan.servicios_fijos.forEach(function (id) {
+            const srv = buscarServicio(id);
+            if (srv) {
+                const item = document.createElement("div");
+                item.className = "mpc-item mpc-item--incluido";
+                item.innerHTML = `
+                    <span>${srv.nombre}</span>
+                    <span>Incluido</span>
+                `;
+                mpcItems.appendChild(item);
+            }
+        });
+    }
+
+    // Servicios elegidos
+    if (estadoModal.serviciosElegidos.length > 0) {
+        const subtituloElegido = document.createElement("div");
+        subtituloElegido.className = "mpc-subtitulo";
+        subtituloElegido.textContent = "★ Sistemas elegidos (sin costo):";
+        mpcItems.appendChild(subtituloElegido);
+
+        estadoModal.serviciosElegidos.forEach(function (id) {
+            const srv = buscarServicio(id);
+            if (srv) {
+                const item = document.createElement("div");
+                item.className = "mpc-item mpc-item--elegido";
+                item.innerHTML = `
+                    <span>${srv.nombre}</span>
+                    <span>Sin costo</span>
+                `;
+                mpcItems.appendChild(item);
+            }
+        });
+    }
+
+    // Servicios adicionales
+    if (estadoModal.serviciosAdicionales.length > 0) {
+        const subtituloAdicional = document.createElement("div");
+        subtituloAdicional.className = "mpc-subtitulo";
+        subtituloAdicional.textContent = "+ Servicios adicionales:";
+        mpcItems.appendChild(subtituloAdicional);
+
+        estadoModal.serviciosAdicionales.forEach(function (id) {
+            const srv = buscarServicio(id);
+            if (!srv) {
+                return;
+            }
+
+            let precio;
+            if (estadoModal.periodicidad === "mensual") {
+                precio = srv.precio;
+            } else {
+                precio = srv.precio * 10;
+            }
+
+            const item = document.createElement("div");
+            item.className = "mpc-item";
+            item.innerHTML = `
+                <span>${srv.nombre}</span>
+                <span>${formatearPrecio(precio)}</span>
+            `;
+            mpcItems.appendChild(item);
+        });
+    }
+
+    // Descuento
+    if (estadoModal.descuentoAplicado > 0) {
+        const itemDescuento = document.createElement("div");
+        itemDescuento.className = "mpc-item mpc-item--descuento";
+        itemDescuento.innerHTML = `
+            <span>Descuento (${estadoModal.descuentoAplicado}%)</span>
+            <span>-${estadoModal.descuentoAplicado}%</span>
+        `;
+        mpcItems.appendChild(itemDescuento);
+    }
+
+    document.getElementById("mpc-total").textContent = formatearPrecio(total);
     document.getElementById("mp-confirmacion-overlay").classList.add("mp-overlay--visible");
 }
 
@@ -328,12 +493,52 @@ function cerrarModalConfirmacion() {
 }
 
 // ============================================================
-// GUARDAR EN LOCALSTORAGE
+// GUARDAR COMPRA (ACTUALIZADO)
 // ============================================================
 
 function guardarCompraEnLocalStorage() {
     const plan = estadoModal.planElegido;
     const total = calcularTotal();
+
+    let precioPlan;
+    if (estadoModal.periodicidad === "mensual") {
+        precioPlan = plan.precio_mensual;
+    } else {
+        precioPlan = plan.precio_anual;
+    }
+
+    // Servicios elegidos por el usuario (incluidos en el plan)
+    const serviciosElegidosDetalle = estadoModal.serviciosElegidos.map(function (id) {
+        const srv = buscarServicio(id);
+        if (srv) {
+            return {
+                id: srv.id,
+                nombre: srv.nombre,
+                precio: 0
+            };
+        }
+        return { id: id, nombre: id, precio: 0 };
+    });
+
+    // Servicios adicionales (pagan extra)
+    const serviciosAdicionalesDetalle = estadoModal.serviciosAdicionales.map(function (id) {
+        const srv = buscarServicio(id);
+        let precioExtra;
+        if (estadoModal.periodicidad === "mensual") {
+            precioExtra = srv.precio;
+        } else {
+            precioExtra = srv.precio * 10;
+        }
+
+        if (srv) {
+            return {
+                id: srv.id,
+                nombre: srv.nombre,
+                precio: precioExtra
+            };
+        }
+        return { id: id, nombre: id, precio: 0 };
+    });
 
     const compra = {
         fecha: new Date().toISOString(),
@@ -341,352 +546,19 @@ function guardarCompraEnLocalStorage() {
             id: plan.id,
             nombre: plan.nombre,
             periodicidad: estadoModal.periodicidad,
-            precio: estadoModal.periodicidad === "mensual" ? plan.precio_mensual : plan.precio_anual
+            precio: precioPlan
         },
-        serviciosExtra: estadoModal.serviciosExtra.map(function (id) {
-            const srv = obtenerServicioPorId(id);
-            return srv
-                ? {
-                    id: srv.id,
-                    nombre: srv.nombre,
-                    precio: estadoModal.periodicidad === "mensual" ? srv.precio : srv.precio * 10
-                }
-                : { id: id, nombre: id, precio: 0 };
-        }),
+        serviciosElegidos: serviciosElegidosDetalle,
+        serviciosAdicionales: serviciosAdicionalesDetalle,
         descuentoAplicado: estadoModal.descuentoAplicado,
         codigoDescuento: estadoModal.codigoDescuento,
         total: total
     };
 
-    // Guardar historial (array de compras)
     let historial = JSON.parse(localStorage.getItem("softrent_compras") || "[]");
     historial.push(compra);
     localStorage.setItem("softrent_compras", JSON.stringify(historial));
-
-    // Guardar última compra por separado para acceso rápido
     localStorage.setItem("softrent_ultima_compra", JSON.stringify(compra));
 
     return compra;
 }
-
-// ============================================================
-// VALIDACIÓN DE CÓDIGO DE DESCUENTO
-// ============================================================
-
-const CODIGOS_DESCUENTO = {
-    "SOFTRENT10": 10,
-    "SOFTRENT20": 20,
-    "UTN2026": 15,
-    "PROMO50": 50
-};
-
-function validarCodigoDescuento() {
-    const inputCodigo = document.getElementById("mp-codigo-descuento");
-    const msgEl = document.getElementById("mp-mensaje-codigo");
-    const codigo = inputCodigo.value.trim().toUpperCase();
-
-    if (!codigo) {
-        msgEl.textContent = "Ingresá un código.";
-        msgEl.className = "mp-msg-codigo mp-msg-codigo--error";
-        return;
-    }
-
-    if (CODIGOS_DESCUENTO[codigo] !== undefined) {
-        estadoModal.codigoDescuento = codigo;
-        estadoModal.descuentoAplicado = CODIGOS_DESCUENTO[codigo];
-        msgEl.textContent = `¡Código válido! ${CODIGOS_DESCUENTO[codigo]}% de descuento aplicado.`;
-        msgEl.className = "mp-msg-codigo mp-msg-codigo--exito";
-    } else {
-        estadoModal.codigoDescuento = "";
-        estadoModal.descuentoAplicado = 0;
-        msgEl.textContent = "Código inválido. Intentá con otro.";
-        msgEl.className = "mp-msg-codigo mp-msg-codigo--error";
-    }
-
-    renderizarDetalle();
-}
-
-// ============================================================
-// CONSTRUCCIÓN DEL HTML DEL MODAL (se inyecta al body)
-// ============================================================
-/*
-function inyectarHTMLModal() {
-    const html = `
-    <!-- ===== OVERLAY MODAL PRINCIPAL ===== -->
-    <div id="mp-overlay" class="mp-overlay">
-        <div class="mp-modal" role="dialog" aria-modal="true" aria-labelledby="mp-titulo">
-
-            <!-- Botón cerrar -->
-            <button class="mp-btn-cerrar" id="mp-btn-cerrar" title="Cerrar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <!-- ===== PANEL IZQUIERDO: Pasos 2 y 3 ===== -->
-            <div class="mp-panel-izq">
-
-                <!-- PASO 2: Servicios adicionales -->
-                <div class="mp-seccion">
-                    <h3 class="mp-seccion-titulo">
-                        <span class="mp-paso-badge">2</span>
-                        Servicios adicionales
-                    </h3>
-                    <p class="mp-seccion-sub">Agregá servicios del catálogo que no están en tu plan</p>
-                    <div id="mp-catalogo-extras" class="mp-catalogo-extras"></div>
-                </div>
-
-                <!-- PASO 3: Periodicidad -->
-                <div class="mp-seccion mp-seccion--periodicidad">
-                    <h3 class="mp-seccion-titulo">
-                        <span class="mp-paso-badge">3</span>
-                        Modalidad de pago
-                    </h3>
-                    <div class="mp-radios">
-                        <label class="mp-radio-label" for="mp-radio-mensual">
-                            <input type="radio" id="mp-radio-mensual" name="mp-periodicidad" value="mensual" checked>
-                            <span class="mp-radio-custom"></span>
-                            Mensual
-                        </label>
-                        <label class="mp-radio-label" for="mp-radio-anual">
-                            <input type="radio" id="mp-radio-anual" name="mp-periodicidad" value="anual">
-                            <span class="mp-radio-custom"></span>
-                            Anual
-                            <span class="mp-badge-ahorro" id="mp-badge-ahorro"></span>
-                        </label>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ===== PANEL DERECHO: Paso 1 - Detalle de factura ===== -->
-            <div class="mp-panel-der">
-
-                <h3 class="mp-seccion-titulo">
-                    <span class="mp-paso-badge">1</span>
-                    Detalle de tu compra
-                </h3>
-
-                <!-- Plan elegido -->
-                <div id="mp-plan-encabezado" class="mp-plan-encabezado"></div>
-
-                <hr class="mp-divisor">
-
-                <!-- Servicios incluidos -->
-                <p class="mp-label-grupo">Servicios incluidos en el plan</p>
-                <div id="mp-servicios-incluidos" class="mp-servicios-incluidos"></div>
-
-                <hr class="mp-divisor">
-
-                <!-- Servicios extra en factura -->
-                <p class="mp-label-grupo">Servicios adicionales</p>
-                <div id="mp-servicios-extra-factura" class="mp-servicios-extra-factura"></div>
-
-                <!-- Línea de descuento (oculta por defecto) -->
-                <div id="mp-linea-descuento" class="mp-linea-descuento" style="display:none;">
-                    <span class="mp-desc-texto"></span>
-                    <span class="mp-desc-valor">-${estadoModal ? estadoModal.descuentoAplicado : 0}%</span>
-                </div>
-
-                <hr class="mp-divisor">
-
-                <!-- Código de descuento -->
-                <div class="mp-codigo-area">
-                    <label class="mp-label-grupo" for="mp-codigo-descuento">Código de descuento</label>
-                    <div class="mp-codigo-input-grupo">
-                        <input type="text" id="mp-codigo-descuento" class="mp-input-codigo" placeholder="Ej: SOFTRENT10">
-                        <button id="mp-btn-aplicar-codigo" class="mp-btn-codigo">Aplicar</button>
-                    </div>
-                    <p id="mp-mensaje-codigo" class="mp-msg-codigo"></p>
-                </div>
-
-                <hr class="mp-divisor">
-
-                <!-- Total -->
-                <div class="mp-total-area">
-                    <span class="mp-total-label">Total:</span>
-                    <span id="mp-total-numero" class="mp-total-numero">₡0</span>
-                </div>
-
-                <button id="mp-btn-siguiente" class="mp-btn-siguiente">
-                    SIGUIENTE <i class="fa-solid fa-arrow-right"></i>
-                </button>
-
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ===== OVERLAY MODAL CONFIRMACIÓN ===== -->
-    <div id="mp-confirmacion-overlay" class="mp-overlay mp-overlay--confirmacion">
-        <div class="mp-modal mp-modal--confirmacion" role="dialog" aria-modal="true">
-
-            <button class="mp-btn-cerrar" id="mpc-btn-cerrar" title="Cerrar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="mpc-contenido">
-                <h2 class="mpc-titulo">Resumen de tu compra</h2>
-                <p class="mpc-subtitulo">Revisá los detalles antes de confirmar</p>
-
-                <div class="mpc-lista" id="mpc-items"></div>
-
-                <hr class="mp-divisor">
-
-                <div class="mpc-total-area">
-                    <span>Total a pagar:</span>
-                    <span id="mpc-total" class="mpc-total-precio"></span>
-                </div>
-
-                <div class="mpc-botones">
-                    <button id="mpc-btn-volver" class="mpc-btn mpc-btn--volver">
-                        <i class="fa-solid fa-arrow-left"></i> Volver
-                    </button>
-                    <button id="mpc-btn-comprar" class="mpc-btn mpc-btn--comprar">
-                        Comprar <i class="fa-solid fa-bag-shopping"></i>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ===== OVERLAY ÉXITO ===== -->
-    <div id="mp-exito-overlay" class="mp-overlay mp-overlay--exito">
-        <div class="mp-modal mp-modal--exito">
-            <div class="mp-exito-contenido">
-                <i class="fa-solid fa-circle-check mp-exito-icon"></i>
-                <h2>¡Compra realizada!</h2>
-                <p id="mp-exito-resumen"></p>
-                <button id="mp-exito-cerrar" class="mp-btn-siguiente">Cerrar</button>
-            </div>
-        </div>
-    </div>
-    `;
-
-    document.body.insertAdjacentHTML("beforeend", html);
-}
-
-// ============================================================
-// VINCULAR EVENTOS DEL MODAL
-// ============================================================
-
-function vincularEventosModal() {
-    // Cerrar modal principal
-    document.getElementById("mp-btn-cerrar").addEventListener("click", cerrarModalPago);
-    document.getElementById("mp-overlay").addEventListener("click", function (e) {
-        if (e.target === this) cerrarModalPago();
-    });
-
-    // Periodicidad
-    document.querySelectorAll("input[name='mp-periodicidad']").forEach(function (radio) {
-        radio.addEventListener("change", function () {
-            estadoModal.periodicidad = this.value;
-            actualizarBadgeAhorro();
-            renderizarDetalle();
-        });
-    });
-
-    // Código de descuento
-    document.getElementById("mp-btn-aplicar-codigo").addEventListener("click", validarCodigoDescuento);
-    document.getElementById("mp-codigo-descuento").addEventListener("keydown", function (e) {
-        if (e.key === "Enter") validarCodigoDescuento();
-    });
-
-    // Botón siguiente → abrir confirmación
-    document.getElementById("mp-btn-siguiente").addEventListener("click", abrirModalConfirmacion);
-
-    // Modal confirmación
-    document.getElementById("mpc-btn-cerrar").addEventListener("click", cerrarModalConfirmacion);
-    document.getElementById("mpc-btn-volver").addEventListener("click", cerrarModalConfirmacion);
-    document.getElementById("mp-confirmacion-overlay").addEventListener("click", function (e) {
-        if (e.target === this) cerrarModalConfirmacion();
-    });
-
-    // Botón comprar
-    document.getElementById("mpc-btn-comprar").addEventListener("click", function () {
-        const compra = guardarCompraEnLocalStorage();
-        cerrarModalConfirmacion();
-        cerrarModalPago();
-        mostrarExito(compra);
-    });
-
-    // Cerrar éxito
-    document.getElementById("mp-exito-cerrar").addEventListener("click", function () {
-        document.getElementById("mp-exito-overlay").classList.remove("mp-overlay--visible");
-    });
-    document.getElementById("mp-exito-overlay").addEventListener("click", function (e) {
-        if (e.target === this) this.classList.remove("mp-overlay--visible");
-    });
-}
-
-// ============================================================
-// BADGE DE AHORRO EN PLAN ANUAL
-// ============================================================
-
-function actualizarBadgeAhorro() {
-    const plan = estadoModal.planElegido;
-    const badge = document.getElementById("mp-badge-ahorro");
-    if (!badge || !plan) return;
-
-    if (estadoModal.periodicidad === "anual" && plan.porc_desc_anual) {
-        badge.textContent = `Ahorrás ${plan.porc_desc_anual}%`;
-        badge.style.display = "inline-block";
-    } else {
-        badge.style.display = "none";
-    }
-}
-
-// ============================================================
-// MOSTRAR PANTALLA DE ÉXITO
-// ============================================================
-
-function mostrarExito(compra) {
-    const resumen = document.getElementById("mp-exito-resumen");
-    resumen.textContent = `${compra.plan.nombre} (${compra.plan.periodicidad}) — Total: ${formatearPrecio(compra.total)}`;
-    document.getElementById("mp-exito-overlay").classList.add("mp-overlay--visible");
-}
-
-// ============================================================
-// VINCULAR BOTONES DE PLANES EN LAS TARJETAS
-// ============================================================
-
-function vincularBotonesPlan() {
-    // Tarjetas existentes en planes.html
-    const mapaBotones = {
-        ".tarjeta-plan.basic":     "PLAN-BASICO",
-        ".tarjeta-plan.inter":     "PLAN-INTERMEDIO",
-        ".tarjeta-plan.pro":       "PLAN-PROFESIONAL"
-    };
-
-    Object.entries(mapaBotones).forEach(function (entrada) {
-        const selector = entrada[0];
-        const planId = entrada[1];
-        const tarjeta = document.querySelector(selector);
-        if (!tarjeta) return;
-
-        const boton = tarjeta.querySelector("button");
-        if (boton) {
-            boton.addEventListener("click", function () {
-                abrirModalPago(planId);
-            });
-        }
-    });
-
-    // Plan VIP (sección aparte si existe como tarjeta con botón)
-    const btnVIP = document.querySelector(".tarjeta-plan.vip button");
-    if (btnVIP) {
-        btnVIP.addEventListener("click", function () {
-            abrirModalPago("PLAN-VIP");
-        });
-    }
-}
-
-// ============================================================
-// INICIALIZACIÓN
-// ============================================================
-
-document.addEventListener("DOMContentLoaded", function () {
-    inyectarHTMLModal();
-    vincularEventosModal();
-    vincularBotonesPlan();
-});
-*/

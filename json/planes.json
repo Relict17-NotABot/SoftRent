@@ -6,7 +6,8 @@
         "precio_mensual": 25480,
         "precio_anual": 244400,
         "porc_desc_anual": 20,
-        "servicios_incluidos": ["srv-008", "srv-009", "srv-010"],
+        "servicios_fijos": ["srv-008", "srv-009"],
+        "sistemas_elegibles": 1,
         "icono": "robot1.png" 
     },
     {
@@ -16,7 +17,8 @@
         "precio_mensual": 61880,
         "precio_anual": 557000,
         "porc_desc_anual": 25,
-        "servicios_incluidos": ["srv-008", "srv-011"],
+        "servicios_fijos": ["srv-008", "srv-011"],
+        "sistemas_elegibles": 3,
         "icono": "robot2.png" 
     },
     {
@@ -26,7 +28,8 @@
         "precio_mensual": 119080,
         "precio_anual": 1285000,
         "porc_desc_anual": 10,
-        "servicios_incluidos": ["srv-028", "srv-011", "srv-013"],
+        "servicios_fijos": ["srv-028", "srv-011"],
+        "sistemas_elegibles": 5,
         "icono": "robot3.png" 
     },
     {
@@ -36,7 +39,8 @@
         "precio_mensual": 233480,
         "precio_anual": 2522000,
         "porc_desc_anual": 10,
-        "servicios_incluidos": ["srv-012", "srv-013", "srv-014"],
+        "servicios_fijos": ["srv-012", "srv-013"],
+        "sistemas_elegibles": 10,
         "icono": "robotVIP.png" 
     }
 ]
