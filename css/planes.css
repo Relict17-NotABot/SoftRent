@@ -58,6 +58,7 @@
     align-items: center;
 }
 
+
 .basic{
     background:
         linear-gradient(
@@ -549,7 +550,10 @@ span {
 .icons{
     font-size: 6rem;
     padding: 15px 0;
-    color: rgba(142, 71, 129, 1)
+    color: rgba(142, 71, 129, 1);
+    
+    text-shadow:
+        0 0 10px rgba(226, 39, 192, 0.6);
 }
 
 .seccion-servicios{
@@ -696,4 +700,147 @@ span {
     border: 1px solid rgba(255,255,255,.15);
 
     font-size: 15px;
+}
+
+/*=====================================================
+=================   SECCION FORM   ====================
+======================================================*/
+
+.seccion-form{
+    width: 100%;
+    height: auto;
+    margin: 100px 0;
+}
+
+.form-titulo {
+    width: 100%;
+    text-align: center;
+    padding: 25px 0;
+}
+
+.form-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+}
+
+.registroForm {
+    width: 30%;
+    height: auto;
+    padding: 25px;
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.41),
+            rgba(83, 1, 1, 0.41)
+        );
+    border: 1px solid rgba(255,0,0,.4);
+    border-radius: 25px;
+    box-shadow:
+        0 0 20px rgba(255,0,0,.2),
+        0 0 40px rgba(255,0,0,.1);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.registroForm p{
+    margin: 0 0 15px 0;
+}
+
+.form-tipoNegocio{
+    font-family: var(--nunito);
+    color: var(--color-text);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-datos{
+    font-family: var(--nunito);
+    color: var(--color-text);
+    margin-bottom: 15px;
+    display: grid;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-datos input {
+    width: 70%;
+    padding: 6px 0;
+    border-radius: 5px;
+}
+
+.registroForm button{
+    width: 50%;
+    font-size: 17px;
+}
+
+/*detalle del form*/
+
+.detalle-info {
+    width: 30%;
+    background-color: rgba(0, 0, 0, 0.41);
+    border-radius: 25px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.detalle-info{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    gap: 10px;
+}
+
+.tarjeta-planForm{
+    width: 80%;
+    margin-left: 40px;
+    border: 1px solid rgba(61, 0, 0, 0.048);
+    border-radius: 16px;
+    border-style: solid;
+    padding: 30px 22px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.tarjeta-planForm img{
+    width: 170px;
+    height: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-planForm img:hover{
+    transform: translateY(-10px); /* Efecto de flotar al pasar el mouse */
+}
+
+.tarjeta-planForm ul{
+    text-align: left;
+    font-family: var(--nunito);
+    color: var(--color-text);
+
+}
+
+.tarjeta-planForm:hover {
+    transform: translateY(-10px); /* Efecto de flotar al pasar el mouse */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    border-color: rgba(199, 86, 86, 0.4);
+}
+
+.tarjeta-planForm ul li{
+    list-style: none;
+    display: flex;
+    padding-bottom: 10px;
+    gap: 10px;
 }

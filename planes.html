@@ -144,8 +144,44 @@
 
         <!-- Seccion: Plan V.I.P-->
         <section class="seccion-planVIP">
-            <h2>Plan V.I.P</h2>
-            <h2>¿Querés un plan a medida? ¡Contactanos!</h2>
+
+            <div class="vip-diamante">
+                <img src="assets/img/vipdiamond.png" alt="Plan VIP">
+                <div class="linea-dorada"></div>
+            </div>
+
+            <div class="vip-info">
+
+                <h2>Plan V.I.P</h2>
+
+                <div class="vip-beneficios">
+
+                    <ul>
+                        <li>Todo el catálogo a disposición</li>
+                        <li>Mantenimiento Prioritario</li>
+                        <li>Asesoramiento Profesional</li>
+                        <li>Brief Mensual de Estadísticas</li>
+                        <li>Análisis Profundo de Datos</li>
+                    </ul>
+
+                    <hr>
+
+                    <ul>
+                        <li>Reuniones Exclusivas</li>
+                        <li>Invitaciones VIP</li>
+                        <li>Servicio Exclusivo</li>
+                        <li>Atención Directa</li>
+                        <li>Y mucho más</li>
+                    </ul>
+
+                </div>
+
+                <button class="btn-vip">
+                    CONSEGUIR
+                </button>
+
+            </div>
+
         </section>
 
         <!-- Seccion: Servicios -->
@@ -189,6 +225,47 @@
                 <p id="mensajeServicios"></p>
 
                 <div id="contenedorServicios"></div>
+            </section>
+
+            <section class="seccion-form">
+
+                <div class="form-titulo">
+                     <h2>¿Te quedaste con alguna duda?</h2>
+                <p>Obtén más información llenando este formulario y muy pronto te contactaremos</p>
+                </div>
+
+                <div class="form-container">
+                    <form id="form-masInfo" class="registroForm">
+                        <p>Primero, selecciona el tipo de negocio que se adapte más al tuyo:</p>
+                        <div class="form-tipoNegocio">
+                            <input type="radio" id="rb-empredimiento" name="tipo-negocio" value="emprendimiento">
+                            <label for="rb-empredimiento">Emprendimiento</label><br>
+                            <input type="radio" id="rb-negocio" name="tipo-negocio" value="negocio">
+                            <label for="rb-negocio">Negocio Formal</label><br>
+                            <input type="radio" id="rb-empresa" name="tipo-negocio" value="empresa">
+                            <label for="rb-empresa">Empresa</label>
+                        </div>
+                        <small id="errorRdButton" class="form-error"></small>
+                        <div class="form-datos">
+                            <label for="nombreUsuario">Nombre Completo:</label>
+                            <input type="text" id="nombreUsuario" placeholder="Ejemplo: Elias Castro">
+                            <small id="errorNombre" class="form-error"></small>
+                        </div>
+                        <div class="form-datos">
+                            <label for="correoUsuario">Correo electrónico:</label>
+                            <input type="text" id="correoUsuario" placeholder="ejemplo@gmail.com">
+                            <small id="errorCorreo" class="form-error"></small>
+                        </div>
+                        <button type="submit" id="btnEnviarDatos">
+                            Contactar
+                        </button>
+                    </form>
+                    <article id="InfoPorTipoNegocio" class="detalle-info">
+                        <div class="detalle-vacio">
+                            <h3>Selecciona el tipo de negocio</h3>
+                        </div>
+                    </article>
+                </div>
             </section>
 
         </section>
@@ -284,6 +361,7 @@
         });
     </script>
 
+    <script src="js/ServiciosPlanesLoader.js"></script>
     <script src="js/servicios.js"></script>
     <script src="js/modalPago.js"></script>
 

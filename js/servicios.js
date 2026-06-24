@@ -25,20 +25,8 @@ const btnLimpiarFiltros =
 // ============================================================
 
 let servicios = [];
+let planes = [];
 let categoriaSeleccionada = "";
-
-// ============================================================
-// CARGA DEL JSON
-// ============================================================
-
-async function cargarServicios() {
-    try {
-        const respuesta = await fetch("json/servicios.json");
-        servicios = await respuesta.json();
-    } catch(error) {
-        console.error("Error al cargar servicios");
-    }
-}
 
 // ============================================================
 // HELPERS
@@ -260,6 +248,10 @@ async function iniciarServicios() {
     );
 }
 
+async function iniciarPlanes(){
+    await cargarPlanes();
+}
+
 // ============================================================
 // PUNTO DE ENTRADA
 // ============================================================
@@ -268,3 +260,226 @@ document.addEventListener(
     "DOMContentLoaded",
     iniciarServicios
 );
+
+document.addEventListener(
+    "DOMContentLoaded",
+    iniciarPlanes
+)
+
+// ============================================================
+// FORMULARIO
+// ============================================================
+
+//Seleccion elementos DOM
+
+const formInfo = document.getElementById("form-masInfo");
+
+const rbEmprendimiento = document.getElementById("rb-empredimiento");
+const rbNegocio = document.getElementById("rb-negocio");
+const rbEmpresa = document.getElementById("rb-empresa");
+
+const nombreUsuario = document.getElementById("nombreUsuario");
+const correoUsuario = document.getElementById("correoUsuario");
+
+const errorNombre = document.getElementById("errorNombre");
+const errorCorreo = document.getElementById("errorCorreo");
+const errorRdButton = document.getElementById("errorRdButton")
+
+const btnEnviarDatos = document.getElementById("btnEnviarDatos");
+
+const InfoPorTipoNegocio = document.getElementById("InfoPorTipoNegocio");
+
+/**Validaciones */
+
+function mostrarError(input, elementoError, mensaje){
+    elementoError.textContent = mensaje
+
+    input.classList.add("input-error")
+    input.classList.remove("input-success")
+}
+
+function mostrarExito(input, elementoError){
+    elementoError.textContent = ""
+
+    input.classList.remove("input-error")
+    input.classList.add("input-success")
+}
+
+function validarNombre(){
+    const nombre = nombreUsuario.value.trim()
+    if(nombre === "" ){
+        mostrarError(nombreUsuario, errorNombre, "El nombre es obligatorio")
+        return false;
+    }
+    
+
+    if(nombre.length > 3){
+        mostrarError(nombreUsuario,errorNombre, "El nombre debe ser mayor a 3 caractéres")
+        return false;
+    }
+
+    mostrarExito(nombreUsuario, errorNombre)
+    return true
+    
+}
+
+function validarCorreo(){
+    const correo = correoUsuario.value.trim()
+    if(correo === ""){
+        mostrarError(correoUsuario, errorCorreo, "El correo es necesario.")
+        return false
+    }
+    if(!correo.includes("@") && !correo.includes(".")){
+        mostrarError(correoUsuario, errorCorreo, "Ingrese un correo válido")
+        return false
+    }
+
+    mostrarExito(correoUsuario, errorCorreo)
+    return true
+}
+
+function validarTipoNegocio(){
+    if(!rbEmprendimiento.checked &&
+       !rbNegocio.checked        &&
+       !rbEmpresa.checked
+    ){
+        mostrarError(rbEmprendimiento, errorRdButton, "")
+        mostrarError(rbNegocio, errorRdButton, "")
+        mostrarError(rbEmpresa, errorRdButton, "elegir una opción.")
+        return false
+    }
+    
+    mostrarExito(rbEmprendimiento, errorRdButton)
+    mostrarExito(rbNegocio, errorRdButton)
+    mostrarExito(rbEmpresa, errorRdButton)
+    return true
+}
+
+function validarForm(){
+    const nombreValido = validarNombre();
+    const correoValido = validarCorreo();
+    const rbValido = validarTipoNegocio();
+
+    return nombreValido && correoValido && rbValido
+}
+
+
+/**Mostrar información dentro del article */
+
+function mostrarServicio(idServicio){
+
+    const servicio =
+        servicios.find(function(servicio){
+            return servicio.id === idServicio;
+        });
+
+    return `
+        <div class="tarjeta-recomendacion">
+            <i class="${servicio.icono}"></i>
+            <p>${servicio.nombre}</p>
+        </div>
+    `;
+}
+
+function MostrarPlan(idPlan){
+
+    const plan = planes.find(function(plan){
+        return plan.id === idPlan;
+    });
+
+     const serviciosHTML =
+        plan.servicios_incluidos.map(function(idServicio){
+
+            const servicio =
+                servicios.find(function(servicio){
+                    return servicio.id === idServicio;
+                });
+
+            return `
+                <li class="list-form-servicios">
+                    <i class="${servicio.icono}"></i>
+                    ${servicio.nombre}
+                </li>
+            `;
+
+        }).join("");
+
+    return `
+        <div class="tarjeta-planForm destacado inter">
+
+            <div>
+                <img src="assets/img/${plan.icono}" alt="">
+                <h2>${plan.nombre}</h2>
+            </div>
+
+            <div>
+                <ul>
+                    ${serviciosHTML}
+                </ul>
+            </div>
+
+            <button>CONSEGUIR</button>
+
+        </div>
+    `;
+
+
+}
+
+
+
+function mostrarInformacion(){
+    
+    if(rbEmprendimiento.checked){
+        InfoPorTipoNegocio.innerHTML = ""
+        InfoPorTipoNegocio.innerHTML =
+        `
+        <h3>Si estás empezando tu emprendimiento, te recomendamos estos servicios:</h3>
+
+        <div class="contenido-detalle1">
+        ${mostrarServicio("srv-003")}
+        ${mostrarServicio("srv-008")}
+        ${mostrarServicio("srv-010")}
+        </div>
+        `
+        return;
+    }
+     if(rbNegocio.checked){
+        InfoPorTipoNegocio.innerHTML = ""
+        InfoPorTipoNegocio.innerHTML = `
+        <h3>Este es el plan indicado si tienes un negocio en crecimiento:</h3>
+
+       ${MostrarPlan("PLAN-INTERMEDIO")}
+
+        `
+        return;
+    }
+
+    if(rbEmpresa.checked){
+         InfoPorTipoNegocio.innerHTML = ""
+         InfoPorTipoNegocio.innerHTML = `
+         <h3>Conoce más sobre nuestros servicios en el siguiente link:</h3>
+
+         <a href = "https://youtu.be/dQw4w9WgXcQ">Video Informativo</a>
+         `
+         return;
+    }
+}
+
+rbEmprendimiento.addEventListener(
+    "change",
+    mostrarInformacion
+);
+
+rbNegocio.addEventListener(
+    "change",
+    mostrarInformacion
+)
+
+rbEmpresa.addEventListener(
+    "change",
+    mostrarInformacion
+)
+
+
+
