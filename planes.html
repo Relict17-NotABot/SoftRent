@@ -280,168 +280,165 @@
         </section>
 
 
-        <!-- ===== MODAL DE PAGO ===== -->
-        <div id="mp-overlay" class="mp-overlay">
-            <div class="mp-modal" role="dialog" aria-modal="true" aria-labelledby="mp-titulo">
+            <!-- ===== MODAL DE PAGO ===== -->
+    <div id="mp-overlay" class="mp-overlay">
+        <div class="mp-modal" role="dialog" aria-modal="true" aria-labelledby="mp-titulo">
 
-                <!-- Botón cerrar -->
-                <button class="mp-btn-cerrar" id="mp-btn-cerrar" title="Cerrar">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+            <!-- Botón cerrar -->
+            <button class="mp-btn-cerrar" id="mp-btn-cerrar" title="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-                <!-- ===== PANEL IZQUIERDO: Sistemas elegibles ===== -->
-                <div class="mp-panel-izq">
+            <!-- ===== PANEL IZQUIERDO: Sistemas elegibles ===== -->
+            <div class="mp-panel-izq">
 
-                    <!-- PASO 2: Sistemas elegibles (dentro del límite) -->
-                    <div class="mp-seccion">
-                        <h3 class="mp-seccion-titulo">
-                            <span class="mp-paso-badge">2</span>
-                            Elige tus sistemas
-                        </h3>
-                        <p class="mp-seccion-sub">Selecciona los sistemas que incluye tu plan</p>
-
-                        <!-- Mensaje del límite -->
-                        <div id="mp-limite-mensaje" class="mp-limite-mensaje"></div>
-
-                        <!-- Catálogo de sistemas elegibles -->
-                        <div id="mp-catalogo-elegibles" class="mp-catalogo-elegibles"></div>
-                    </div>
-
-                    <!-- PASO 3: Periodicidad -->
-                    <div class="mp-seccion mp-seccion--periodicidad">
-                        <h3 class="mp-seccion-titulo">
-                            <span class="mp-paso-badge">3</span>
-                            Modalidad de pago
-                        </h3>
-                        <div class="mp-radios">
-                            <label class="mp-radio-label" for="mp-radio-mensual">
-                                <input type="radio" id="mp-radio-mensual" name="mp-periodicidad" value="mensual"
-                                    checked>
-                                <span class="mp-radio-custom"></span>
-                                Mensual
-                            </label>
-                            <label class="mp-radio-label" for="mp-radio-anual">
-                                <input type="radio" id="mp-radio-anual" name="mp-periodicidad" value="anual">
-                                <span class="mp-radio-custom"></span>
-                                Anual
-                                <span class="mp-badge-ahorro" id="mp-badge-ahorro"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ===== PANEL DERECHO: Detalle de factura ===== -->
-                <div class="mp-panel-der">
-
+                <!-- PASO 2: Sistemas elegibles (dentro del límite) -->
+                <div class="mp-seccion">
                     <h3 class="mp-seccion-titulo">
-                        <span class="mp-paso-badge">1</span>
-                        Detalle de tu compra
+                        <span class="mp-paso-badge">2</span>
+                        Elige tus sistemas
                     </h3>
+                    <p class="mp-seccion-sub">Selecciona los sistemas que incluye tu plan</p>
+                    
+                    <!-- Mensaje del límite -->
+                    <div id="mp-limite-mensaje" class="mp-limite-mensaje"></div>
 
-                    <!-- Plan elegido -->
-                    <div id="mp-plan-encabezado" class="mp-plan-encabezado"></div>
+                    <!-- Catálogo de sistemas elegibles -->
+                    <div id="mp-catalogo-elegibles" class="mp-catalogo-elegibles"></div>
+                </div>
 
-                    <hr class="mp-divisor">
-
-                    <!-- Servicios fijos (incluidos siempre) -->
-                    <p class="mp-label-grupo">✓ Servicios incluidos en el plan</p>
-                    <div id="mp-servicios-fijos" class="mp-servicios-fijos"></div>
-
-                    <hr class="mp-divisor">
-
-                    <!-- Sistemas elegidos por el usuario (dentro del límite) -->
-                    <p class="mp-label-grupo">★ Sistemas elegidos (sin costo)</p>
-                    <div id="mp-servicios-elegidos" class="mp-servicios-elegidos"></div>
-
-                    <hr class="mp-divisor">
-
-                    <!-- Servicios adicionales (fuera del límite) -->
-                    <p class="mp-label-grupo">+ Servicios adicionales</p>
-                    <div id="mp-servicios-extra-factura" class="mp-servicios-extra-factura"></div>
-
-                    <!-- Línea de descuento (oculta por defecto) -->
-                    <div id="mp-linea-descuento" class="mp-linea-descuento" style="display:none;">
-                        <span class="mp-desc-texto"></span>
-                        <span class="mp-desc-valor">-0%</span>
+                <!-- PASO 3: Periodicidad -->
+                <div class="mp-seccion mp-seccion--periodicidad">
+                    <h3 class="mp-seccion-titulo">
+                        <span class="mp-paso-badge">3</span>
+                        Modalidad de pago
+                    </h3>
+                    <div class="mp-radios">
+                        <label class="mp-radio-label" for="mp-radio-mensual">
+                            <input type="radio" id="mp-radio-mensual" name="mp-periodicidad" value="mensual" checked>
+                            <span class="mp-radio-custom"></span>
+                            Mensual
+                        </label>
+                        <label class="mp-radio-label" for="mp-radio-anual">
+                            <input type="radio" id="mp-radio-anual" name="mp-periodicidad" value="anual">
+                            <span class="mp-radio-custom"></span>
+                            Anual
+                            <span class="mp-badge-ahorro" id="mp-badge-ahorro"></span>
+                        </label>
                     </div>
-
-                    <hr class="mp-divisor">
-
-                    <!-- Código de descuento -->
-                    <div class="mp-codigo-area">
-                        <label class="mp-label-grupo" for="mp-codigo-descuento">Código de descuento</label>
-                        <div class="mp-codigo-input-grupo">
-                            <input type="text" id="mp-codigo-descuento" class="mp-input-codigo"
-                                placeholder="Ej: SOFTRENT10">
-                            <button id="mp-btn-aplicar-codigo" class="mp-btn-codigo">Aplicar</button>
-                        </div>
-                        <p id="mp-mensaje-codigo" class="mp-msg-codigo"></p>
-                    </div>
-
-                    <hr class="mp-divisor">
-
-                    <!-- Total -->
-                    <div class="mp-total-area">
-                        <span class="mp-total-label">Total:</span>
-                        <span id="mp-total-numero" class="mp-total-numero">₡0</span>
-                    </div>
-
-                    <button id="mp-btn-siguiente" class="mp-btn-siguiente">
-                        SIGUIENTE <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
                 </div>
 
             </div>
-        </div>
 
-        <!-- ===== MODAL DE CONFIRMACIÓN ===== -->
-        <div id="mp-confirmacion-overlay" class="mp-overlay mp-overlay--confirmacion">
-            <div class="mp-modal mp-modal--confirmacion" role="dialog" aria-modal="true">
+            <!-- ===== PANEL DERECHO: Detalle de factura ===== -->
+            <div class="mp-panel-der">
 
-                <button class="mp-btn-cerrar" id="mpc-btn-cerrar" title="Cerrar">
-                    <i class="fa-solid fa-xmark"></i>
+                <h3 class="mp-seccion-titulo">
+                    <span class="mp-paso-badge">1</span>
+                    Detalle de tu compra
+                </h3>
+
+                <!-- Plan elegido -->
+                <div id="mp-plan-encabezado" class="mp-plan-encabezado"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Servicios fijos (incluidos siempre) -->
+                <p class="mp-label-grupo">✓ Servicios incluidos en el plan</p>
+                <div id="mp-servicios-fijos" class="mp-servicios-fijos"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Sistemas elegidos por el usuario (dentro del límite) -->
+                <p class="mp-label-grupo">★ Sistemas elegidos (sin costo)</p>
+                <div id="mp-servicios-elegidos" class="mp-servicios-elegidos"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Servicios adicionales (fuera del límite) -->
+                <p class="mp-label-grupo">+ Servicios adicionales</p>
+                <div id="mp-servicios-extra-factura" class="mp-servicios-extra-factura"></div>
+
+                <!-- Línea de descuento (oculta por defecto) -->
+                <div id="mp-linea-descuento" class="mp-linea-descuento" style="display:none;">
+                    <span class="mp-desc-texto"></span>
+                    <span class="mp-desc-valor">-0%</span>
+                </div>
+
+                <hr class="mp-divisor">
+
+                <!-- Código de descuento -->
+                <div class="mp-codigo-area">
+                    <label class="mp-label-grupo" for="mp-codigo-descuento">Código de descuento</label>
+                    <div class="mp-codigo-input-grupo">
+                        <input type="text" id="mp-codigo-descuento" class="mp-input-codigo" placeholder="Ej: SOFTRENT10">
+                        <button id="mp-btn-aplicar-codigo" class="mp-btn-codigo">Aplicar</button>
+                    </div>
+                    <p id="mp-mensaje-codigo" class="mp-msg-codigo"></p>
+                </div>
+
+                <hr class="mp-divisor">
+
+                <!-- Total -->
+                <div class="mp-total-area">
+                    <span class="mp-total-label">Total:</span>
+                    <span id="mp-total-numero" class="mp-total-numero">₡0</span>
+                </div>
+
+                <button id="mp-btn-siguiente" class="mp-btn-siguiente">
+                    SIGUIENTE <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
-                <div class="mpc-contenido">
-                    <h2 class="mpc-titulo">Resumen de tu compra</h2>
-                    <p class="mpc-subtitulo">Revisá los detalles antes de confirmar</p>
+            </div>
 
-                    <div class="mpc-lista" id="mpc-items"></div>
+        </div>
+    </div>
 
-                    <hr class="mp-divisor">
+    <!-- ===== MODAL DE CONFIRMACIÓN ===== -->
+    <div id="mp-confirmacion-overlay" class="mp-overlay mp-overlay--confirmacion">
+        <div class="mp-modal mp-modal--confirmacion" role="dialog" aria-modal="true">
 
-                    <div class="mpc-total-area">
-                        <span>Total a pagar:</span>
-                        <span id="mpc-total" class="mpc-total-precio"></span>
-                    </div>
+            <button class="mp-btn-cerrar" id="mpc-btn-cerrar" title="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-                    <div class="mpc-botones">
-                        <button id="mpc-btn-volver" class="mpc-btn mpc-btn--volver">
-                            <i class="fa-solid fa-arrow-left"></i> Volver
-                        </button>
-                        <button id="mpc-btn-comprar" class="mpc-btn mpc-btn--comprar">
-                            Comprar <i class="fa-solid fa-bag-shopping"></i>
-                        </button>
-                    </div>
+            <div class="mpc-contenido">
+                <h2 class="mpc-titulo">Resumen de tu compra</h2>
+                <p class="mpc-subtitulo">Revisá los detalles antes de confirmar</p>
+
+                <div class="mpc-lista" id="mpc-items"></div>
+
+                <hr class="mp-divisor">
+
+                <div class="mpc-total-area">
+                    <span>Total a pagar:</span>
+                    <span id="mpc-total" class="mpc-total-precio"></span>
                 </div>
 
-            </div>
-        </div>
-
-        <!-- ===== MODAL DE ÉXITO ===== -->
-        <div id="mp-exito-overlay" class="mp-overlay mp-overlay--exito">
-            <div class="mp-modal mp-modal--exito">
-                <div class="mp-exito-contenido">
-                    <i class="fa-solid fa-circle-check mp-exito-icon"></i>
-                    <h2>¡Compra realizada!</h2>
-                    <p id="mp-exito-resumen"></p>
-                    <button id="mp-exito-cerrar" class="mp-btn-siguiente">Cerrar</button>
+                <div class="mpc-botones">
+                    <button id="mpc-btn-volver" class="mpc-btn mpc-btn--volver">
+                        <i class="fa-solid fa-arrow-left"></i> Volver
+                    </button>
+                    <button id="mpc-btn-comprar" class="mpc-btn mpc-btn--comprar">
+                        Comprar <i class="fa-solid fa-bag-shopping"></i>
+                    </button>
                 </div>
             </div>
+
         </div>
-    </main>
+    </div>
+
+    <!-- ===== MODAL DE ÉXITO ===== -->
+    <div id="mp-exito-overlay" class="mp-overlay mp-overlay--exito">
+        <div class="mp-modal mp-modal--exito">
+            <div class="mp-exito-contenido">
+                <i class="fa-solid fa-circle-check mp-exito-icon"></i>
+                <h2>¡Compra realizada!</h2>
+                <p id="mp-exito-resumen"></p>
+                <button id="mp-exito-cerrar" class="mp-btn-siguiente">Cerrar</button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-cont1">
