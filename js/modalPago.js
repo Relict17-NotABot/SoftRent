@@ -808,11 +808,9 @@ function vincularBotonesPlan() {
     }
 }
 
-// ============================================================
-// INICIALIZACIÓN
-// ============================================================
-
-document.addEventListener("DOMContentLoaded", function () {
+// datosListos (definido en ServiciosPlanesLoader.js) garantiza que
+// planes[] y servicios[] ya están cargados antes de vincular botones.
+datosListos.then(function () {
     vincularEventosModal();
     vincularBotonesPlan();
 });

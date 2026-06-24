@@ -1,24 +1,11 @@
-// ============================================================
-// REFERENCIAS DEL DOM
-// ============================================================
-
-const contenedorServicios =
-    document.getElementById("contenedorServicios");
-
-const mensajeServicios =
-    document.getElementById("mensajeServicios");
-
-const filtroTag =
-    document.getElementById("filtroTag");
-
-const btnCore =
-    document.getElementById("btnCore");
-
-const btnEcommerce =
-    document.getElementById("btnEcommerce");
-
-const btnLimpiarFiltros =
-    document.getElementById("btnLimpiarFiltros");
+// Las referencias DOM se asignan en iniciarServicios() para
+// garantizar que el DOM ya esté listo cuando se usen.
+let contenedorServicios;
+let mensajeServicios;
+let filtroTag;
+let btnCore;
+let btnEcommerce;
+let btnLimpiarFiltros;
 
 // ============================================================
 // VARIABLES GLOBALES
@@ -215,6 +202,10 @@ function limpiarFiltros() {
 
     filtroTag.value = "";
 
+    // Quitar estado activo de los botones de categoría
+    btnCore.classList.remove("activo");
+    btnEcommerce.classList.remove("activo");
+
     filtrarServicios();
 
 }
@@ -225,13 +216,25 @@ function limpiarFiltros() {
 
 async function iniciarServicios() {
 
+    // Asignar referencias DOM aquí, con DOM ya cargado
+    contenedorServicios  = document.getElementById("contenedorServicios");
+    mensajeServicios     = document.getElementById("mensajeServicios");
+    filtroTag            = document.getElementById("filtroTag");
+    btnCore              = document.getElementById("btnCore");
+    btnEcommerce         = document.getElementById("btnEcommerce");
+    btnLimpiarFiltros    = document.getElementById("btnLimpiarFiltros");
+
     btnCore.addEventListener("click", function(){
         categoriaSeleccionada = "core";
+        btnCore.classList.add("activo");
+        btnEcommerce.classList.remove("activo");
         filtrarServicios();
     });
 
     btnEcommerce.addEventListener("click", function(){
         categoriaSeleccionada = "ecommerce";
+        btnEcommerce.classList.add("activo");
+        btnCore.classList.remove("activo");
         filtrarServicios();
     });
 
@@ -239,16 +242,11 @@ async function iniciarServicios() {
 
     btnLimpiarFiltros.addEventListener("click", limpiarFiltros);
 
-    await cargarServicios();
-
     renderizarServicios(
-    obtenerServiciosDisponibles()
+        obtenerServiciosDisponibles()
     );
 }
 
-async function iniciarPlanes(){
-    await cargarPlanes();
-}
 
 // ============================================================
 // BUSQUEDA
@@ -275,15 +273,12 @@ function buscarServicio(idServicio){
 // PUNTO DE ENTRADA
 // ============================================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    iniciarServicios
-);
+// datosListos garantiza que planes[] y servicios[] ya estén
+// cargados antes de llamar a cualquier módulo.
+datosListos.then(function () {
+    iniciarServicios();
+});
 
-document.addEventListener(
-    "DOMContentLoaded",
-    iniciarPlanes
-)
 
 // ============================================================
 // FORMULARIO
@@ -378,7 +373,7 @@ function validarCorreo(){
         mostrarError(correoUsuario, errorCorreo, "El correo es necesario.")
         return false
     }
-    if(!correo.includes("@") && !correo.includes(".")){
+    if(!correo.includes("@") || !correo.includes(".")){
         mostrarError(correoUsuario, errorCorreo, "Ingrese un correo válido")
         return false
     }
@@ -438,7 +433,7 @@ function MostrarPlan(idPlan){
     });
 
      const serviciosHTML =
-        plan.servicios_incluidos.map(function(idServicio){
+        plan.servicios_fijos.map(function(idServicio){
 
             const servicio =
                 servicios.find(function(servicio){

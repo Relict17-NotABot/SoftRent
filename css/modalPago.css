@@ -1,4 +1,608 @@
 /* ============================================================
+   OVERLAY (fondo oscuro) — oculto por defecto
+   ============================================================ */
+
+.mp-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* La clase que JS agrega para mostrar el overlay */
+.mp-overlay--visible {
+    display: flex;
+}
+
+/* ============================================================
+   MODAL PRINCIPAL — contenedor de dos paneles
+   ============================================================ */
+
+.mp-modal {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    max-height: 90vh;
+    overflow: hidden;
+
+    background: linear-gradient(145deg, #1a0305 0%, #2b0007 60%, #1a0305 100%);
+    border: 1px solid rgba(119, 7, 7, 0.5);
+    border-radius: 1.25rem;
+    box-shadow:
+        0 0 60px rgba(119, 7, 7, 0.35),
+        0 25px 60px rgba(0, 0, 0, 0.7);
+
+    display: flex;
+    gap: 0;
+
+    font-family: var(--nunito, 'Nunito', sans-serif);
+    color: #fff;
+}
+
+/* ============================================================
+   BOTÓN CERRAR (X)
+   ============================================================ */
+
+.mp-btn-cerrar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+
+    background: rgba(119, 7, 7, 0.2);
+    border: 1px solid rgba(119, 7, 7, 0.4);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.mp-btn-cerrar:hover {
+    background: rgba(180, 0, 0, 0.5);
+    color: #fff;
+}
+
+/* ============================================================
+   PANEL IZQUIERDO (catálogo de sistemas + periodicidad)
+   ============================================================ */
+
+.mp-panel-izq {
+    flex: 1.1;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid rgba(119, 7, 7, 0.3);
+    overflow-y: auto;
+    max-height: 90vh;
+    scrollbar-width: thin;
+    scrollbar-color: #770707 transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ============================================================
+   PANEL DERECHO (factura / detalle de compra)
+   ============================================================ */
+
+.mp-panel-der {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    max-height: 90vh;
+    scrollbar-width: thin;
+    scrollbar-color: #770707 transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ============================================================
+   SECCIONES INTERNAS
+   ============================================================ */
+
+.mp-seccion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.mp-seccion-titulo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 0.9rem;
+    color: #fff;
+    margin: 0;
+}
+
+.mp-seccion-sub {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* Número de paso (badge circular) */
+.mp-paso-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #770707;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+/* ============================================================
+   ENCABEZADO DEL PLAN (panel derecho)
+   ============================================================ */
+
+.mp-plan-encabezado {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(119, 7, 7, 0.12);
+    border: 1px solid rgba(119, 7, 7, 0.35);
+    border-radius: 0.6rem;
+}
+
+.mp-plan-icon {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.mp-plan-nombre {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 0.9rem;
+    color: #fff;
+    display: block;
+}
+
+.mp-plan-periodo {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+}
+
+.mp-plan-precio-base {
+    margin-left: auto;
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 1rem;
+    color: #e55;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   DIVISOR
+   ============================================================ */
+
+.mp-divisor {
+    border: none;
+    border-top: 1px solid rgba(119, 7, 7, 0.25);
+    margin: 0.25rem 0;
+}
+
+/* ============================================================
+   ETIQUETAS DE GRUPO
+   ============================================================ */
+
+.mp-label-grupo {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+}
+
+/* ============================================================
+   RADIO BUTTONS (mensual / anual)
+   ============================================================ */
+
+.mp-seccion--periodicidad {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(119, 7, 7, 0.25);
+}
+
+.mp-radios {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.mp-radio-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(119, 7, 7, 0.35);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.mp-radio-label:has(input:checked) {
+    border-color: #770707;
+    background: rgba(119, 7, 7, 0.15);
+    color: #fff;
+}
+
+.mp-radio-label input[type="radio"] {
+    display: none;
+}
+
+/* Círculo personalizado del radio */
+.mp-radio-custom {
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 2px solid rgba(119, 7, 7, 0.6);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.mp-radio-label:has(input:checked) .mp-radio-custom {
+    border-color: #c0392b;
+}
+
+.mp-radio-label:has(input:checked) .mp-radio-custom::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: #c0392b;
+    border-radius: 50%;
+}
+
+/* Badge de ahorro (Anual) */
+.mp-badge-ahorro {
+    display: none;
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: rgba(93, 221, 136, 0.15);
+    border: 1px solid rgba(93, 221, 136, 0.4);
+    color: #5dd;
+    padding: 0.15rem 0.45rem;
+    border-radius: 0.3rem;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   CÓDIGO DE DESCUENTO
+   ============================================================ */
+
+.mp-codigo-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mp-codigo-input-grupo {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mp-input-codigo {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(119, 7, 7, 0.35);
+    border-radius: 0.4rem;
+    color: #fff;
+    font-family: var(--nunito, 'Nunito', sans-serif);
+    font-size: 0.8rem;
+    padding: 0.45rem 0.75rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.mp-input-codigo:focus {
+    border-color: #770707;
+}
+
+.mp-input-codigo::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.mp-btn-codigo {
+    background: #770707;
+    border: none;
+    border-radius: 0.4rem;
+    color: #fff;
+    font-family: var(--nunito, 'Nunito', sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.mp-btn-codigo:hover {
+    background: #a00909;
+}
+
+.mp-msg-codigo {
+    font-size: 0.75rem;
+    margin: 0;
+    min-height: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.mp-msg-codigo--error {
+    color: #e55;
+}
+
+.mp-msg-codigo--exito {
+    color: #5d8;
+}
+
+/* ============================================================
+   LÍNEA DE DESCUENTO APLICADO
+   ============================================================ */
+
+.mp-linea-descuento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #5d8;
+    padding: 0.3rem 0;
+}
+
+.mp-desc-texto {
+    color: #5d8;
+}
+
+.mp-desc-valor {
+    font-weight: 700;
+    color: #5d8;
+}
+
+/* ============================================================
+   ÁREA DE TOTAL
+   ============================================================ */
+
+.mp-total-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.mp-total-label {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.mp-total-numero {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 1.5rem;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   BOTÓN SIGUIENTE
+   ============================================================ */
+
+.mp-btn-siguiente {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: auto;
+    background: linear-gradient(135deg, #770707, #a30a0e);
+    border: none;
+    border-radius: 0.6rem;
+    color: #fff;
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.mp-btn-siguiente:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(119, 7, 7, 0.6);
+}
+
+/* ============================================================
+   MODAL DE CONFIRMACIÓN
+   ============================================================ */
+
+.mp-overlay--confirmacion {
+    z-index: 1100;
+}
+
+.mp-modal--confirmacion {
+    max-width: 480px;
+    flex-direction: column;
+}
+
+.mpc-contenido {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mpc-titulo {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 1.3rem;
+    margin: 0;
+    color: #fff;
+}
+
+.mpc-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin: 0.5rem 0;
+}
+
+.mpc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.4rem;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.mpc-total-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.mpc-total-precio {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+.mpc-botones {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.mpc-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 0.6rem;
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.mpc-btn--volver {
+    background: transparent;
+    border: 1px solid rgba(119, 7, 7, 0.5);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mpc-btn--volver:hover {
+    background: rgba(119, 7, 7, 0.15);
+    color: #fff;
+}
+
+.mpc-btn--comprar {
+    background: linear-gradient(135deg, #770707, #a30a0e);
+    border: none;
+    color: #fff;
+}
+
+.mpc-btn--comprar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(119, 7, 7, 0.6);
+}
+
+/* ============================================================
+   MODAL DE ÉXITO
+   ============================================================ */
+
+.mp-overlay--exito {
+    z-index: 1200;
+}
+
+.mp-modal--exito {
+    max-width: 380px;
+    flex-direction: column;
+    text-align: center;
+}
+
+.mp-exito-contenido {
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mp-exito-icon {
+    font-size: 3.5rem;
+    color: #5d8;
+    filter: drop-shadow(0 0 12px rgba(85, 221, 136, 0.5));
+}
+
+.mp-modal--exito h2 {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.mp-modal--exito p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 700px) {
+    .mp-modal {
+        flex-direction: column;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+
+    .mp-panel-izq {
+        border-right: none;
+        border-bottom: 1px solid rgba(119, 7, 7, 0.3);
+        max-height: none;
+    }
+
+    .mp-panel-der {
+        max-height: none;
+    }
+
+    .mp-radios {
+        flex-direction: column;
+    }
+}
+
+/* ============================================================
    MENSAJE DE LÍMITE
    ============================================================ */
 

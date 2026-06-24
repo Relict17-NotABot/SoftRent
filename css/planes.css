@@ -214,7 +214,7 @@
 }
 
 /* Layout interno de cada tarjeta de plan */
-.tarjeta-plan:first-child() {
+.tarjeta-plan:first-child {
     width: 100%;
 }
 
@@ -542,7 +542,8 @@ height: auto;
 =================SECCION SERVICIOS=====================
 ======================================================*/
 
-span {
+/* Aplicado solo dentro de la sección de servicios para no romper otros componentes */
+#seccion-servicios .servicio-categoria {
     font-family: var(--play-bold);
     color: rgba(142, 71, 129, 1);
 }
@@ -556,16 +557,135 @@ span {
         0 0 10px rgba(226, 39, 192, 0.6);
 }
 
-.seccion-servicios{
+#seccion-servicios {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.seccion-servicios > section {
+#seccion-servicios > section {
     width: 100%;
 }
+
+/* ---- Título de la sección ---- */
+.servicios-titulo {
+    text-align: center;
+    padding: 60px 20px 30px;
+}
+
+.servicios-titulo h2 {
+    font-size: 2.5rem;
+    font-family: var(--play-bold);
+    color: var(--color-text);
+    margin-bottom: 10px;
+}
+
+.servicios-titulo p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---- Botones de categoría (Core / Ecommerce) ---- */
+#seccion-servicios > div:nth-of-type(1) {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 0 20px 20px;
+    flex-wrap: wrap;
+}
+
+#btnCore,
+#btnEcommerce {
+    background: transparent;
+    border: 2px solid rgba(119, 7, 7, 0.5);
+    color: rgba(255, 255, 255, 0.75);
+    font-family: var(--play-bold);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    padding: 10px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+}
+
+#btnCore:hover,
+#btnEcommerce:hover {
+    background: rgba(119, 7, 7, 0.2);
+    border-color: #770707;
+    color: #fff;
+}
+
+#btnCore.activo,
+#btnEcommerce.activo {
+    background: #770707;
+    border-color: #770707;
+    color: #fff;
+    box-shadow: 0 0 16px rgba(119, 7, 7, 0.5);
+}
+
+/* ---- Filtros select ---- */
+.servicios-filtros-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px 28px;
+    flex-wrap: wrap;
+}
+
+#filtroTag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(119, 7, 7, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--nunito);
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    min-width: 180px;
+}
+
+#filtroTag:focus {
+    border-color: #770707;
+}
+
+#filtroTag option {
+    background: #1a0305;
+    color: #fff;
+}
+
+#btnLimpiarFiltros {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--nunito);
+    font-size: 0.82rem;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+#btnLimpiarFiltros:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+/* ---- Mensaje de cantidad ---- */
+#mensajeServicios {
+    text-align: center;
+    font-family: var(--nunito);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 0 16px;
+    padding: 0 20px;
+}
+
 
 #contenedorServicios{
     width: 100%;
