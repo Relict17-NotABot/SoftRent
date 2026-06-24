@@ -279,9 +279,11 @@ const rbNegocio = document.getElementById("rb-negocio");
 const rbEmpresa = document.getElementById("rb-empresa");
 
 const nombreUsuario = document.getElementById("nombreUsuario");
+const nombreNegocio = document.getElementById("nombreNegocio");
 const correoUsuario = document.getElementById("correoUsuario");
 
 const errorNombre = document.getElementById("errorNombre");
+const errorNegocio = document.getElementById("errorNegocio");
 const errorCorreo = document.getElementById("errorCorreo");
 const errorRdButton = document.getElementById("errorRdButton")
 
@@ -313,7 +315,7 @@ function validarNombre(){
     }
     
 
-    if(nombre.length > 3){
+    if(nombre.length < 3){
         mostrarError(nombreUsuario,errorNombre, "El nombre debe ser mayor a 3 caractéres")
         return false;
     }
@@ -321,6 +323,34 @@ function validarNombre(){
     mostrarExito(nombreUsuario, errorNombre)
     return true
     
+}
+
+function validarNegocio(){
+
+    const nombre =
+        nombreNegocio.value.trim();
+
+    if(nombre === ""){
+        mostrarError(
+            nombreNegocio,
+            errorNegocio,
+            "El nombre del negocio es necesario"
+        );
+        return false;
+    }
+
+    if(nombre.length < 3){
+        mostrarError(
+            nombreNegocio,
+            errorNegocio,
+            "El nombre debe tener al menos 3 caracteres"
+        );
+        return false;
+    }
+
+    mostrarExito(nombreNegocio, errorNegocio);
+
+    return true;
 }
 
 function validarCorreo(){
@@ -359,8 +389,9 @@ function validarForm(){
     const nombreValido = validarNombre();
     const correoValido = validarCorreo();
     const rbValido = validarTipoNegocio();
+    const negocioValido = validarNegocio();
 
-    return nombreValido && correoValido && rbValido
+    return nombreValido && correoValido && rbValido && negocioValido
 }
 
 
@@ -465,6 +496,46 @@ function mostrarInformacion(){
          return;
     }
 }
+
+/**
+ * FUNCION GUARDAR USUARIO LOCAL STORAGE
+ */
+
+function guardarUsuario(){
+    const usuario = {
+        nombre: nombreUsuario.value,
+        negocio: nombreNegocio.value,
+        correo: correoUsuario.value,
+        tipoNegocio: document.querySelector ('input[name="tipo-negocio"]:checked').value
+    };
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+}
+
+/**
+ * guardar la información del usuario
+ */
+
+formInfo.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+        if(validarForm()){
+
+            guardarUsuario();
+
+            alert("Información guardada");
+
+        }
+
+    }
+);
+
+/**
+ * cambiar la información mostrada en el detalle
+ */
 
 rbEmprendimiento.addEventListener(
     "change",

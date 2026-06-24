@@ -746,6 +746,12 @@ span {
     align-items: center;
 }
 
+.registroForm small {
+    font-family: var(--nunito);
+    color: var(--color-text);
+
+}
+
 .registroForm p{
     margin: 0 0 15px 0;
 }
@@ -762,7 +768,7 @@ span {
 .form-datos{
     font-family: var(--nunito);
     color: var(--color-text);
-    margin-bottom: 15px;
+    margin: 15px 0;
     display: grid;
     flex-direction: column;
     gap: 10px;
@@ -771,7 +777,8 @@ span {
 .form-datos input {
     width: 70%;
     padding: 6px 0;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 3px solid var(--color-text);
 }
 
 .registroForm button{
@@ -875,4 +882,16 @@ span {
     transform: translateY(-10px); /* Efecto de flotar al pasar el mouse */
     box-shadow: 0 15px 35px rgba(110, 3, 3, 0.8);
     border-color: rgba(199, 86, 86, 0.4);
+}
+
+/*inputs*/
+
+.input-error {
+    border-color: var(--color-secondary) !important;
+    background-color: #fef2f2 !important;
+}
+
+.input-success {
+    border-color: #16a34a !important;
+    background-color: #f0fdf4 !important;
 }

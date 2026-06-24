@@ -453,7 +453,7 @@ function validarCodigoDescuento() {
 // ============================================================
 // CONSTRUCCIÓN DEL HTML DEL MODAL (se inyecta al body)
 // ============================================================
-
+/*
 function inyectarHTMLModal() {
     const html = `
     <!-- ===== OVERLAY MODAL PRINCIPAL ===== -->
@@ -733,3 +733,4 @@ document.addEventListener("DOMContentLoaded", function () {
     vincularEventosModal();
     vincularBotonesPlan();
 });
+*/
