@@ -3,35 +3,26 @@
    ============================================================ */
 
 
-/* ---- HERO ---- */
+/* ---- CONTENEDOR PRINCIPAL ---- */
 
-.gestion-hero {
-    text-align: center;
-    padding: 8rem 1rem 2rem;   /* deja espacio bajo el header fijo */
-    color: #fff;
-}
-
-.gestion-hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.gestion-hero p {
-    color: #c48a9a;
-    font-size: 1rem;
+.gestion-container {
+    padding: 100px 9%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 
 /* ---- SECCIONES GENERALES ---- */
 
 /* Cada sección tiene el mismo espaciado base */
-.gestion-subscripcion,
+.gestion-subscripcion {
+    width: 100%;
+}
+
 .gestion-datos,
-.gestion-servicios,
-.gestion-acciones {
-    max-width: 860px;
-    margin: 0 auto 3rem;
-    padding: 0 1rem;
+.gestion-servicios {
+    width: 100%;
 }
 
 /* Títulos de sección */
@@ -114,6 +105,23 @@
     text-decoration: none;
     padding: 0.6rem 1.4rem;
     border-radius: 8px;
+}
+
+
+/* ---- FILA HORIZONTAL ---- */
+
+.gestion-row {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}
+
+/* Columna derecha: servicios + acciones */
+.gestion-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
 }
 
 
@@ -268,6 +276,7 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    margin-top: auto; /* Empuja las acciones al fondo de la columna derecha */
 }
 
 .btn-editar,
@@ -432,25 +441,33 @@
 
 /* ---- RESPONSIVO: único breakpoint móvil (Samsung S9 ~360px) ---- */
 @media (max-width: 700px) {
-    .gestion-hero {
-        padding: 6rem 1rem 1.5rem;   /* deja espacio bajo el header fijo */
+    .gestion-container {
+        padding: 110px 6%;
+        gap: 24px;
     }
-    .gestion-hero h1 {
-        font-size: 2rem;
+    
+    /* Apilar las columnas verticalmente en móvil */
+    .gestion-row {
+        flex-direction: column;
+        gap: 24px;
     }
+    
     .sub-tarjeta {
         flex-direction: column;
         align-items: flex-start;
     }
+    
     .sub-datos {
         width: 100%;
         justify-content: space-between;
         gap: 1rem;
     }
+    
     /* El modal grande pasa de 2 columnas a 1 */
     .modal-cuerpo {
         grid-template-columns: 1fr;
     }
+    
     .modal {
         padding: 1.5rem;
     }
