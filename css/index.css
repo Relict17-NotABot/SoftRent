@@ -110,8 +110,7 @@ button:hover{
     padding: 80px 9%;
     display: flex;
     justify-content: center;
-    justify-content: center;
-    gap: 200px;
+    gap: 100px;
     text-align: center;
 
     background:
@@ -132,10 +131,16 @@ button:hover{
 }
 
 .seccion-introduccion div{
-    width: 30%;
+    width: 40%;
     flex-direction: column;
     justify-content: center;
-    justify-content: center;
+}
+
+.seccion-introduccion p {
+    font-family: var(--nunito);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    font-size: 1.05rem;
 }
 
     .header-serviciosbtn {
@@ -155,6 +160,12 @@ button:hover{
     justify-content: center;
 }
 
+.servicios-botones button.activo {
+    background-color: var(--color-secondary);
+    border-color: transparent;
+    color: var(--color-primary);
+}
+
 
 .seccion-introduccion h2 {
     padding-bottom: 30px;
@@ -167,7 +178,7 @@ button:hover{
 
 .seccion-servicios{
     width: 100%;
-    padding: 200px 9%;
+    padding: 120px 9%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -176,17 +187,29 @@ button:hover{
     text-align: center;
 }
 
+.servicios-subtitulo {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 10px;
+}
+
 .contenedor-servicios{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
 }
 
 .contenedor-solucion{
-    padding: 0 50px;
-    width: 80%;
+    position: relative;
+    overflow: hidden;
+    padding: 36px 28px;
+    width: 100%;
+    text-align: left;
     border-style: none;
     background:
         linear-gradient(
@@ -194,15 +217,66 @@ button:hover{
             rgba(51, 4, 28, 0.6)
         ),
         url(../assets/img/disenios-02.png);
-    
+
     background-size: cover;
     background-position: center;
 
     box-shadow:
     inset 0 0 0 1px rgba(199, 86, 86, 0.3),
     inset 0 0 20px rgba(163, 10, 14, 0.2);
-    
+
     border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contenedor-solucion:hover {
+    transform: translateY(-8px);
+    box-shadow:
+    inset 0 0 0 1px rgba(199, 86, 86, 0.5),
+    inset 0 0 20px rgba(163, 10, 14, 0.2),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.solucion-paso {
+    position: absolute;
+    top: 14px;
+    right: 22px;
+    font-family: var(--play-bold);
+    font-size: 2.4rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.12);
+}
+
+.solucion-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.solucion-cabecera i {
+    font-size: 1.6rem;
+    color: var(--color-text);
+    background: var(--color-bg);
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.contenedor-solucion h4 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.contenedor-solucion p {
+    font-family: var(--nunito);
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.55;
+    margin: 0;
 }
 
 .hidden {

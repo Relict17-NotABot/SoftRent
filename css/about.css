@@ -1,33 +1,182 @@
+/* ============================================
+   INTRO: idea de negocio
+   ============================================ */
+
+.about-intro {
+  width: 100%;
+  padding: 160px 9% 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+
+.about-eyebrow {
+  font-family: var(--play-bold);
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  padding: 8px 18px;
+  border: 1px solid rgba(199, 86, 86, 0.5);
+  border-radius: 999px;
+  background: rgba(163, 10, 14, 0.15);
+}
+
+.about-intro h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  max-width: 16ch;
+  margin: 0;
+  text-shadow: 0 0 25px rgba(204, 47, 175, 0.4);
+}
+
+.about-intro > p {
+  font-family: var(--nunito);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 65ch;
+  margin: 0;
+}
+
+/* Valores / pilares del negocio */
+.about-valores {
+  width: 100%;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.valor-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    rgba(85, 85, 85, 0.07),
+    rgba(37, 0, 0, 0.55)
+  );
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.valor-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  border-color: rgba(199, 86, 86, 0.4);
+}
+
+.valor-item i {
+  font-size: 2rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+
+.valor-item h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.valor-item p {
+  font-family: var(--nunito);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================
+   SECCIONES: historia / misión / visión / trabajo
+   ============================================ */
+
 .seccion-about{
   width: 100%;
   height: auto;
   display: flex;
-  margin-top: 110px;
-  margin-bottom: 50px;
-  padding: 0 100px;
-  gap: 200px;
+  align-items: center;
+  margin: 60px 0;
+  padding: 0 9%;
+  gap: 70px;
   justify-content: center;
 }
 
 .seccion-about h2{
-  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-family: var(--play-bold);
   color: var(--color-text);
-  text-shadow:
-        0 0 15px rgba(204, 47, 175, 0.5);
+  margin-top: 0;
+  text-shadow: 0 0 15px rgba(204, 47, 175, 0.5);
+}
+
+.seccion-about h2 i {
+  font-size: 0.8em;
+  color: var(--color-bg);
 }
 
 .seccion-about p{
-  font-size: 1.75rem;
+  font-family: var(--nunito);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .seccion-about img{
-  width: 750px;
+  width: 100%;
+  max-width: 620px;
   height: auto;
   border-radius: 25px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease;
+}
+
+.seccion-about img:hover {
+  transform: scale(1.03);
 }
 
 .about-text{
-  width: 30%;
+  width: 40%;
   align-items: center;
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 850px) {
+  .about-intro {
+    padding: 130px 6% 40px;
+  }
+
+  .seccion-about {
+    flex-direction: column;
+    gap: 28px;
+    margin: 40px 0;
+    padding: 0 6%;
+    text-align: center;
+  }
+
+  .seccion-about h2 {
+    justify-content: center;
+  }
+
+  .about-text {
+    width: 100%;
+    order: 2;
+  }
+
+  .seccion-about img {
+    max-width: 100%;
+  }
 }
