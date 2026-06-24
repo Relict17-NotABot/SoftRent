@@ -36,6 +36,10 @@ button:hover{
     cursor: pointer;
 }
 
+.hero-botones button a {
+    text-decoration: none;
+    color: var(--color-text);
+}
 
 /*Seccion 1: Hero*/
 
@@ -169,6 +173,7 @@ button:hover{
     align-items: center;
     justify-content: center;
     gap: 30px;
+    text-align: center;
 }
 
 .contenedor-servicios{
@@ -227,6 +232,10 @@ button:hover{
     text-align: center;
     font-size: 2rem;
     margin-bottom: 10px;
+}
+
+.seccion-ventajas > h2 {
+    text-align: center;
 }
 
 .ventajas-contenedor {
