@@ -4,7 +4,7 @@ footer{
     width: 100%;
     height: auto;
     padding: 50px 100px;
-    background-color: transparent;
+    background-color: black;
     justify-content: grid;
     gap: 50px;
 }

@@ -570,6 +570,8 @@ height: auto;
 
 /* ---- Título de la sección ---- */
 .servicios-titulo {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     padding: 60px 20px 30px;
 }
@@ -587,7 +589,7 @@ height: auto;
 }
 
 /* ---- Botones de categoría (Core / Ecommerce) ---- */
-#seccion-servicios > div:nth-of-type(1) {
+.servicios-filtros-botones {
     display: flex;
     justify-content: center;
     gap: 16px;
@@ -595,8 +597,7 @@ height: auto;
     flex-wrap: wrap;
 }
 
-#btnCore,
-#btnEcommerce {
+#btnCore, #btnEcommerce {
     background: transparent;
     border: 2px solid rgba(119, 7, 7, 0.5);
     color: rgba(255, 255, 255, 0.75);
@@ -663,7 +664,6 @@ height: auto;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.55);
-    font-family: var(--nunito);
     font-size: 0.82rem;
     padding: 8px 18px;
     border-radius: 8px;
@@ -812,6 +812,8 @@ height: auto;
 }
 
 .tag{
+    font-family: var(--nunito);
+    color: var(--color-secondary);
     padding: 6px 12px;
 
     border-radius: 50px;

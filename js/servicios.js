@@ -567,4 +567,22 @@ rbEmpresa.addEventListener(
 )
 
 
+/**
+ * trasladarse de manera smooth a la seccion de servicios
+ */
+
+window.addEventListener("load", function(){
+
+    if(location.hash === "#seccion-servicios"){
+
+        document
+            .getElementById("seccion-servicios")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+});
+
 
