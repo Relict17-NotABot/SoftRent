@@ -41,6 +41,6 @@
         "porc_desc_anual": 10,
         "servicios_fijos": ["srv-012", "srv-013"],
         "sistemas_elegibles": 10,
-        "icono": "robotVIP.png" 
+        "icono": "vipdiamond.png" 
     }
 ]

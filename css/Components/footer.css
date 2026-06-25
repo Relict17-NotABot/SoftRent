@@ -2,11 +2,13 @@
 
 footer{
     width: 100%;
+    max-width: 1920px;
     height: auto;
     padding: 50px 100px;
     background-color: black;
     justify-content: grid;
     gap: 50px;
+    justify-self: center;
 }
 footer p, a{
     font-family: 'Nunito', sans-serif;
