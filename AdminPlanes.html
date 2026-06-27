@@ -22,6 +22,43 @@
 </head>
 
 <body class="finisher-header">
+
+<div class="sin-plan oculto">
+    <main class="container">
+        <header class="side-header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo-softrent.png" alt="logo-softrent">
+                    </a>
+                </div>
+
+                <input type="checkbox" id="check-menu" class="menu-oculto">
+
+                <label for="check-menu" class="boton-hamburguesa">
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                </label>
+
+                <nav class="nav-menu">
+                    <ul class="navegacion">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="AdminPlanes.html" class="nav-activo">Gestión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <p>Todavía no tenés ningún plan contratado.</p>
+        <a href="planes.html" class="btn-ir-planes">Ver planes disponibles</a>
+    </main>
+</div>
+
+
+<div class = "con-plan oculto">
     <main class="container">
         <header class="side-header">
             <div class="header-content">
@@ -51,15 +88,10 @@
         </header>
 
 
-        <!-- ============================
-             CONTENEDOR PRINCIPAL HORIZONTAL
-             ============================ -->
+       
         <div class="gestion-container">
 
-            <!-- ============================
-                 SECCIÓN 1: ESTADO DE LA SUBSCRIPCIÓN
-                 Full width arriba
-                 ============================ -->
+           
             <section class="gestion-subscripcion">
                 <h2>Tu Subscripción</h2>
 
@@ -83,7 +115,7 @@
 
                 <!-- Mensaje vacío: cuando el usuario no tiene plan contratado -->
                 <!-- Para activarlo: agregar clase "oculto" a .sub-tarjeta y quitar "oculto" de aquí -->
-                <div class="sin-plan oculto">
+                <div class="sin-plan-interno oculto">
                     <p>Todavía no tenés ningún plan contratado.</p>
                     <a href="planes.html" class="btn-ir-planes">Ver planes disponibles</a>
                 </div>
@@ -225,9 +257,9 @@
 
         </div>
 
-
+    
     </main>
-
+</div>
     <footer>
         <div class="footer-cont1">
             <div class="footer-edu">
@@ -357,6 +389,8 @@
 </script>
 
 <!-- Lógica de modales y validación del formulario -->
+<script src="js/ServiciosPlanesLoader.js"></script>
+<script src="js/modalPago.js"></script>
 <script src="js/gestion.js"></script>
 
 </html>

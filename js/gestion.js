@@ -1,13 +1,121 @@
+// Carga Inicial de la pagina
+
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const compraJSON = localStorage.getItem("softrent_ultima_compra")
+
+if(compraJSON) {
+
+const compra = JSON.parse(compraJSON);
+mostrarVista(compra);
+
+} else {
+
+    mostrarVistaSinCompra();
+
+}
+
+})
+
+function mostrarVista(compra){
+    document.querySelector(".sin-plan").classList.add("oculto");
+    document.querySelector(".con-plan").classList.remove("oculto");
+
+    // Llenar datos del plan
+    document.querySelector(".sub-nombre").textContent = compra.plan.nombre;
+    document.querySelector(".sub-modalidad").textContent = compra.plan.periodicidad;
+    document.querySelector(".dato-numero").textContent = formatearPrecio(compra.total);
+
+    // Contar servicios activos (fijos + elegidos + adicionales)
+    const totalServicios = compra.serviciosElegidos.length + compra.serviciosAdicionales.length;
+    document.querySelectorAll(".dato-numero")[1].textContent = totalServicios;
+
+    // Renderizar servicios contratados
+    renderizarServiciosContratados(compra);
+}
+
+function renderizarServiciosContratados(compra) {
+    const grid = document.querySelector(".servicios-grid");
+    grid.innerHTML = "";
+
+    // Servicios fijos del plan
+    const plan = buscarPlan(compra.plan.id);
+    if (plan && plan.servicios_fijos) {
+        plan.servicios_fijos.forEach(function(id) {
+            const srv = buscarServicio(id);
+            if (srv) {
+                grid.appendChild(crearTarjetaServicioContratado(srv, true));
+            }
+        });
+    }
+
+    // Servicios elegidos
+    compra.serviciosElegidos.forEach(function(srv) {
+        grid.appendChild(crearTarjetaServicioContratado(srv, true));
+    });
+
+    // Servicios adicionales
+    compra.serviciosAdicionales.forEach(function(srv) {
+        grid.appendChild(crearTarjetaServicioContratado(srv, true));
+    });
+}
+
+function crearTarjetaServicioContratado(srv, activo) {
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "servicio-tarjeta";
+    tarjeta.innerHTML = `
+        <div class="servicio-icono">
+            <i class="${srv.icono}"></i>
+        </div>
+        <div class="servicio-info">
+            <h3>${srv.nombre}</h3>
+            <span class="servicio-categoria">Servicio</span>
+        </div>
+        <label class="toggle">
+            <input type="checkbox" ${activo ? "checked" : ""}>
+            <span class="toggle-slider"></span>
+        </label>
+    `;
+    return tarjeta;
+}
+
+function formatearPrecio(numero) {
+    return "₡" + numero.toLocaleString("es-CR");
+}
+
+function mostrarVistaSinCompra() {
+
+    document.querySelector(".sub-tarjeta").classList.add("oculto");
+    document.querySelector(".sin-plan").classList.remove("oculto");
+
+}
+
+document.getElementById("btn-abrir-eliminar").addEventListener("click", () => {
+    localStorage.clear();
+    alert("LocalStorage eliminado.");
+});
+
+
 
 /* ---- MODAL: EDITAR PLAN ---- */
+
+
+
+
+
 
 var modalEditar = document.getElementById('modal-editar');
 var btnAbrirEditar = document.getElementById('btn-abrir-editar');
 var btnCerrarEditar = document.getElementById('btn-cerrar-editar');
 
-/* Abre el modal de editar plan */
+/* Abre el modal de editar plan usando el modal de pago */
 btnAbrirEditar.addEventListener('click', function () {
-    modalEditar.classList.remove('oculto');
+    const compraJSON = localStorage.getItem("softrent_ultima_compra");
+    if (compraJSON) {
+        const compra = JSON.parse(compraJSON);
+        abrirModalPago(compra.plan.id);
+    }
 });
 
 /* Cierra el modal de editar plan */
