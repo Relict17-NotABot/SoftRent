@@ -103,11 +103,11 @@
                     </div>
                     <div class="sub-datos">
                         <div class="sub-dato">
-                            <span class="dato-numero">$99</span>
+                            <span class="dato-numero">₡99,000</span>
                             <span class="dato-label">Precio / mes</span>
                         </div>
                         <div class="sub-dato">
-                            <span class="dato-numero">3</span>
+                            <span class="dato-numero">5</span>
                             <span class="dato-label">Servicios activos</span>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
 
                         <div class="servicios-grid">
 
-                            <!-- Tarjeta de servicio — repetir por cada servicio -->
+                            <!-- Servicio fijo del plan -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-robot"></i>
@@ -194,13 +194,13 @@
                                     <h3>Automatización CRM</h3>
                                     <span class="servicio-categoria">Automatización</span>
                                 </div>
-                                <!-- Toggle: checked = activo, sin checked = pausado -->
                                 <label class="toggle">
                                     <input type="checkbox" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
                             </div>
 
+                            <!-- Servicio fijo del plan -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-headset"></i>
@@ -210,11 +210,12 @@
                                     <span class="servicio-categoria">Soporte</span>
                                 </div>
                                 <label class="toggle">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
                             </div>
 
+                            <!-- Servicio elegido por usuario -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-chart-line"></i>
@@ -225,6 +226,36 @@
                                 </div>
                                 <label class="toggle">
                                     <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <!-- Servicio adicional (pagado extra) -->
+                            <div class="servicio-tarjeta">
+                                <div class="servicio-icono">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="servicio-info">
+                                    <h3>Email Marketing</h3>
+                                    <span class="servicio-categoria">Marketing</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <!-- Servicio adicional (pagado extra) -->
+                            <div class="servicio-tarjeta">
+                                <div class="servicio-icono">
+                                    <i class="fa-solid fa-box"></i>
+                                </div>
+                                <div class="servicio-info">
+                                    <h3>Gestión de Inventario</h3>
+                                    <span class="servicio-categoria">Operaciones</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox">
                                     <span class="toggle-slider"></span>
                                 </label>
                             </div>
