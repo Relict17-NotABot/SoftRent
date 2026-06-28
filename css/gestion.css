@@ -3,6 +3,27 @@
    ============================================================ */
 
 
+/* ---- TIPOGRAFÍAS DEL PROYECTO (assets/fonts) ---- */
+
+/* Texto general: Nunito. Definidas en Base.css. */
+.con-plan,
+.sin-plan {
+    font-family: var(--nunito, 'Nunito', sans-serif);
+}
+
+/* Títulos, nombres y números destacados: Play. */
+.gestion-subscripcion h2,
+.gestion-datos h2,
+.gestion-servicios h2,
+.sub-nombre,
+.dato-numero,
+.servicio-info h3,
+.modal-cabecera h3,
+.resumen-precio {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+}
+
+
 /* ---- VISTAS PRINCIPALES (con/sin plan) ---- */
 
 /* Vista cuando NO hay plan contratado */

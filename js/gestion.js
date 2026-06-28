@@ -84,6 +84,21 @@ function formatearPrecio(numero) {
     return "₡" + numero.toLocaleString("es-CR");
 }
 
+// Buscadores en los catálogos cargados por ServiciosPlanesLoader.js.
+// servicios.js (donde viven originalmente) no se carga en esta página,
+// así que los redefinimos aquí para modalPago.js y mostrarVista().
+function buscarPlan(idPlan) {
+    return planes.find(function (plan) {
+        return plan.id === idPlan;
+    });
+}
+
+function buscarServicio(idServicio) {
+    return servicios.find(function (servicio) {
+        return servicio.id === idServicio;
+    });
+}
+
 function mostrarVistaSinCompra() {
 
     document.querySelector(".sub-tarjeta").classList.add("oculto");
