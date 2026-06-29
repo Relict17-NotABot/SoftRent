@@ -97,7 +97,9 @@ button:hover{
 /* ESTILOS PARA LA IMAGEN DEL HERO */
 .hero-frame {
     width: 100%;
-    height: 500px;
+    max-width: 460px;          /* mas chiquito, cabe en el bloque */
+    aspect-ratio: 680 / 640;   /* mantiene proporcion del SVG, sin recorte */
+    height: auto;
     border: none;
     overflow: hidden;
 }
@@ -462,9 +464,6 @@ button:hover{
     .hero-botones :nth-child(1),
     .hero-botones :nth-child(2) {
         width: 100%;
-    }
-    .hero-frame {
-        height: 820px;   /* el grid interno pasa a 2 columnas y crece a lo alto */
     }
 
     /* Introducción en columna */

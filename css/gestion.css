@@ -3,6 +3,66 @@
    ============================================================ */
 
 
+/* ---- TIPOGRAFÍAS DEL PROYECTO (assets/fonts) ---- */
+
+/* Texto general: Nunito. Definidas en Base.css. */
+.con-plan,
+.sin-plan {
+    font-family: var(--nunito, 'Nunito', sans-serif);
+}
+
+/* Títulos, nombres y números destacados: Play. */
+.gestion-subscripcion h2,
+.gestion-datos h2,
+.gestion-servicios h2,
+.sub-nombre,
+.dato-numero,
+.servicio-info h3,
+.modal-cabecera h3,
+.resumen-precio {
+    font-family: var(--play-bold, 'PlayBold', sans-serif);
+}
+
+
+/* ---- VISTAS PRINCIPALES (con/sin plan) ---- */
+
+/* Vista cuando NO hay plan contratado */
+.sin-plan {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.sin-plan p {
+    font-size: 1.2rem;
+    color: #c48a9a;
+    margin-bottom: 1.5rem;
+}
+
+.sin-plan .btn-ir-planes {
+    background-color: #c0395a;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.sin-plan .btn-ir-planes:hover {
+    background-color: #a02e4a;
+}
+
+/* Vista cuando HAY plan contratado */
+.con-plan {
+    width: 100%;
+}
+
 /* ---- CONTENEDOR PRINCIPAL ---- */
 
 .gestion-container {

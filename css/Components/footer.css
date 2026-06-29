@@ -1,6 +1,6 @@
 @import url('../Base.css');
 
-footer{
+footer {
     width: 100%;
     max-width: 1920px;
     height: auto;
@@ -10,65 +10,70 @@ footer{
     gap: 50px;
     justify-self: center;
 }
-footer p, a{
+
+footer p,
+a {
     font-family: 'Nunito', sans-serif;
     color: var(--color-text);
     font-weight: 200;
     font-size: small;
-    
+
 }
 
-footer h3{
+footer h3 {
     font-family: var(--play-bold);
     font-weight: 700;
     font-size: 15px;
     color: var(--color-text);
 }
 
-.icon{
+.icon {
     color: var(--color-text);
     font-size: 2rem;
 }
 
-.icon:hover{
+.icon:hover {
     color: var(--color-secondary);
 }
 
 
-.footer-edu{
+.footer-edu {
     display: block;
 }
+
 .edu-contenedor1 {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
-.edu-contenedor1 img{
+
+.edu-contenedor1 img {
     width: auto;
     height: 100px;
 }
-.edu-contenedor2{
+
+.edu-contenedor2 {
     display: flex;
     justify-content: flex-start;
     gap: 100px;
     padding-top: 25px;
 }
 
-.edu-contenedor2 div{
+.edu-contenedor2 div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
 }
 
-.footer-cont1{
+.footer-cont1 {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.footer-logo{
+.footer-logo {
     width: auto;
     height: auto;
     justify-content: center;
@@ -76,12 +81,12 @@ footer h3{
     padding-top: 50px;
 }
 
-.footer-logo img{
+.footer-logo img {
     width: 450px;
     height: auto;
 }
 
-.footer-acceso{
+.footer-acceso {
     width: 10%;
     height: auto;
     display: grid;
@@ -89,7 +94,8 @@ footer h3{
     align-items: left;
     text-align: left;
 }
-.footer-acceso ul{
+
+.footer-acceso ul {
     padding: 0;
     display: grid;
     justify-content: center;
@@ -97,27 +103,27 @@ footer h3{
     gap: 15px;
 }
 
-.footer-acceso ul li{
+.footer-acceso ul li {
     text-decoration: none;
     list-style: none;
 }
 
-.footer-patrocinadores{
+.footer-patrocinadores {
     width: 15%;
     text-align: center;
 }
 
-.patrocinadores-cont{
+.patrocinadores-cont {
     display: flex;
     gap: 10px;
 }
 
-.patrocinadores-cont img{
+.patrocinadores-cont img {
     width: auto;
     height: 100px;
 }
 
-.footer-cont2{
+.footer-cont2 {
     margin: 20px 0px 0px 0px;
     display: flex;
     justify-content: center;
@@ -129,32 +135,38 @@ footer h3{
     footer {
         padding: 40px 24px;
     }
+
     .footer-cont1 {
         flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 40px;
     }
+
     .footer-logo {
         padding-top: 0;
     }
+
     .footer-logo img {
         width: 240px;
     }
+
     .footer-acceso,
     .footer-patrocinadores {
         width: auto;
     }
+
     .edu-contenedor1 {
         flex-direction: column;
     }
+
     .edu-contenedor2 {
         flex-direction: column;
         align-items: center;
         gap: 15px;
     }
+
     .patrocinadores-cont {
         justify-content: center;
     }
 }
-

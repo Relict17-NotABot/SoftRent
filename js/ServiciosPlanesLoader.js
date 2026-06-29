@@ -1,13 +1,10 @@
-// ============================================================
-// DATOS GLOBALES
-// ============================================================
+
 
 let servicios = [];
 let planes = [];
 
-// ============================================================
-// FUNCIONES DE CARGA
-// ============================================================
+
+// Cargar Serv
 
 async function cargarServicios() {
     try {
@@ -29,12 +26,7 @@ async function cargarPlanes() {
     }
 }
 
-// ============================================================
-// ORQUESTADOR CENTRAL
-// Carga ambos JSON en paralelo y luego llama a los módulos.
-// Todos los scripts dependen de esta Promise en vez de tener
-// sus propios DOMContentLoaded compitiendo entre sí.
-// ============================================================
+// Esto es para que Cargar Planes y Servicios al mismo tiempo
 
 const datosListos = new Promise(function (resolve) {
     document.addEventListener("DOMContentLoaded", async function () {

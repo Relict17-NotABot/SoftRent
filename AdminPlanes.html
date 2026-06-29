@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Estilos base del sitio -->
+    
     <link rel="stylesheet" href="css/Base.css">
     <link rel="stylesheet" href="css/Components/header.css">
     <link rel="stylesheet" href="css/Components/footer.css">
 
-    
+
     <link rel="stylesheet" href="css/gestion.css">
-
-   
-
+    <link rel="stylesheet" href="css/modalPago.css">
 
     <script src="js/finisher-header.es5.min.js" type="text/javascript"></script>
 
@@ -22,6 +20,43 @@
 </head>
 
 <body class="finisher-header">
+
+<div class="sin-plan oculto">
+    <main class="container">
+        <header class="side-header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo-softrent.png" alt="logo-softrent">
+                    </a>
+                </div>
+
+                <input type="checkbox" id="check-menu" class="menu-oculto">
+
+                <label for="check-menu" class="boton-hamburguesa">
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                    <span class="linea"></span>
+                </label>
+
+                <nav class="nav-menu">
+                    <ul class="navegacion">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="planes.html">Planes</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="AdminPlanes.html" class="nav-activo">Gestión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <p>Todavía no tenés ningún plan contratado.</p>
+        <a href="planes.html" class="btn-ir-planes">Ver planes disponibles</a>
+    </main>
+</div>
+
+
+<div class = "con-plan oculto">
     <main class="container">
         <header class="side-header">
             <div class="header-content">
@@ -51,15 +86,10 @@
         </header>
 
 
-        <!-- ============================
-             CONTENEDOR PRINCIPAL HORIZONTAL
-             ============================ -->
+       
         <div class="gestion-container">
 
-            <!-- ============================
-                 SECCIÓN 1: ESTADO DE LA SUBSCRIPCIÓN
-                 Full width arriba
-                 ============================ -->
+           
             <section class="gestion-subscripcion">
                 <h2>Tu Subscripción</h2>
 
@@ -71,54 +101,46 @@
                     </div>
                     <div class="sub-datos">
                         <div class="sub-dato">
-                            <span class="dato-numero">$99</span>
+                            <span class="dato-numero">₡99,000</span>
                             <span class="dato-label">Precio / mes</span>
                         </div>
                         <div class="sub-dato">
-                            <span class="dato-numero">3</span>
+                            <span class="dato-numero">5</span>
                             <span class="dato-label">Servicios activos</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Mensaje vacío: cuando el usuario no tiene plan contratado -->
-                <!-- Para activarlo: agregar clase "oculto" a .sub-tarjeta y quitar "oculto" de aquí -->
-                <div class="sin-plan oculto">
+
+                <div class="sin-plan-interno oculto">
                     <p>Todavía no tenés ningún plan contratado.</p>
                     <a href="planes.html" class="btn-ir-planes">Ver planes disponibles</a>
                 </div>
             </section>
 
 
-            <!-- ============================
-                 SEGUNDA FILA HORIZONTAL
-                 Datos del negocio (izquierda) | Servicios + Acciones (derecha)
-                 ============================ -->
+           
             <div class="gestion-row">
 
-                <!-- ============================
-                     SECCIÓN 2: DATOS DEL NEGOCIO
-                     Formulario con información del negocio.
-                     La validación corre desde gestion.js al hacer submit.
-                     ============================ -->
+                <!-- Formulario con información del negocio-->
                 <section class="gestion-datos">
                     <h2>Datos del Negocio</h2>
 
-                    <!-- novalidate: desactiva la validación nativa del browser, la hacemos nosotros -->
+                    <!-- novalidate: desactiva la validación nativa del browser-->
                     <form id="form-negocio" class="datos-form" novalidate>
 
                         <!-- Campo: nombre del negocio -->
                         <div class="campo">
                             <label for="negocio-nombre">Nombre del negocio</label>
                             <input type="text" id="negocio-nombre" placeholder="Ej: Mi Empresa S.A.">
-                            <!-- Aquí gestion.js escribe el mensaje de error si el campo está vacío -->
+                            <!-- gestion.js e-->
                             <span class="campo-error" id="error-nombre"></span>
                         </div>
 
                         <!-- Campo: correo de contacto -->
                         <div class="campo">
                             <label for="negocio-correo">Correo de contacto</label>
-                            <input type="email" id="negocio-correo" placeholder="Ej: contacto@miempresa.com">
+                            <input type="email" id="negocio-correo" placeholder="Ej: contacto@empresa.com">
                             <span class="campo-error" id="error-correo"></span>
                         </div>
 
@@ -138,22 +160,16 @@
                 </section>
 
 
-                <!-- ============================
-                     COLUMNA DERECHA: Servicios + Acciones
-                     ============================ -->
+                <!-- Servicios + Acciones -->
                 <div class="gestion-right-column">
 
-                    <!-- ============================
-                         SECCIÓN 3: SERVICIOS CONTRATADOS
-                         Una tarjeta por cada servicio del plan.
-                         Cada toggle cambia el estado activo / pausado.
-                         ============================ -->
+                   
                     <section class="gestion-servicios">
                         <h2>Servicios Contratados</h2>
 
                         <div class="servicios-grid">
 
-                            <!-- Tarjeta de servicio — repetir por cada servicio -->
+                            <!-- Servicio fijo del plan -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-robot"></i>
@@ -162,13 +178,9 @@
                                     <h3>Automatización CRM</h3>
                                     <span class="servicio-categoria">Automatización</span>
                                 </div>
-                                <!-- Toggle: checked = activo, sin checked = pausado -->
-                                <label class="toggle">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
                             </div>
 
+                            <!-- Servicio fijo del plan -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-headset"></i>
@@ -178,11 +190,12 @@
                                     <span class="servicio-categoria">Soporte</span>
                                 </div>
                                 <label class="toggle">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
                             </div>
 
+                            <!-- Servicio elegido por usuario -->
                             <div class="servicio-tarjeta">
                                 <div class="servicio-icono">
                                     <i class="fa-solid fa-chart-line"></i>
@@ -197,14 +210,41 @@
                                 </label>
                             </div>
 
+                            <!-- Servicio adicional (pagado extra) -->
+                            <div class="servicio-tarjeta">
+                                <div class="servicio-icono">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="servicio-info">
+                                    <h3>Email Marketing</h3>
+                                    <span class="servicio-categoria">Marketing</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <!-- Servicio adicional (pagado extra) -->
+                            <div class="servicio-tarjeta">
+                                <div class="servicio-icono">
+                                    <i class="fa-solid fa-box"></i>
+                                </div>
+                                <div class="servicio-info">
+                                    <h3>Gestión de Inventario</h3>
+                                    <span class="servicio-categoria">Operaciones</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
                         </div>
                     </section>
 
 
-                    <!-- ============================
-                         SECCIÓN 4: ACCIONES
-                         Botones que abren los modales
-                         ============================ -->
+                    <!-- Botones que abren los modales -->
                     <section class="gestion-acciones">
                         <!-- Abre el modal de editar plan (id conectado en gestion.js) -->
                         <button class="btn-editar" id="btn-abrir-editar">
@@ -212,7 +252,7 @@
                             Editar Plan
                         </button>
 
-                        <!-- Abre el mini modal de confirmación (id conectado en gestion.js) -->
+                        <!-- Abre el mini modal de confirmación  -->
                         <button class="btn-eliminar" id="btn-abrir-eliminar">
                             <i class="fa-solid fa-trash"></i>
                             Eliminar Subscripción
@@ -225,9 +265,9 @@
 
         </div>
 
-
+    
     </main>
-
+</div>
     <footer>
         <div class="footer-cont1">
             <div class="footer-edu">
@@ -280,11 +320,169 @@
     </footer>
 
 
-    <!-- ============================
-         MODAL: EDITAR PLAN
-         Se abre con btn-abrir-editar.
-         Dos columnas: configuración | resumen de precio.
-         ============================ -->
+    <!-- ===== MODAL DE PAGO (reutilizado como "Editar Plan") ===== -->
+    <div id="mp-overlay" class="mp-overlay">
+        <div class="mp-modal" role="dialog" aria-modal="true" aria-labelledby="mp-titulo">
+
+            <!-- Botón cerrar -->
+            <button class="mp-btn-cerrar" id="mp-btn-cerrar" title="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- ===== PANEL IZQUIERDO: Sistemas elegibles ===== -->
+            <div class="mp-panel-izq">
+
+                <!-- PASO 2: Sistemas elegibles (dentro del límite) -->
+                <div class="mp-seccion">
+                    <h3 class="mp-seccion-titulo">
+                        <span class="mp-paso-badge">2</span>
+                        Elige tus sistemas
+                    </h3>
+                    <p class="mp-seccion-sub">Selecciona los sistemas que incluye tu plan</p>
+
+                    <!-- Mensaje del límite -->
+                    <div id="mp-limite-mensaje" class="mp-limite-mensaje"></div>
+
+                    <!-- Catálogo de sistemas elegibles -->
+                    <div id="mp-catalogo-elegibles" class="mp-catalogo-elegibles"></div>
+                </div>
+
+                <!-- PASO 3: Periodicidad -->
+                <div class="mp-seccion mp-seccion--periodicidad">
+                    <h3 class="mp-seccion-titulo">
+                        <span class="mp-paso-badge">3</span>
+                        Modalidad de pago
+                    </h3>
+                    <div class="mp-radios">
+                        <label class="mp-radio-label" for="mp-radio-mensual">
+                            <input type="radio" id="mp-radio-mensual" name="mp-periodicidad" value="mensual" checked>
+                            <span class="mp-radio-custom"></span>
+                            Mensual
+                        </label>
+                        <label class="mp-radio-label" for="mp-radio-anual">
+                            <input type="radio" id="mp-radio-anual" name="mp-periodicidad" value="anual">
+                            <span class="mp-radio-custom"></span>
+                            Anual
+                            <span class="mp-badge-ahorro" id="mp-badge-ahorro"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== PANEL DERECHO: Detalle de factura ===== -->
+            <div class="mp-panel-der">
+
+                <h3 class="mp-seccion-titulo">
+                    <span class="mp-paso-badge">1</span>
+                    Detalle de tu compra
+                </h3>
+
+                <!-- Plan elegido -->
+                <div id="mp-plan-encabezado" class="mp-plan-encabezado"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Servicios fijos (incluidos siempre) -->
+                <p class="mp-label-grupo">✓ Servicios incluidos en el plan</p>
+                <div id="mp-servicios-fijos" class="mp-servicios-fijos"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Sistemas elegidos por el usuario (dentro del límite) -->
+                <p class="mp-label-grupo">★ Sistemas elegidos (sin costo)</p>
+                <div id="mp-servicios-elegidos" class="mp-servicios-elegidos"></div>
+
+                <hr class="mp-divisor">
+
+                <!-- Servicios adicionales (fuera del límite) -->
+                <p class="mp-label-grupo">+ Servicios adicionales</p>
+                <div id="mp-servicios-extra-factura" class="mp-servicios-extra-factura"></div>
+
+                <!-- Línea de descuento (oculta por defecto) -->
+                <div id="mp-linea-descuento" class="mp-linea-descuento" style="display:none;">
+                    <span class="mp-desc-texto"></span>
+                    <span class="mp-desc-valor">-0%</span>
+                </div>
+
+                <hr class="mp-divisor">
+
+                <!-- Código de descuento -->
+                <div class="mp-codigo-area">
+                    <label class="mp-label-grupo" for="mp-codigo-descuento">Código de descuento</label>
+                    <div class="mp-codigo-input-grupo">
+                        <input type="text" id="mp-codigo-descuento" class="mp-input-codigo"
+                            placeholder="Ej: SOFTRENT10">
+                        <button id="mp-btn-aplicar-codigo" class="mp-btn-codigo">Aplicar</button>
+                    </div>
+                    <p id="mp-mensaje-codigo" class="mp-msg-codigo"></p>
+                </div>
+
+                <hr class="mp-divisor">
+
+                <!-- Total -->
+                <div class="mp-total-area">
+                    <span class="mp-total-label">Total:</span>
+                    <span id="mp-total-numero" class="mp-total-numero">₡0</span>
+                </div>
+
+                <button id="mp-btn-siguiente" class="mp-btn-siguiente">
+                    SIGUIENTE <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE CONFIRMACIÓN ===== -->
+    <div id="mp-confirmacion-overlay" class="mp-overlay mp-overlay--confirmacion">
+        <div class="mp-modal mp-modal--confirmacion" role="dialog" aria-modal="true">
+
+            <button class="mp-btn-cerrar" id="mpc-btn-cerrar" title="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mpc-contenido">
+                <h2 class="mpc-titulo">Resumen de tu compra</h2>
+                <p class="mpc-subtitulo">Revisá los detalles antes de confirmar</p>
+
+                <div class="mpc-lista" id="mpc-items"></div>
+
+                <hr class="mp-divisor">
+
+                <div class="mpc-total-area">
+                    <span>Total a pagar:</span>
+                    <span id="mpc-total" class="mpc-total-precio"></span>
+                </div>
+
+                <div class="mpc-botones">
+                    <button id="mpc-btn-volver" class="mpc-btn mpc-btn--volver">
+                        <i class="fa-solid fa-arrow-left"></i> Volver
+                    </button>
+                    <button id="mpc-btn-comprar" class="mpc-btn mpc-btn--comprar">
+                        Comprar <i class="fa-solid fa-bag-shopping"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE ÉXITO ===== -->
+    <div id="mp-exito-overlay" class="mp-overlay mp-overlay--exito">
+        <div class="mp-modal mp-modal--exito">
+            <div class="mp-exito-contenido">
+                <i class="fa-solid fa-circle-check mp-exito-icon"></i>
+                <h2>¡Compra realizada!</h2>
+                <p id="mp-exito-resumen"></p>
+                <button id="mp-exito-cerrar" class="mp-btn-siguiente">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Editar el Plan-->
     <div class="modal-overlay oculto" id="modal-editar">
         <div class="modal">
             <div class="modal-cabecera">
@@ -339,24 +537,9 @@
 
 </body>
 
-<!-- Animación de fondo (misma configuración que planes.html) -->
-<script type="text/javascript">
-    new FinisherHeader({
-        "count": 7,
-        "size": { "min": 886, "max": 1148, "pulse": 1.8 },
-        "speed": { "x": { "min": 1.2, "max": 2 }, "y": { "min": 1.2, "max": 2.2 } },
-        "colors": {
-            "background": "#400517",
-            "particles": ["#770707", "#810303", "#690631", "#59031d"]
-        },
-        "blending": "lighten",
-        "opacity": { "center": 0.65, "edge": 0 },
-        "skew": 0,
-        "shapes": ["c"]
-    });
-</script>
-
-<!-- Lógica de modales y validación del formulario -->
+<!-- modales y validación del formulario -->
+<script src="js/ServiciosPlanesLoader.js"></script>
+<script src="js/modalPago.js"></script>
 <script src="js/gestion.js"></script>
 
 </html>

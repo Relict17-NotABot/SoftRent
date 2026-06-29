@@ -24,6 +24,8 @@
 }
 
 .about-intro h1 {
+  font-family: var(--play-bold);
+  color: var(--color-text);
   font-size: clamp(2rem, 4vw, 3.4rem);
   max-width: 16ch;
   margin: 0;
@@ -70,19 +72,25 @@
   border-color: rgba(199, 86, 86, 0.4);
 }
 
-.valor-item i {
-  font-size: 2rem;
+.iconAbout {
+  font-size: 3rem;
   color: var(--color-text);
-  background: var(--color-bg);
-  width: 64px;
-  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 14px;
+  transition: color 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+.iconAbout:hover {
+  color: var(--color-bg);
+  transform: translateY(-5px);
 }
 
 .valor-item h3 {
+  font-family: var(--play-bold);
+  color: var(--color-text);
   font-size: 1.1rem;
   margin: 0;
 }

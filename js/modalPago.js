@@ -771,9 +771,7 @@ function vincularEventosModal() {
     }
 }
 
-// ============================================================
-// VINCULAR BOTONES DE PLANES
-// ============================================================
+// botones de planes - logica de vincular
 
 function vincularBotonesPlan() {
     // Tarjetas existentes
@@ -808,8 +806,7 @@ function vincularBotonesPlan() {
     }
 }
 
-// datosListos (definido en ServiciosPlanesLoader.js) garantiza que
-// planes[] y servicios[] ya están cargados antes de vincular botones.
+// datosListos es el promise para ambos
 datosListos.then(function () {
     vincularEventosModal();
     vincularBotonesPlan();
