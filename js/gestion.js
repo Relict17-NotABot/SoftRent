@@ -241,7 +241,6 @@ form.addEventListener('submit', function (e) {
             correo: correo,
             modalidad: modalidad
         }));
-        alert('Datos guardados correctamente.');
     }
 });
 
