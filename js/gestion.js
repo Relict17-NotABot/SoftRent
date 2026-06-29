@@ -102,10 +102,17 @@ function mostrarVistaSinCompra() {
 
 }
 
-document.getElementById("btn-abrir-eliminar").addEventListener("click", () => {
-    localStorage.clear();
-});
+document.getElementById("btn-confirmar-eliminar").addEventListener("click", () => {
+    // 1. borra solo la suscripción 
+    localStorage.removeItem("softrent_ultima_compra");
 
+    // 2. cierra el mini modal
+    modalEliminar.classList.add("oculto");
+
+    // 3. cambia de vista en vivo, sin recargar
+    document.querySelector(".con-plan").classList.add("oculto");
+    document.querySelector(".sin-plan").classList.remove("oculto");
+});
 
 
 /* ---- MODAL: EDITAR PLAN ---- */
