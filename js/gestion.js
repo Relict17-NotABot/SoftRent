@@ -124,7 +124,8 @@ btnAbrirEditar.addEventListener('click', function () {
     const compraJSON = localStorage.getItem("softrent_ultima_compra");
     if (compraJSON) {
         const compra = JSON.parse(compraJSON);
-        abrirModalPago(compra.plan.id);
+        // Modo edición: precargar el plan + servicios ya guardados
+        abrirModalPago(compra.plan.id, compra);
     }
 });
 

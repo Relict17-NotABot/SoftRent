@@ -618,7 +618,7 @@ function mostrarExito(compra) {
 // ABRIR / CERRAR MODAL
 // ============================================================
 
-function abrirModalPago(planId) {
+function abrirModalPago(planId, compraExistente) {
     const plan = buscarPlan(planId);
     if (!plan) {
         return;
@@ -634,25 +634,45 @@ function abrirModalPago(planId) {
         descuentoAplicado: 0
     };
 
-    // Resetear UI del radio
+    // Modo edición: precargar lo que el usuario ya tiene guardado.
+    // La compra guarda los servicios como objetos {id,nombre,precio};
+    // estadoModal trabaja con IDs, así que mapeamos a id.
+    if (compraExistente) {
+        estadoModal.periodicidad = compraExistente.plan.periodicidad || "mensual";
+        estadoModal.serviciosElegidos = (compraExistente.serviciosElegidos || []).map(function (s) {
+            return s.id;
+        });
+        estadoModal.serviciosAdicionales = (compraExistente.serviciosAdicionales || []).map(function (s) {
+            return s.id;
+        });
+        estadoModal.codigoDescuento = compraExistente.codigoDescuento || "";
+        estadoModal.descuentoAplicado = compraExistente.descuentoAplicado || 0;
+    }
+
+    // Sincronizar UI del radio con la periodicidad cargada
     const radioMensual = document.getElementById("mp-radio-mensual");
     const radioAnual = document.getElementById("mp-radio-anual");
     if (radioMensual) {
-        radioMensual.checked = true;
+        radioMensual.checked = estadoModal.periodicidad === "mensual";
     }
     if (radioAnual) {
-        radioAnual.checked = false;
+        radioAnual.checked = estadoModal.periodicidad === "anual";
     }
 
-    // Resetear código de descuento
+    // Sincronizar código de descuento con el cargado
     const inputCodigo = document.getElementById("mp-codigo-descuento");
     if (inputCodigo) {
-        inputCodigo.value = "";
+        inputCodigo.value = estadoModal.codigoDescuento;
     }
     const msgCodigo = document.getElementById("mp-mensaje-codigo");
-    if (msgCodigo) { 
-        msgCodigo.textContent = ""; 
-        msgCodigo.className = "mp-msg-codigo"; 
+    if (msgCodigo) {
+        if (estadoModal.descuentoAplicado > 0) {
+            msgCodigo.textContent = `Código aplicado: ${estadoModal.descuentoAplicado}% de descuento.`;
+            msgCodigo.className = "mp-msg-codigo mp-msg-codigo--exito";
+        } else {
+            msgCodigo.textContent = "";
+            msgCodigo.className = "mp-msg-codigo";
+        }
     }
 
     // Renderizar
