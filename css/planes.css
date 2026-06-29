@@ -267,8 +267,8 @@ height: auto;
 }
 
 
-/* RESPONSIVE: único breakpoint móvil (Samsung S9 ~360px) */
-@media (max-width: 700px) {
+/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
+@media (max-width: 768px) {
     .contenedor-tarjetas {
         flex-direction: column;
         align-items: center;
@@ -825,9 +825,6 @@ height: auto;
     font-size: 15px;
 }
 
-/*=====================================================
-=================   SECCION FORM   ====================
-======================================================*/
 
 .seccion-form{
     width: 100%;

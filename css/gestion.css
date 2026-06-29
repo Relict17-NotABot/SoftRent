@@ -499,10 +499,10 @@
 }
 
 
-/* ---- RESPONSIVO: único breakpoint móvil (Samsung S9 ~360px) ---- */
-@media (max-width: 700px) {
+/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
+@media (max-width: 768px) {
     .gestion-container {
-        padding: 110px 6%;
+        padding: 130px 6% 50px;
         gap: 24px;
     }
     

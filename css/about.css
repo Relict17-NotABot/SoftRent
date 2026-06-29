@@ -159,10 +159,8 @@
   align-items: center;
 }
 
-/* ============================================
-   RESPONSIVO
-   ============================================ */
-@media (max-width: 850px) {
+/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
+@media (max-width: 768px) {
   .about-intro {
     padding: 130px 6% 40px;
   }
