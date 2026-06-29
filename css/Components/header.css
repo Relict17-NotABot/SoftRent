@@ -1,17 +1,37 @@
 .side-header {
-  max-width: 1920px;
-  background-color: rgba(255, 255, 255, 0);
-  color: whiteSmoke;
-  padding: 18px 0;
-  border-bottom: 2px solid rgb(199, 86, 86);
+    max-width: 1920px;
+    background: transparent;
+    color: whiteSmoke;
+    padding: 18px 0;
+    border-bottom: 2px solid rgb(199, 86, 86);
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 
-  z-index: 1000;
+    z-index: 1000;
 
+    transition: background 0.4s ease,
+                backdrop-filter 0.4s ease,
+                box-shadow 0.4s ease,
+                padding 0.4s ease;
+}
+
+.side-header.scrolled {
+    background: linear-gradient(
+        180deg,
+        rgba(22,22,22,0.95) 0%,
+        rgba(53,3,5,0.92) 55%,
+        rgba(64,5,23,0.92) 100%
+    );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    
+    padding: 10px 0;  
 }
 
 .header-content {
