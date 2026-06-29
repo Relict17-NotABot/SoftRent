@@ -7,6 +7,8 @@
 
     <!-- link al css -->
     <link rel="stylesheet" href="css/Base.css">
+
+    <link rel="stylesheet" href="css/Components/fondoAnimado.css">
     <link rel="stylesheet" href="css/Components/header.css">
     <link rel="stylesheet" href="css/Components/footer.css">
     <link rel="stylesheet" href="css/planes.css">
@@ -16,14 +18,10 @@
 
     <!-- Font Awesome Link -->
     <script src="https://kit.fontawesome.com/9b11b68b76.js" crossorigin="anonymous"></script>
-
-    <!--Finisher header animacion -->
-    <script src="js/finisher-header.es5.min.js" type="text/javascript"></script>
-
     <title>Soft Rent</title>
 </head>
 
-<body class=" finisher-header planes-page">
+<body class="planes-page">
     <main class="container">
 
         <header class="side-header">
@@ -492,46 +490,9 @@
             <a href=""><i class="fa-brands fa-square-facebook icon"></i></a>
         </div>
     </footer>
-    <script type="text/javascript">
-        new FinisherHeader({
-            "count": 7,
-            "size": {
-                "min": 886,
-                "max": 1148,
-                "pulse": 1.8
-            },
-            "speed": {
-                "x": {
-                    "min": 1.2,
-                    "max": 2
-                },
-                "y": {
-                    "min": 1.2,
-                    "max": 2.2
-                }
-            },
-            "colors": {
-                "background": "#400517",
-                "particles": [
-                    "#770707",
-                    "#810303",
-                    "#690631",
-                    "#59031d"
-                ]
-            },
-            "blending": "lighten",
-            "opacity": {
-                "center": 0.65,
-                "edge": 0
-            },
-            "skew": 0,
-            "shapes": [
-                "c"
-            ]
-        });
-    </script>
 
     <!-- link a js-->
+     <script src="js/fondoAnimado.js"></script>
     <script src="js/utilitarios.js"></script>
     <script src="js/ServiciosPlanesLoader.js"></script>
     <script src="js/servicios.js"></script>

@@ -65,7 +65,8 @@ html {
 /*body*/
 
 body {
-  background-color: #410305;
+background: #7d0505;
+background: linear-gradient(180deg, rgba(125, 5, 5, 1) 0%, rgba(122, 2, 48, 1) 56%, rgba(74, 5, 6, 1) 100%);
   min-height: 100vh;
   overflow-x: hidden;
 }
