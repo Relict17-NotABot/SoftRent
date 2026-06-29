@@ -45,23 +45,23 @@ function renderizarServiciosContratados(compra) {
         plan.servicios_fijos.forEach(function(id) {
             const srv = buscarServicio(id);
             if (srv) {
-                grid.appendChild(crearTarjetaServicioContratado(srv, true));
+                grid.appendChild(crearTarjetaServicioContratado(srv));
             }
         });
     }
 
     // Servicios elegidos
     compra.serviciosElegidos.forEach(function(srv) {
-        grid.appendChild(crearTarjetaServicioContratado(srv, true));
+        grid.appendChild(crearTarjetaServicioContratado(srv));
     });
 
     // Servicios adicionales
     compra.serviciosAdicionales.forEach(function(srv) {
-        grid.appendChild(crearTarjetaServicioContratado(srv, true));
+        grid.appendChild(crearTarjetaServicioContratado(srv));
     });
 }
 
-function crearTarjetaServicioContratado(srv, activo) {
+function crearTarjetaServicioContratado(srv) {
     const tarjeta = document.createElement("div");
     tarjeta.className = "servicio-tarjeta";
     tarjeta.innerHTML = `
@@ -72,10 +72,6 @@ function crearTarjetaServicioContratado(srv, activo) {
             <h3>${srv.nombre}</h3>
             <span class="servicio-categoria">Servicio</span>
         </div>
-        <label class="toggle">
-            <input type="checkbox" ${activo ? "checked" : ""}>
-            <span class="toggle-slider"></span>
-        </label>
     `;
     return tarjeta;
 }
