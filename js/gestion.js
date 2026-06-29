@@ -16,6 +16,9 @@ mostrarVista(compra);
 
 }
 
+// Restaurar nombre y correo guardados previamente
+restaurarDatosNegocio();
+
 })
 
 function mostrarVista(compra){
@@ -33,6 +36,12 @@ function mostrarVista(compra){
 
     // Renderizar servicios contratados
     renderizarServiciosContratados(compra);
+
+    // Precargar la modalidad de pago con la de la última compra
+    const selModalidad = document.getElementById("negocio-modalidad");
+    if (selModalidad) {
+        selModalidad.value = compra.plan.periodicidad;
+    }
 }
 
 function renderizarServiciosContratados(compra) {
@@ -225,9 +234,86 @@ form.addEventListener('submit', function (e) {
         valido = false;
     }
 
-    /* Si todo está bien, aquí iría el guardado real (backend / JSON) */
+    /* Si todo está bien, guardar los datos del negocio en localStorage */
     if (valido) {
+        localStorage.setItem("softrent_datos_negocio", JSON.stringify({
+            nombre: nombre,
+            correo: correo,
+            modalidad: modalidad
+        }));
         alert('Datos guardados correctamente.');
-        /* TODO: conectar con backend */
     }
 });
+
+
+/* ---- DATOS DEL NEGOCIO: persistencia + cambio de modalidad ---- */
+
+/* Restaura nombre y correo desde localStorage al cargar la página */
+function restaurarDatosNegocio() {
+    const datosJSON = localStorage.getItem("softrent_datos_negocio");
+    if (!datosJSON) {
+        return;
+    }
+    const datos = JSON.parse(datosJSON);
+    const inNombre = document.getElementById("negocio-nombre");
+    const inCorreo = document.getElementById("negocio-correo");
+    if (inNombre && datos.nombre) {
+        inNombre.value = datos.nombre;
+    }
+    if (inCorreo && datos.correo) {
+        inCorreo.value = datos.correo;
+    }
+}
+
+/* Recalcula el total de la compra para una periodicidad dada
+   (mismo criterio que modalPago.js: base del plan + adicionales + descuento) */
+function calcularTotalCompra(compra, periodicidad) {
+    const plan = buscarPlan(compra.plan.id);
+    if (!plan) {
+        return compra.total;
+    }
+
+    let total = periodicidad === "anual" ? plan.precio_anual : plan.precio_mensual;
+
+    (compra.serviciosAdicionales || []).forEach(function (s) {
+        const srv = buscarServicio(s.id);
+        if (srv) {
+            total += periodicidad === "anual" ? srv.precio * 10 : srv.precio;
+        }
+    });
+
+    if (compra.descuentoAplicado > 0) {
+        total = total * (1 - compra.descuentoAplicado / 100);
+    }
+
+    return Math.round(total);
+}
+
+/* Al cambiar la modalidad de pago, actualiza el precio mostrado en la
+   sección del plan en vivo y persiste el cambio en la compra */
+var selectModalidad = document.getElementById("negocio-modalidad");
+if (selectModalidad) {
+    selectModalidad.addEventListener("change", function () {
+        const valor = this.value;
+        if (valor !== "mensual" && valor !== "anual") {
+            return;
+        }
+
+        const compraJSON = localStorage.getItem("softrent_ultima_compra");
+        if (!compraJSON) {
+            return;
+        }
+        const compra = JSON.parse(compraJSON);
+
+        const nuevoTotal = calcularTotalCompra(compra, valor);
+
+        // Actualizar precio y badge de modalidad en la sección del plan
+        document.querySelector(".dato-numero").textContent = formatearPrecio(nuevoTotal);
+        document.querySelector(".sub-modalidad").textContent = valor;
+
+        // Persistir el cambio
+        compra.plan.periodicidad = valor;
+        compra.total = nuevoTotal;
+        localStorage.setItem("softrent_ultima_compra", JSON.stringify(compra));
+    });
+}
