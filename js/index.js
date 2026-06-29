@@ -1,5 +1,5 @@
 
-/*SECCION DE SERVICIOS BEGIN */
+/*Servicios begin*/
 const btnCore = document.getElementById("btnCore");
 const btnEcommerce = document.getElementById("btnEcommerce");
 
@@ -19,8 +19,6 @@ btnEcommerce.addEventListener("click", () => {
     btnEcommerce.classList.add("activo");
     btnCore.classList.remove("activo");
 });
-
-// estado inicial: "Como Trabajamos" activo
+// x
 btnCore.classList.add("activo");
 
-/***SECCION DE SERVICIOS END */

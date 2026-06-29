@@ -108,7 +108,6 @@ function mostrarVistaSinCompra() {
 
 document.getElementById("btn-abrir-eliminar").addEventListener("click", () => {
     localStorage.clear();
-    alert("LocalStorage eliminado.");
 });
 
 
