@@ -1,11 +1,15 @@
 /*afecta a todo*/
-* {box-sizing: border-box;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;}
 
 /*Html*/
 html {
   scroll-behavior: smooth;
   background-size: cover;
   background-repeat: no-repeat;
+   min-height: 100%;
 }
 
 /******************Tipografías****************/
@@ -61,11 +65,14 @@ html {
 /*body*/
 
 body {
-  margin: 0;
+  background-color: #410305;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
-
+  position:relative;
+  z-index: 1;
   width: 100%;
   height: auto; 
   max-width: 1920px;

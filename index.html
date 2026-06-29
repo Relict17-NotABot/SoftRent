@@ -8,6 +8,8 @@
 
     <!-- link al css -->
     <link rel="stylesheet" href="css/Base.css">
+
+    <link rel="stylesheet" href="css/Components/fondoAnimado.css">
     <link rel="stylesheet" href="css/Components/header.css">
     <link rel="stylesheet" href="css/Components/footer.css">
     <link rel="stylesheet" href="css/index.css">
@@ -23,7 +25,7 @@
 
 </head>
 
-<body class="finisher-header">
+<body>
     <main class="container">
 
         <header class="side-header">
@@ -462,50 +464,8 @@
         </div>
     </footer>
     <!-- link a js-->
+     <script src="js/fondoAnimado.js"></script>
     <script src="js/utilitarios.js"></script>
 </body>
-
-
-
-<!--Codigo de fondo-->
-
-<script type="text/javascript">
-    new FinisherHeader({
-        "count": 7,
-        "size": {
-            "min": 886,
-            "max": 1148,
-            "pulse": 1.8
-        },
-        "speed": {
-            "x": {
-                "min": 1.2,
-                "max": 2
-            },
-            "y": {
-                "min": 1.2,
-                "max": 2.2
-            }
-        },
-        "colors": {
-            "background": "#400517",
-            "particles": [
-                "#770707",
-                "#810303",
-                "#690631",
-                "#59031d"
-            ]
-        },
-        "blending": "lighten",
-        "opacity": {
-            "center": 0.65,
-            "edge": 0
-        },
-        "skew": 0,
-        "shapes": [
-            "c"
-        ]
-    });
-</script>
 
 </html>
