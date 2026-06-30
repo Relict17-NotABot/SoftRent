@@ -159,7 +159,7 @@
   align-items: center;
 }
 
-/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
+/* base 740pc=== */
 @media (max-width: 768px) {
   .about-intro {
     padding: 130px 6% 40px;

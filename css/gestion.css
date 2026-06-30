@@ -1,11 +1,4 @@
-/* ============================================================
-   GESTION.CSS — Estilos de la página de gestión del usuario
-   ============================================================ */
-
-
-/* ---- TIPOGRAFÍAS DEL PROYECTO (assets/fonts) ---- */
-
-/* Texto general: Nunito. Definidas en Base.css. */
+/* Texto general */
 .con-plan,
 .sin-plan {
     font-family: var(--nunito, 'Nunito', sans-serif);
@@ -23,8 +16,6 @@
     font-family: var(--play-bold, 'PlayBold', sans-serif);
 }
 
-
-/* ---- VISTAS PRINCIPALES (con/sin plan) ---- */
 
 /* Vista cuando NO hay plan contratado */
 .sin-plan {
@@ -499,7 +490,7 @@
 }
 
 
-/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
+/* MÓVIL  360×740 */
 @media (max-width: 768px) {
     .gestion-container {
         padding: 130px 6% 50px;
