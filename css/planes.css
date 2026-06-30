@@ -1014,3 +1014,96 @@ height: auto;
     border-color: #16a34a !important;
     background-color: #f0fdf4 !important;
 }
+
+/* === MÓVIL — PLAN VIP === */
+@media (max-width: 768px) {
+    .seccion-planVIP {
+        flex-direction: column;
+        min-height: auto;
+        padding: 60px 6%;
+    }
+
+    .seccion-planVIP::after {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .vip-diamante {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin-bottom: 30px;
+    }
+
+    .vip-diamante img {
+        width: 220px;
+        transform: rotate(-40deg);
+    }
+
+    .linea-dorada {
+        width: 240px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -15px;
+    }
+
+    .vip-info {
+        margin-left: 0;
+        width: 100%;
+        max-width: 400px;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .vip-info h2 {
+        font-size: 2rem;
+    }
+
+    .vip-beneficios {
+        flex-direction: column;
+        gap: 10px;
+        text-align: left;
+    }
+}
+
+/* === MÓVIL — FORMULARIO DE CONTACTO === */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .registroForm,
+    .detalle-info {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .form-tipoNegocio {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .form-datos input {
+        width: 100%;
+    }
+
+    .registroForm button {
+        width: 100%;
+    }
+
+    .tarjeta-planForm {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .tarjeta-recomendacion {
+        width: 100%;
+    }
+}
