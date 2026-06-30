@@ -1,10 +1,3 @@
-/*Servicios begin*/
-const btnCore = document.getElementById("btnCore");
-const btnEcommerce = document.getElementById("btnEcommerce");
-
-const coreSolutions = document.getElementById("coreSolutions");
-const ecommerceSolutions = document.getElementById("ecommerceSolutions");
-
 btnCore.addEventListener("click", () => {
     coreSolutions.classList.remove("hidden");
     ecommerceSolutions.classList.add("hidden");
