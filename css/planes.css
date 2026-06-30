@@ -801,7 +801,7 @@ height: auto;
 }
 
 .hidden{
-    display:none;
+    display:none  !important;
 }
 
 .servicio-tags{
