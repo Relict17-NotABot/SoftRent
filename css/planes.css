@@ -1112,12 +1112,13 @@ height: auto;
 @media (max-width: 768px){
    
     #contenedorServicios {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);   /* min 0: deja que el track baje de 350px */
         padding: 0 16px;
         gap: 20px;
     }
 
     .tarjeta-servicio {
+        min-width: 0;        /* permite que el card se achique dentro del grid */
         padding: 20px;
     }
 
