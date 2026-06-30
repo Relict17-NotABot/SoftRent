@@ -1107,3 +1107,21 @@ height: auto;
         width: 100%;
     }
 }
+
+@media (max-with: 768pc){
+    .tarjeta-servicio{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    #contenedorServicios {
+    padding: 0 16px;   
+    gap: 20px;
+    }
+
+    .tarjeta-servicio { padding: 20px; }
+    .tarjeta-servicio h3 { font-size: 1.4rem; }
+    .servicio-precio { font-size: 1.6rem; }
+
+}
