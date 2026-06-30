@@ -1108,20 +1108,23 @@ height: auto;
     }
 }
 
-@media (max-with: 768pc){
-    .tarjeta-servicio{
-        flex-direction: column;
-        gap: 30px;
-        align-items: center;
-    }
 
+@media (max-width: 768px){
+   
     #contenedorServicios {
-    padding: 0 16px;   
-    gap: 20px;
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+        gap: 20px;
     }
 
-    .tarjeta-servicio { padding: 20px; }
-    .tarjeta-servicio h3 { font-size: 1.4rem; }
-    .servicio-precio { font-size: 1.6rem; }
+    .tarjeta-servicio {
+        padding: 20px;
+    }
 
+    .tarjeta-servicio h3 {
+        font-size: 1.4rem;
+        overflow-wrap: break-word;   /* corta "E-Commerce" si no entra */
+    }
+
+    .servicio-precio { font-size: 1.6rem; }
 }
