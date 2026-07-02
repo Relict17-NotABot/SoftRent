@@ -11,13 +11,12 @@ footer {
     justify-self: center;
 }
 
-footer p,
-a {
+footer p, footer a {
     font-family: 'Nunito', sans-serif;
     color: var(--color-text);
     font-weight: 200;
     font-size: small;
-
+    text-decoration: none;
 }
 
 footer h3 {

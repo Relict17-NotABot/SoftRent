@@ -127,6 +127,12 @@
     color: var(--color-text);
 }
 
+.tarjeta-plan a{
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: var(--play-bold);
+}
+
 .etiqueta-popular {
     position: absolute;
     top: 15px;
@@ -322,6 +328,12 @@ height: auto;
     pointer-events:none;
 
     z-index:3;
+}
+
+.seccion-planVIP a{
+    text-decoration: none;
+    color: black;
+    font-size: var(--play-bold);
 }
 
 /* BRILLOS DE FONDO */
