@@ -89,9 +89,7 @@ function formatearPrecio(numero) {
     return "₡" + numero.toLocaleString("es-CR");
 }
 
-// Buscadores en los catálogos cargados por ServiciosPlanesLoader.js.
-// servicios.js (donde viven originalmente) no se carga en esta página,
-// así que los redefinimos aquí para modalPago.js y mostrarVista().
+// Buscadores en los catálogos cargados por ServiciosPlanesLoader.js
 function buscarPlan(idPlan) {
     return planes.find(function (plan) {
         return plan.id === idPlan;
@@ -127,7 +125,7 @@ if (btnConfirmarEliminar) {
 }
 
 
-/* ---- MODAL: EDITAR PLAN ---- */
+/* EDITAR PLAN */
 
 
 
@@ -267,8 +265,7 @@ function restaurarDatosNegocio() {
     }
 }
 
-/* Recalcula el total de la compra para una periodicidad dada
-   (mismo criterio que modalPago.js: base del plan + adicionales + descuento) */
+/* Recalcula el total de la compra para una periodicidad */
 function calcularTotalCompra(compra, periodicidad) {
     const plan = buscarPlan(compra.plan.id);
     if (!plan) {
