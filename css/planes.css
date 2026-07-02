@@ -1106,25 +1106,21 @@ height: auto;
     .tarjeta-recomendacion {
         width: 100%;
     }
-}
-
-
-@media (max-width: 768px){
    
     #contenedorServicios {
-        grid-template-columns: minmax(0, 1fr);   /* min 0: deja que el track baje de 350px */
+        grid-template-columns: minmax(0, 1fr);   
         padding: 0 16px;
         gap: 20px;
     }
 
     .tarjeta-servicio {
-        min-width: 0;        /* permite que el card se achique dentro del grid */
+        min-width: 0;       
         padding: 20px;
     }
 
     .tarjeta-servicio h3 {
         font-size: 1.4rem;
-        overflow-wrap: break-word;   /* corta "E-Commerce" si no entra */
+        overflow-wrap: break-word;  
     }
 
     .servicio-precio { font-size: 1.6rem; }

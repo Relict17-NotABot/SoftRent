@@ -1,5 +1,5 @@
 /* ============================================
-   INTRO: idea de negocio
+   INTRO
    ============================================ */
 
 .about-intro {
@@ -104,7 +104,7 @@
 }
 
 /* ============================================
-   SECCIONES: historia / misión / visión / trabajo
+   SECCIONES
    ============================================ */
 
 .seccion-about{
@@ -159,7 +159,9 @@
   align-items: center;
 }
 
-/* base 740pc=== */
+/*
+MEDIA QUERIES
+*/
 @media (max-width: 768px) {
   .about-intro {
     padding: 130px 6% 40px;

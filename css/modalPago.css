@@ -591,28 +591,7 @@
     margin: 0;
 }
 
-/* === MÓVIL (≤768px) — base de diseño: 360×740 === */
-@media (max-width: 768px) {
-    .mp-modal {
-        flex-direction: column;
-        max-height: 95vh;
-        overflow-y: auto;
-    }
 
-    .mp-panel-izq {
-        border-right: none;
-        border-bottom: 1px solid rgba(119, 7, 7, 0.3);
-        max-height: none;
-    }
-
-    .mp-panel-der {
-        max-height: none;
-    }
-
-    .mp-radios {
-        flex-direction: column;
-    }
-}
 
 /* ============================================================
    MENSAJE DE LÍMITE
@@ -909,3 +888,25 @@
     color: #5d8;
 }
 
+/* MEDIA QUERIES*/
+@media (max-width: 768px) {
+    .mp-modal {
+        flex-direction: column;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+
+    .mp-panel-izq {
+        border-right: none;
+        border-bottom: 1px solid rgba(119, 7, 7, 0.3);
+        max-height: none;
+    }
+
+    .mp-panel-der {
+        max-height: none;
+    }
+
+    .mp-radios {
+        flex-direction: column;
+    }
+}

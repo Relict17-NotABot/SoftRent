@@ -327,7 +327,7 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-top: auto; /* Empuja las acciones al fondo de la columna derecha */
+    margin-top: auto;
 }
 
 .btn-editar,
