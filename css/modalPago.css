@@ -454,6 +454,21 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    overflow-y: auto;        
+    max-height: 85vh;        
+    scrollbar-width: thin;   
+    scrollbar-color: #770707 transparent; 
+}
+
+.mpc-contenido::-webkit-scrollbar {
+    width: 4px;
+}
+.mpc-contenido::-webkit-scrollbar-thumb {
+    background: #770707;
+    border-radius: 4px;
+}
+.mpc-contenido::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .mpc-titulo {
