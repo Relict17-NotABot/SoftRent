@@ -68,7 +68,7 @@ function calcularTotal() {
 }
 
 // ============================================================
-// RENDERIZAR DETALLE DE FACTURA (ACTUALIZADO)
+// RENDERIZAR DETALLE DE FACTURA 
 // ============================================================
 
 function renderizarDetalle() {
@@ -99,7 +99,7 @@ function renderizarDetalle() {
     `;
 
     // ============================================================
-    // SERVICIOS FIJOS (NO removibles)
+    // SERVICIOS FIJOS 
     // ============================================================
 
     const fijosEl = document.getElementById("mp-servicios-fijos");
@@ -125,7 +125,7 @@ function renderizarDetalle() {
     }
 
     // ============================================================
-    // SERVICIOS ELEGIDOS (removibles, dentro del límite)
+    // SERVICIOS ELEGIDOS 
     // ============================================================
 
     const elegidosEl = document.getElementById("mp-servicios-elegidos");
@@ -165,7 +165,7 @@ function renderizarDetalle() {
     }
 
     // ============================================================
-    // SERVICIOS ADICIONALES (fuera del límite - CON COSTO)
+    // SERVICIOS ADICIONALES 
     // ============================================================
 
     const extrasEl = document.getElementById("mp-servicios-extra-factura");
@@ -305,7 +305,7 @@ function renderizarCatalogoElegibles() {
 }
 
 // ============================================================
-// AGREGAR SERVICIO (sistema decide si va elegido o adicional)
+// AGREGAR SERVICIO 
 // ============================================================
 
 function agregarServicio(id) {
@@ -330,7 +330,7 @@ function agregarServicio(id) {
 }
 
 // ============================================================
-// QUITAR SERVICIO ELEGIDO (dentro del límite)
+// QUITAR SERVICIO ELEGIDO 
 // ============================================================
 
 function quitarServicioElegido(id) {
@@ -342,7 +342,7 @@ function quitarServicioElegido(id) {
 }
 
 // ============================================================
-// QUITAR SERVICIO ADICIONAL (fuera del límite)
+// QUITAR SERVICIO ADICIONAL 
 // ============================================================
 
 function quitarServicioAdicional(id) {
@@ -354,7 +354,7 @@ function quitarServicioAdicional(id) {
 }
 
 // ============================================================
-// RENDERIZAR MODAL DE CONFIRMACIÓN (ACTUALIZADO)
+// RENDERIZAR MODAL DE CONFIRMACIÓN 
 // ============================================================
 
 function abrirModalConfirmacion() {
@@ -478,7 +478,7 @@ function cerrarModalConfirmacion() {
 }
 
 // ============================================================
-// GUARDAR COMPRA (ACTUALIZADO)
+// GUARDAR COMPRA 
 // ============================================================
 
 function guardarCompraEnLocalStorage() {
@@ -634,9 +634,9 @@ function abrirModalPago(planId, compraExistente) {
         descuentoAplicado: 0
     };
 
-    // Modo edición: precargar lo que el usuario ya tiene guardado.
-    // La compra guarda los servicios como objetos {id,nombre,precio};
-    // estadoModal trabaja con IDs, así que mapeamos a id.
+    //  precargar lo que el usuario ya tiene guardado.
+    // La compra guarda los servicios como objetos id,nombre,precio;
+   
     if (compraExistente) {
         estadoModal.periodicidad = compraExistente.plan.periodicidad || "mensual";
         estadoModal.serviciosElegidos = (compraExistente.serviciosElegidos || []).map(function (s) {
@@ -826,7 +826,7 @@ function vincularBotonesPlan() {
     }
 }
 
-// datosListos es el promise para ambos
+// datosListos promise para ambos
 datosListos.then(function () {
     vincularEventosModal();
     vincularBotonesPlan();

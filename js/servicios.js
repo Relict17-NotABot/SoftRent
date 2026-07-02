@@ -567,9 +567,7 @@ rbEmpresa.addEventListener(
 )
 
 
-/**
- * trasladarse de manera smooth a la seccion de servicios
- */
+
 
 window.addEventListener("load", function(){
 
